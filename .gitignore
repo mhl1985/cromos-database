@@ -46,14 +46,6 @@ backend/target/
 
 
 #####################################
-# NODE / FRONTEND (por si se usa npm más adelante)
-#####################################
-
-# Dependencias instaladas por npm
-node_modules/
-
-
-#####################################
 # VARIABLES DE ENTORNO
 #####################################
 
