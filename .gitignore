@@ -1,24 +1,65 @@
-# Compiled class file
-*.class
+#####################################
+# SISTEMA OPERATIVO
+#####################################
 
-# Log file
+# Archivos que generan macOS y Windows automáticamente
+.DS_Store
+Thumbs.db
+
+
+#####################################
+# LOGS
+#####################################
+
+# Archivos de log generados por aplicaciones
 *.log
 
-# BlueJ files
-*.ctxt
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+#####################################
+# INTELLIJ IDEA
+#####################################
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Configuración local del IDE
+.idea/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Archivos de módulo del proyecto
+*.iml
+
+
+#####################################
+# VISUAL STUDIO CODE
+#####################################
+
+# Configuración local del editor
+.vscode/
+
+
+#####################################
+# MAVEN / SPRING BOOT
+#####################################
+
+# Carpeta generada al compilar el proyecto
+target/
+
+# Por seguridad también ignoramos la del backend
+backend/target/
+
+
+#####################################
+# NODE / FRONTEND (por si se usa npm más adelante)
+#####################################
+
+# Dependencias instaladas por npm
+node_modules/
+
+
+#####################################
+# VARIABLES DE ENTORNO
+#####################################
+
+# Archivos que pueden contener claves o contraseñas
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
