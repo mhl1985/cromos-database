@@ -1,26 +1,30 @@
-
-#####################################
-# LOGS
-#####################################
-
-*.log
-
-#####################################
-# INTELLIJ IDEA
-#####################################
-
-.idea/
+### IntelliJ IDEA ###
+.idea
 *.iml
+*.iws
+*.ipr
+out
 
-#####################################
-# VISUAL STUDIO CODE
-#####################################
+### VS Code ###
+.vscode
 
-.vscode/
+### Eclipse ###
+.project
+.classpath
+.settings
+bin
+.metadata
+*.launch
+.recommenders
+ 
+### Build outputs ###
+target
+build
+ 
+### Logs ###
+*.log
+ 
+### Archivos del SO ###
+.DS_Store
+Thumbs.db
 
-#####################################
-# MAVEN / SPRING BOOT
-#####################################
-
-target/
-backend/target/
