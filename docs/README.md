@@ -1,3 +1,3 @@
 # Docs
 
-This is the documentation section of the project.
+Aquí se encontrará la documentación del proyecto.
