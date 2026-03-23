@@ -6,14 +6,13 @@
 .DS_Store
 Thumbs.db
 
-
 #####################################
 # LOGS
 #####################################
 
 # Archivos de log generados por aplicaciones
 *.log
-
+logs/
 
 #####################################
 # INTELLIJ IDEA
@@ -22,9 +21,13 @@ Thumbs.db
 # Configuración local del IDE
 .idea/
 
-# Archivos de módulo del proyecto
+# Archivos del proyecto
+*.iws
 *.iml
+*.ipr
 
+# Carpeta de salida de compilación del IDE
+out/
 
 #####################################
 # VISUAL STUDIO CODE
@@ -35,31 +38,26 @@ Thumbs.db
 
 
 #####################################
-# MAVEN / SPRING BOOT
+# MAVEN / SPRING BOOT / JAVA
 #####################################
 
 # Carpeta generada al compilar el proyecto
 target/
 
-# Por seguridad también ignoramos la del backend
-backend/target/
+# Archivos generados por Java
+*.class
 
-
-#####################################
-# NODE / FRONTEND (por si se usa npm más adelante)
-#####################################
-
-# Dependencias instaladas por npm
-node_modules/
-
+# Archivos temporales
+*.tmp
+*.swp
 
 #####################################
-# VARIABLES DE ENTORNO
+# ARCHIVOS DE ENTORNO / PERSONALES
 #####################################
 
-# Archivos que pueden contener claves o contraseñas
+# Configuraciones locales
+application-local.properties
+
+# Variables de entorno
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
