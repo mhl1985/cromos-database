@@ -1,30 +1,63 @@
-### IntelliJ IDEA ###
-.idea
-*.iml
-*.iws
-*.ipr
-out
+#####################################
+# SISTEMA OPERATIVO
+#####################################
 
-### VS Code ###
-.vscode
-
-### Eclipse ###
-.project
-.classpath
-.settings
-bin
-.metadata
-*.launch
-.recommenders
- 
-### Build outputs ###
-target
-build
- 
-### Logs ###
-*.log
- 
-### Archivos del SO ###
+# Archivos que generan macOS y Windows automáticamente
 .DS_Store
 Thumbs.db
 
+#####################################
+# LOGS
+#####################################
+
+# Archivos de log generados por aplicaciones
+*.log
+logs/
+
+#####################################
+# INTELLIJ IDEA
+#####################################
+
+# Configuración local del IDE
+.idea/
+
+# Archivos del proyecto
+*.iws
+*.iml
+*.ipr
+
+# Carpeta de salida de compilación del IDE
+out/
+
+#####################################
+# VISUAL STUDIO CODE
+#####################################
+
+# Configuración local del editor
+.vscode/
+
+
+#####################################
+# MAVEN / SPRING BOOT / JAVA
+#####################################
+
+# Carpeta generada al compilar el proyecto
+target/
+
+# Archivos generados por Java
+*.class
+
+# Archivos temporales
+*.tmp
+*.swp
+
+#####################################
+# ARCHIVOS DE ENTORNO / PERSONALES
+#####################################
+
+# Configuraciones locales
+application-local.properties
+
+# Variables de entorno
+.env
+.env.*
