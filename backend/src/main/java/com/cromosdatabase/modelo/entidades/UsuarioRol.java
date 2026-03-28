@@ -15,7 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class UsuarioRol {
 
     /**

@@ -18,7 +18,6 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true) // Solo el indicado explicitamente (id).
 @NoArgsConstructor // Constructor vacío
 @AllArgsConstructor // Constructor con todos los campos
-@Builder // Permite construir objetos con patrón builder
 public class Usuario {
 
     /**
@@ -85,6 +84,5 @@ public class Usuario {
      * debido a relaciones bidireccionales (Usuario <-> UsuarioRol).
      */
     @ToString.Exclude
-    @Builder.Default
     private Set<UsuarioRol> usuariosRoles = new HashSet<>();
 }

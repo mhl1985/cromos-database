@@ -17,7 +17,6 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Rol {
 
     /**
@@ -57,10 +56,5 @@ public class Rol {
      * debido a relaciones bidireccionales (UsuarioRol <-> Usuario).
      */
     @ToString.Exclude
-    /**
-     * Inicialización por defecto necesaria cuando se usa @Builder.
-     * Evita que la colección sea null al construir el objeto.
-     */
-    @Builder.Default
     private Set<UsuarioRol> usuariosRoles = new HashSet<>();
 }
