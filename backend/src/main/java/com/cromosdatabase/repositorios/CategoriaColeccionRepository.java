@@ -10,7 +10,20 @@ import java.util.Optional;
  */
 public interface CategoriaColeccionRepository extends JpaRepository<CategoriaColeccion, Integer> {
 
+    /**
+     * Busca una categoría por su nombre exacto.
+     *
+     * @param nombre Nombre de la categoría.
+     * @return Optional con la categoría si existe.
+     */
     Optional<CategoriaColeccion> findByNombre(String nombre);
 
+    /**
+     * Comprueba si existe una categoría con ese nombre.
+     *
+     * @param nombre Nombre de la categoría.
+     * @return true si existe, false en caso contrario.
+     */
     boolean existsByNombre(String nombre);
+
 }

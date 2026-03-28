@@ -10,7 +10,20 @@ import java.util.Optional;
  */
 public interface EditorialRepository extends JpaRepository<Editorial, Integer> {
 
+    /**
+     * Busca una editorial por su nombre exacto.
+     *
+     * @param nombre Nombre de la editorial.
+     * @return Optional con la editorial si existe.
+     */
     Optional<Editorial> findByNombre(String nombre);
 
+    /**
+     * Comprueba si existe una editorial con ese nombre.
+     *
+     * @param nombre Nombre de la editorial.
+     * @return true si existe, false en caso contrario.
+     */
     boolean existsByNombre(String nombre);
+
 }
