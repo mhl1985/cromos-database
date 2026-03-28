@@ -3,6 +3,9 @@ package com.cromosdatabase.modelo.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Entidad que representa la tabla "subcategorias_coleccion".
  */
@@ -34,6 +37,19 @@ public class SubcategoriaColeccion {
     private CategoriaColeccion categoria;
 
     /**
+     * ID de la categoría a la que pertenece la subcategoría.
+     *
+     * Se mapea también como campo simple para permitir referencias compuestas
+     * desde otras entidades, como Coleccion.
+     *
+     * IMPORTANTE:
+     * - El valor real de la relación lo gestiona el campo "categoria".
+     * - Este campo se deja de solo lectura en JPA.
+     */
+    @Column(name = "id_categoria", nullable = false, insertable = false, updatable = false)
+    private Integer idCategoria;
+
+    /**
      * Nombre de la subcategoría.
      */
     @Column(name = "nombre", nullable = false, length = 50)
@@ -44,4 +60,11 @@ public class SubcategoriaColeccion {
      */
     @Column(name = "descripcion", length = 255)
     private String descripcion;
+
+    /**
+     * Relación con las colecciones de esta subcategoría.
+     */
+    @OneToMany(mappedBy = "subcategoria")
+    @ToString.Exclude
+    private Set<Coleccion> colecciones = new HashSet<>();
 }

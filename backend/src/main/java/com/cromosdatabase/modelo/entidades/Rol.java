@@ -49,12 +49,10 @@ public class Rol {
      * Relación con los usuarios que tienen este rol, a través de la tabla intermedia usuarios_roles.
      *
      * mappedBy = "rol" indica que la relación se gestiona desde UsuarioRol.
-     */
-    @OneToMany(mappedBy = "rol")
-    /**
-     * Se excluye del toString para evitar recursividad infinita
+     * ToString.Exclude: Se excluye del toString para evitar recursividad infinita
      * debido a relaciones bidireccionales (UsuarioRol <-> Usuario).
      */
+    @OneToMany(mappedBy = "rol")
     @ToString.Exclude
     private Set<UsuarioRol> usuariosRoles = new HashSet<>();
 }

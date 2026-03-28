@@ -43,7 +43,7 @@ public class Editorial {
     private String descripcion;
 
     /**
-     * Relación con colecciones.
+     * Relación con colecciones de esta editorial.
      */
     @OneToMany(mappedBy = "editorial")
     @ToString.Exclude

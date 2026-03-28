@@ -76,13 +76,25 @@ public class Usuario {
      * Relación con los roles del usuario a través de la tabla intermedia usuarios_roles.
      *
      * mappedBy = "usuario" indica que la relación se gestiona desde la entidad UsuarioRol.
+     * ToString.Exclude: Se excluye del toString para evitar recursividad infinita
+     * debido a relaciones bidireccionales (Usuario <-> UsuarioRol).
      * Se inicializa con HashSet para evitar nulls.
      */
     @OneToMany(mappedBy = "usuario")
-    /**
-     * Se excluye del toString para evitar recursividad infinita
-     * debido a relaciones bidireccionales (Usuario <-> UsuarioRol).
-     */
     @ToString.Exclude
     private Set<UsuarioRol> usuariosRoles = new HashSet<>();
+
+    /**
+     * Relación con las colecciones asociadas al usuario.
+     */
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private Set<UsuarioColeccion> usuariosColecciones = new HashSet<>();
+
+    /**
+     * Relación con los cromos asociados al usuario.
+     */
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private Set<UsuarioCromo> usuariosCromos = new HashSet<>();
 }

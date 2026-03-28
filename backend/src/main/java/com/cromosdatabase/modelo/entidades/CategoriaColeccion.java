@@ -41,9 +41,16 @@ public class CategoriaColeccion {
     private String descripcion;
 
     /**
-     * Subcategorías asociadas.
+     * Subcategorías asociadas a esta categoría.
      */
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
     private Set<SubcategoriaColeccion> subcategorias = new HashSet<>();
+
+    /**
+     * Relación con las colecciones de esta categoría.
+     */
+    @OneToMany(mappedBy = "categoria")
+    @ToString.Exclude
+    private Set<Coleccion> colecciones = new HashSet<>();
 }

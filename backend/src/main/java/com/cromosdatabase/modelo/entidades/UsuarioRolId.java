@@ -1,9 +1,9 @@
 package com.cromosdatabase.modelo.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -17,6 +17,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioRolId implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * ID del usuario.
