@@ -34,6 +34,11 @@ public class UsuarioPrincipal implements UserDetails {
     private String email;
 
     /**
+     * Nombre visible del usuario.
+     */
+    private String nombreMostrar;
+
+    /**
      * Contraseña encriptada del usuario.
      */
     private String contrasena;
