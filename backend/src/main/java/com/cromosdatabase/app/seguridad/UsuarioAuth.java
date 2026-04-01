@@ -21,7 +21,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class UsuarioPrincipal implements UserDetails {
+public class UsuarioAuth implements UserDetails {
 
     /**
      * Identificador del usuario.
