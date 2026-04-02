@@ -47,20 +47,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
      * Servicio encargado de cargar usuarios para Spring Security.
      */
-    private final CustomUserDetailsService customUserDetailsService;
+    private final UsuarioAuthDetailsService usuarioAuthDetailsService;
 
     /**
      * Constructor con inyección de dependencias.
      *
      * @param jwtService servicio JWT
-     * @param customUserDetailsService servicio de carga de usuarios
+     * @param usuarioAuthDetailsService servicio de carga de usuarios
      */
     public JwtAuthenticationFilter(
             JwtService jwtService,
-            CustomUserDetailsService customUserDetailsService) {
+            UsuarioAuthDetailsService usuarioAuthDetailsService) {
 
         this.jwtService = jwtService;
-        this.customUserDetailsService = customUserDetailsService;
+        this.usuarioAuthDetailsService = usuarioAuthDetailsService;
     }
 
     /**
@@ -102,7 +102,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // Carga el usuario desde base de datos
             UsuarioAuth usuarioAuth =
-                    (UsuarioAuth) customUserDetailsService.loadUserByUsername(email);
+                    (UsuarioAuth) usuarioAuthDetailsService.loadUserByUsername(email);
 
             // Comprueba si el token es válido para ese usuario
             boolean tokenValido = jwtService.esTokenValido(token, usuarioAuth);
