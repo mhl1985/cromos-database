@@ -47,7 +47,7 @@ public class UsuarioAuthDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByEmail(email)
+        Usuario usuario = usuarioRepository.findByEmailConRoles(email)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "No existe ningún usuario con el email: " + email));
 

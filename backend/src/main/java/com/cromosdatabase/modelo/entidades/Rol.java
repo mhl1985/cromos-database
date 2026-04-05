@@ -39,13 +39,6 @@ public class Rol {
     private String nombre;
 
     /**
-     * Descripción del rol.
-     * - Opcional
-     */
-    @Column(name = "descripcion", length = 255)
-    private String descripcion;
-
-    /**
      * Relación con los usuarios que tienen este rol, a través de la tabla intermedia usuarios_roles.
      *
      * mappedBy = "rol" indica que la relación se gestiona desde UsuarioRol.
