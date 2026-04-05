@@ -55,6 +55,7 @@ public class SecurityConfig {
         // Configuración de accesos
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/login").permitAll()
+                .requestMatchers("/auth/registro").permitAll()
                 .requestMatchers("/public/**").permitAll()
                 .anyRequest().authenticated()
         );

@@ -1,18 +1,20 @@
 package com.cromosdatabase.controladores;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import com.cromosdatabase.modelo.dtos.auth.AuthResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
+import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioRequest;
+import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioResponse;
 import com.cromosdatabase.servicios.AuthService;
-
+import com.cromosdatabase.servicios.RegistroUsuarioService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 /**
  * Controlador encargado de gestionar las operaciones de autenticación.
- *
- * Expone los endpoints relacionados con el login de usuarios.
+ * Expone los endpoints relacionados con el login y el registro de usuarios.
  */
 @RestController
 @RequestMapping("/auth")
@@ -23,6 +25,11 @@ public class AuthController {
      * Servicio de autenticación.
      */
     private final AuthService authService;
+
+    /**
+     * Servicio de registro de usuarios.
+     */
+    private final RegistroUsuarioService registroUsuarioService;
 
     /**
      * Endpoint para iniciar sesión.
@@ -37,6 +44,25 @@ public class AuthController {
 
         AuthResponse response = authService.login(loginRequest);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    /**
+     * Endpoint para registrar un nuevo usuario.
+     *
+     * Recibe los datos de alta, los valida (@Valid), crea el usuario en el sistema
+     * y devuelve la información (DTO) del usuario registrado.
+     *
+     * @param request datos de entrada del registro
+     * @return respuesta con los datos del usuario creado (DTO)
+     */
+    @PostMapping("/registro")
+    public ResponseEntity<RegistroUsuarioResponse> registrarUsuario(
+            @Valid @RequestBody RegistroUsuarioRequest request) {
+
+        RegistroUsuarioResponse response = registroUsuarioService.registrarUsuario(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
 }
