@@ -1,5 +1,8 @@
 package com.cromosdatabase.servicios.impl;
 
+import com.cromosdatabase.comun.excepciones.EmailDuplicadoException;
+import com.cromosdatabase.comun.excepciones.NombreAMostrarDuplicadoException;
+import com.cromosdatabase.comun.excepciones.RolNoEncontradoException;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioRequest;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioResponse;
 import com.cromosdatabase.modelo.entidades.Rol;
@@ -90,7 +93,7 @@ public class RegistroUsuarioServiceImpl implements RegistroUsuarioService {
         boolean existeUsuarioConEmail = usuarioRepository.existsByEmail(request.getEmail());
 
         if (existeUsuarioConEmail) {
-            throw new RuntimeException("Ya existe un usuario con ese email.");
+            throw new EmailDuplicadoException("Ya existe un usuario con ese email.");
         }
 
         // Comprobamos si ya existe un usuario con el mismo nombre a mostrar.
@@ -98,12 +101,12 @@ public class RegistroUsuarioServiceImpl implements RegistroUsuarioService {
                 usuarioRepository.existsByNombreMostrar(request.getNombreMostrar());
 
         if (existeUsuarioConNombreMostrar) {
-            throw new RuntimeException("Ya existe un usuario con ese nombre a mostrar.");
+            throw new NombreAMostrarDuplicadoException("Ya existe un usuario con ese nombre a mostrar.");
         }
 
         // Recuperamos el rol por defecto que se asignará al nuevo usuario.
         Rol rolPorDefecto = rolRepository.findByNombre(NOMBRE_ROL_POR_DEFECTO)
-                .orElseThrow(() -> new RuntimeException("No existe el rol por defecto."));
+                .orElseThrow(() -> new RolNoEncontradoException("No existe el rol por defecto."));
 
         // Creamos la entidad Usuario con los datos recibidos en la petición.
         Usuario usuario = new Usuario();
