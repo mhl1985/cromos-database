@@ -8,12 +8,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.cromosdatabase.app.seguridad.JwtService;
 import com.cromosdatabase.app.seguridad.UsuarioAuth;
 import com.cromosdatabase.modelo.dtos.auth.AuthResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
+import com.cromosdatabase.modelo.dtos.auth.PerfilUsuarioAuthResponse;
 import com.cromosdatabase.servicios.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,8 +23,11 @@ import lombok.RequiredArgsConstructor;
 /**
  * Implementación del servicio de autenticación.
  *
- * Se encarga de autenticar al usuario con Spring Security, generar el token JWT
- * y construir la respuesta de login.
+ * Se encarga de:
+ * - autenticar al usuario con Spring Security
+ * - generar el token JWT
+ * - construir la respuesta de login
+ * - obtener el perfil del usuario autenticado
  */
 @Service
 @RequiredArgsConstructor
@@ -38,35 +43,43 @@ public class AuthServiceImpl implements AuthService {
      */
     private final JwtService jwtService;
 
+    /**
+     * Autentica a un usuario a partir de sus credenciales de acceso.
+     *
+     * @param loginRequest datos de entrada del login
+     * @return respuesta de autenticación con token y datos del usuario
+     */
     @Override
     public AuthResponse login(LoginRequest loginRequest) {
 
+        // Extracción de credenciales
         String email = loginRequest.getEmail(); // Email introducido
         String contrasena = loginRequest.getContrasena(); // Contraseña en texto plano
 
-        // Intento de autenticación con Spring Security
+        // Creación del token que Spring Security utilizará para autenticar
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(email, contrasena);
 
-        // Spring valida usuario y contraseña
+        // Spring valida usuario y contraseña contra UserDetailsService
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-        // Usuario autenticado devuelto por Spring
+        // Obtenemos el usuario autenticado
         UsuarioAuth usuarioAuth = (UsuarioAuth) authentication.getPrincipal();
 
-        // Generación del JWT
+        // Generamos el token JWT a partir del usuario autenticado
         String token = jwtService.generarToken(usuarioAuth);
 
-        // Tipo de token estandarizado
-        String tipo = "Bearer";
+        String tipo = "Bearer"; // Tipo de token estandarizado
 
-        Integer idUsuario = usuarioAuth.getIdUsuario(); // ID del usuario
-        String emailUsuario = usuarioAuth.getUsername(); // Email
-        String nombreMostrar = usuarioAuth.getNombreMostrar(); // Nombre visible
+        // Extracción de datos del usuario
+        Integer idUsuario = usuarioAuth.getIdUsuario();
+        String emailUsuario = usuarioAuth.getUsername();
+        String nombreMostrar = usuarioAuth.getNombreMostrar();
 
-        // Conversión de roles a lista de texto
+        // Convertimos authorities de Spring en lista de Strings
         List<String> roles = obtenerNombresRoles(usuarioAuth.getAuthorities());
 
+        // Construimos y devolvemos respuesta
         AuthResponse authResponse = new AuthResponse(
                 token,
                 tipo,
@@ -80,6 +93,36 @@ public class AuthServiceImpl implements AuthService {
     }
 
     /**
+     * Obtiene los datos del perfil del usuario autenticado actual.
+     *
+     * Reutiliza directamente el principal autenticado que Spring Security
+     * ha guardado en el contexto de seguridad durante la petición.
+     *
+     * @return datos del perfil del usuario autenticado actual
+     */
+    @Override
+    public PerfilUsuarioAuthResponse obtenerPerfilUsuarioAutenticado() {
+
+        // Obtenemos la autenticación actual del contexto de seguridad.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Obtenemos el usuario autenticado almacenado por Spring Security.
+        UsuarioAuth usuarioAuth = (UsuarioAuth) authentication.getPrincipal();
+
+        // Convertimos authorities de Spring en lista de Strings.
+        List<String> roles = this.obtenerNombresRoles(usuarioAuth.getAuthorities());
+
+        // Construimos y retornamos DTO de respuesta.
+        PerfilUsuarioAuthResponse perfilUsuarioAuthResponse = new PerfilUsuarioAuthResponse();
+        perfilUsuarioAuthResponse.setIdUsuario(usuarioAuth.getIdUsuario());
+        perfilUsuarioAuthResponse.setEmail(usuarioAuth.getUsername());
+        perfilUsuarioAuthResponse.setNombreMostrar(usuarioAuth.getNombreMostrar());
+        perfilUsuarioAuthResponse.setRoles(roles);
+
+        return perfilUsuarioAuthResponse;
+    }
+
+    /**
      * Convierte las authorities de Spring Security en una lista de nombres de rol.
      *
      * @param authorities authorities del usuario autenticado
@@ -90,6 +133,7 @@ public class AuthServiceImpl implements AuthService {
         List<String> roles = new ArrayList<>();
 
         for (GrantedAuthority authority : authorities) {
+            // Obtenemos nombre del rol y lo añadimos a la lista.
             String nombreRol = authority.getAuthority();
             roles.add(nombreRol);
         }
