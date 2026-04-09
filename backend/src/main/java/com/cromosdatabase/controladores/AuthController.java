@@ -2,6 +2,7 @@ package com.cromosdatabase.controladores;
 
 import com.cromosdatabase.modelo.dtos.auth.AuthResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
+import com.cromosdatabase.modelo.dtos.auth.PerfilUsuarioAuthResponse;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioRequest;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioResponse;
 import com.cromosdatabase.servicios.AuthService;
@@ -14,7 +15,8 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Controlador encargado de gestionar las operaciones de autenticación.
- * Expone los endpoints relacionados con el login y el registro de usuarios.
+ * Expone los endpoints relacionados con el login, el registro
+ * y la consulta del perfil del usuario autenticado.
  */
 @RestController
 @RequestMapping("/auth")
@@ -63,6 +65,22 @@ public class AuthController {
         RegistroUsuarioResponse response = registroUsuarioService.registrarUsuario(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    /**
+     * Endpoint para obtener el perfil del usuario autenticado.
+     *
+     * Reutiliza el usuario autenticado actual disponible en Spring Security
+     * a partir del JWT enviado en la petición.
+     *
+     * @return respuesta con los datos del perfil del usuario autenticado
+     */
+    @GetMapping("/perfil")
+    public ResponseEntity<PerfilUsuarioAuthResponse> obtenerPerfilUsuarioAutenticado() {
+
+        PerfilUsuarioAuthResponse response = authService.obtenerPerfilUsuarioAutenticado();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }
