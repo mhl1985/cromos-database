@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -100,31 +101,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Solo continúa si hay email y aún no hay autenticación en el contexto
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            // Carga el usuario desde base de datos
-            UsuarioAuth usuarioAuth =
-                    (UsuarioAuth) usuarioAuthDetailsService.loadUserByUsername(email);
+            try {
+                // Carga el usuario desde base de datos
+                UsuarioAuth usuarioAuth =
+                        (UsuarioAuth) usuarioAuthDetailsService.loadUserByUsername(email);
 
-            // Comprueba si el token es válido para ese usuario
-            boolean tokenValido = jwtService.esTokenValido(token, usuarioAuth);
+                // Comprueba si el token es válido para ese usuario
+                boolean tokenValido = jwtService.esTokenValido(token, usuarioAuth);
 
-            // Si el token es válido, se autentica al usuario en el contexto
-            if (tokenValido) {
+                // Si el token es válido, se autentica al usuario en el contexto
+                if (tokenValido) {
 
-                // Crea el objeto de autenticación para Spring Security
-                UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(
-                                usuarioAuth,
-                                null,
-                                usuarioAuth.getAuthorities()
-                        );
+                    // Crea el objeto de autenticación para Spring Security
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(
+                                    usuarioAuth,
+                                    null,
+                                    usuarioAuth.getAuthorities()
+                            );
 
-                // Añade detalles de la petición actual
-                authenticationToken.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
-                );
+                    // Añade detalles de la petición actual
+                    authenticationToken.setDetails(
+                            new WebAuthenticationDetailsSource().buildDetails(request)
+                    );
 
-                // Guarda la autenticación en el contexto de seguridad
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    // Guarda la autenticación en el contexto de seguridad
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
+            } catch (UsernameNotFoundException ex) {
+                // Si el usuario del token ya no existe en BD, la petición continúa sin autenticar.
+                // Spring Security decidirá después si el endpoint requiere autenticación dependiendo de
+                // lo que tengamos configurado en SecurityConfig -> securityFilterChain().
             }
         }
 
