@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class AuthResponse {
+public class LoginResponse {
 
     /**
      * Token JWT generado tras la autenticación.

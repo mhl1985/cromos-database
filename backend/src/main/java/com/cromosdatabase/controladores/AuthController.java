@@ -1,6 +1,6 @@
 package com.cromosdatabase.controladores;
 
-import com.cromosdatabase.modelo.dtos.auth.AuthResponse;
+import com.cromosdatabase.modelo.dtos.auth.LoginResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
 import com.cromosdatabase.modelo.dtos.auth.PerfilUsuarioAuthResponse;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioRequest;
@@ -42,9 +42,9 @@ public class AuthController {
      * @return respuesta con el token JWT y datos del usuario
      */
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 
-        AuthResponse response = authService.login(loginRequest);
+        LoginResponse response = authService.login(loginRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

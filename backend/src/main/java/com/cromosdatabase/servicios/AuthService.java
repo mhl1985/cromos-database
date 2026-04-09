@@ -1,6 +1,6 @@
 package com.cromosdatabase.servicios;
 
-import com.cromosdatabase.modelo.dtos.auth.AuthResponse;
+import com.cromosdatabase.modelo.dtos.auth.LoginResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
 import com.cromosdatabase.modelo.dtos.auth.PerfilUsuarioAuthResponse;
 
@@ -21,7 +21,7 @@ public interface AuthService {
      * @param loginRequest datos de entrada del login
      * @return respuesta de autenticación con el token y datos del usuario
      */
-    AuthResponse login(LoginRequest loginRequest);
+    LoginResponse login(LoginRequest loginRequest);
 
     /**
      * Obtiene los datos del perfil del usuario autenticado actual.

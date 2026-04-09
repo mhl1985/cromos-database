@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cromosdatabase.app.seguridad.JwtService;
 import com.cromosdatabase.app.seguridad.UsuarioAuth;
-import com.cromosdatabase.modelo.dtos.auth.AuthResponse;
+import com.cromosdatabase.modelo.dtos.auth.LoginResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
 import com.cromosdatabase.modelo.dtos.auth.PerfilUsuarioAuthResponse;
 import com.cromosdatabase.servicios.AuthService;
@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
      * @return respuesta de autenticación con token y datos del usuario
      */
     @Override
-    public AuthResponse login(LoginRequest loginRequest) {
+    public LoginResponse login(LoginRequest loginRequest) {
 
         // Extracción de credenciales
         String email = loginRequest.getEmail(); // Email introducido
@@ -80,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
         List<String> roles = obtenerNombresRoles(usuarioAuth.getAuthorities());
 
         // Construimos y devolvemos respuesta
-        AuthResponse authResponse = new AuthResponse(
+        LoginResponse loginResponse = new LoginResponse(
                 token,
                 tipo,
                 idUsuario,
@@ -89,7 +89,7 @@ public class AuthServiceImpl implements AuthService {
                 roles
         );
 
-        return authResponse;
+        return loginResponse;
     }
 
     /**
