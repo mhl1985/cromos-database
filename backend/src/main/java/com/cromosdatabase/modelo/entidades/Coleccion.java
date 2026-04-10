@@ -82,11 +82,11 @@ public class Coleccion {
     private SubcategoriaColeccion subcategoria;
 
     /**
-     * Año o rango asociado a la colección.
+     * Periodo, año o rango asociado a la colección.
      * Ejemplos: 2022, 2025-2026, 1970-2006.
      */
-    @Column(name = "anio", length = 20)
-    private String anio;
+    @Column(name = "periodo", length = 20)
+    private String periodo;
 
     /**
      * País asociado a la colección.
