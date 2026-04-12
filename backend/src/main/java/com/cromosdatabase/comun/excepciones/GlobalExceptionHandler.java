@@ -90,6 +90,25 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Gestiona el caso en el que se solicita una colección que no existe.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 404 con el mensaje del error
+     */
+    @ExceptionHandler(ColeccionNoEncontradaException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleColeccionNoEncontradaException(
+            ColeccionNoEncontradaException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
      * Gestiona cualquier error no controlado de forma específica.
      *
      * Actúa como último nivel de captura para evitar que la API
