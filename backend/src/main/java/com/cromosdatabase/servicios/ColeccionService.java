@@ -1,6 +1,7 @@
 package com.cromosdatabase.servicios;
 
-import com.cromosdatabase.modelo.entidades.Coleccion;
+import com.cromosdatabase.modelo.dtos.coleccion.ColeccionDetalleResponse;
+import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 
 import java.util.List;
 
@@ -26,19 +27,19 @@ public interface ColeccionService {
      * @param idEditorial identificador de la editorial
      * @param idSubcategoria identificador de la subcategoría
      * @param periodo texto a buscar dentro del periodo de la colección
-     * @return lista de colecciones que cumplen los filtros
+     * @return lista de DTO´s de colecciones en formato resumido que cumplen los filtros
      */
-    List<Coleccion> obtenerColeccionesFiltradas(String nombre,
-                                                Integer idCategoria,
-                                                Integer idEditorial,
-                                                Integer idSubcategoria,
-                                                String periodo);
+    List<ColeccionResumenResponse> obtenerColeccionesFiltradas(String nombre,
+                                                               Integer idCategoria,
+                                                               Integer idEditorial,
+                                                               Integer idSubcategoria,
+                                                               String periodo);
 
     /**
      * Obtiene el detalle de una colección por su identificador.
      *
      * @param idColeccion identificador de la colección
-     * @return colección encontrada
+     * @return DTO de la colección encontrada en formato detallado
      */
-    Coleccion obtenerColeccionPorId(Integer idColeccion);
+    ColeccionDetalleResponse obtenerColeccionPorId(Integer idColeccion);
 }

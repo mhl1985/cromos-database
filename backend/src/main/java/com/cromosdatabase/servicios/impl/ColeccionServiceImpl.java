@@ -1,13 +1,17 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.ColeccionNoEncontradaException;
+import com.cromosdatabase.modelo.dtos.coleccion.ColeccionDetalleResponse;
+import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.Coleccion;
+import com.cromosdatabase.modelo.mappers.ColeccionMapper;
 import com.cromosdatabase.repositorios.ColeccionRepository;
 import com.cromosdatabase.repositorios.filtros.ColeccionFilters;
 import com.cromosdatabase.servicios.ColeccionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +32,11 @@ public class ColeccionServiceImpl implements ColeccionService {
     private final ColeccionRepository coleccionRepository;
 
     /**
+     * Mapper de conversión entre entidad Coleccion y DTOs de respuesta.
+     */
+    private final ColeccionMapper coleccionMapper;
+
+    /**
      * Obtiene el listado de colecciones aplicando los filtros recibidos.
      *
      * Todos los filtros son opcionales y pueden combinarse entre sí.
@@ -44,14 +53,15 @@ public class ColeccionServiceImpl implements ColeccionService {
      * @param idEditorial identificador de la editorial
      * @param idSubcategoria identificador de la subcategoría
      * @param periodo texto a buscar dentro del periodo de la colección
-     * @return lista de colecciones que cumplen los filtros
+     * @return DTO de lista de colecciones que cumplen los filtros en formato resumido
      */
     @Override
-    public List<Coleccion> obtenerColeccionesFiltradas(String nombre,
-                                                       Integer idCategoria,
-                                                       Integer idEditorial,
-                                                       Integer idSubcategoria,
-                                                       String periodo) {
+    @Transactional(readOnly = true)
+    public List<ColeccionResumenResponse> obtenerColeccionesFiltradas(String nombre,
+                                                                      Integer idCategoria,
+                                                                      Integer idEditorial,
+                                                                      Integer idSubcategoria,
+                                                                      String periodo) {
 
         /*
          * Se normalizan los filtros de texto antes de construir la consulta.
@@ -63,38 +73,31 @@ public class ColeccionServiceImpl implements ColeccionService {
 
         Specification<Coleccion> filtroCompleto = null;
 
+        // Filtro por nombre.
         if (nombreNormalizado != null) {
             filtroCompleto = combinarFiltros(filtroCompleto,
                     ColeccionFilters.byNombre(nombreNormalizado));
         }
 
-        /*
-         * Filtro por categoría.
-         */
+        // Filtro por categoría.
         if (idCategoria != null) {
             filtroCompleto = combinarFiltros(filtroCompleto,
                     ColeccionFilters.byIdCategoria(idCategoria));
         }
 
-        /*
-         * Filtro por editorial.
-         */
+        // Filtro por editorial.
         if (idEditorial != null) {
             filtroCompleto = combinarFiltros(filtroCompleto,
                     ColeccionFilters.byIdEditorial(idEditorial));
         }
 
-        /*
-         * Filtro por subcategoría.
-         */
+        // Filtro por subcategoría
         if (idSubcategoria != null) {
             filtroCompleto = combinarFiltros(filtroCompleto,
                     ColeccionFilters.byIdSubcategoria(idSubcategoria));
         }
 
-        /*
-         * Filtro por periodo.
-         */
+        // Filtro por periodo
         if (periodoNormalizado != null) {
             filtroCompleto = combinarFiltros(filtroCompleto,
                     ColeccionFilters.byPeriodo(periodoNormalizado));
@@ -102,8 +105,8 @@ public class ColeccionServiceImpl implements ColeccionService {
 
         /*
          * Ejecución final:
-         * - Si no hay filtros → devuelve todas las colecciones
-         * - Si hay filtros → los aplica y devuelve las colecciones resultantes
+         * - Si no hay filtros: devuelve todas las colecciones
+         * - Si hay filtros: los aplica y devuelve las colecciones resultantes
          */
         List<Coleccion> colecciones;
 
@@ -113,7 +116,11 @@ public class ColeccionServiceImpl implements ColeccionService {
             colecciones = coleccionRepository.findAll(filtroCompleto);
         }
 
-        return colecciones;
+        // Mapeo a DTO
+        List<ColeccionResumenResponse> response =
+                coleccionMapper.toResumenResponseList(colecciones);
+
+        return response;
     }
 
     /**
@@ -124,17 +131,22 @@ public class ColeccionServiceImpl implements ColeccionService {
      * GlobalExceptionHandler.
      *
      * @param idColeccion identificador de la colección
-     * @return colección encontrada
+     * @return DTO de colección encontrada en formato detallado
      */
     @Override
-    public Coleccion obtenerColeccionPorId(Integer idColeccion) {
+    @Transactional(readOnly = true)
+    public ColeccionDetalleResponse obtenerColeccionPorId(Integer idColeccion) {
 
         Coleccion coleccion = coleccionRepository.findById(idColeccion)
                 .orElseThrow(() -> new ColeccionNoEncontradaException(
                         "No existe ninguna colección con id " + idColeccion
                 ));
 
-        return coleccion;
+        // Mapeo a DTO
+        ColeccionDetalleResponse response =
+                coleccionMapper.toDetalleResponse(coleccion);
+
+        return response;
     }
 
     /**
