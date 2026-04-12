@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 /**
  * Manejador global de excepciones.
@@ -106,6 +107,34 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
+     * Gestiona errores de tipo en parámetros de entrada de la petición.
+     *
+     * Este caso ocurre, por ejemplo, cuando un parámetro que debería ser numérico
+     * recibe un valor no válido, como idCategoria=abc.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 400 con detalle del error
+     */
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleMethodArgumentTypeMismatchException(
+            MethodArgumentTypeMismatchException ex) {
+
+        String nombreParametro = ex.getName();
+        String valorRecibido = ex.getValue() != null ? ex.getValue().toString() : "null";
+
+        String mensajeError = "El parámetro '" + nombreParametro
+                + "' tiene un valor no válido: '" + valorRecibido + "'.";
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                mensajeError
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     /**
