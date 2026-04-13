@@ -2,13 +2,15 @@ package com.cromosdatabase.repositorios;
 
 import com.cromosdatabase.modelo.entidades.CategoriaColeccion;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
 /**
  * Repositorio JPA para la entidad CategoriaColeccion.
  */
-public interface CategoriaColeccionRepository extends JpaRepository<CategoriaColeccion, Integer> {
+public interface CategoriaColeccionRepository extends JpaRepository<CategoriaColeccion, Integer>,
+        JpaSpecificationExecutor<CategoriaColeccion> {
 
     /**
      * Busca una categoría por su nombre exacto.
