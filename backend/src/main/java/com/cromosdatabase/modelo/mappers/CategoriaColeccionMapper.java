@@ -1,5 +1,6 @@
 package com.cromosdatabase.modelo.mappers;
 
+import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.CategoriaColeccion;
 import org.mapstruct.Mapper;
@@ -35,5 +36,17 @@ public interface CategoriaColeccionMapper {
      */
     List<CategoriaColeccionResumenResponse> toResumenResponseList(
             List<CategoriaColeccion> categoriasColeccion
+    );
+
+    /**
+     * Convierte una entidad CategoriaColeccion en un DTO
+     * de respuesta detallada.
+     *
+     * @param categoriaColeccion entidad de categoría
+     * @return DTO detallado de la categoría
+     */
+    @Mapping(source = "idCategoria", target = "id")
+    CategoriaColeccionDetalleResponse toDetalleResponse(
+            CategoriaColeccion categoriaColeccion
     );
 }
