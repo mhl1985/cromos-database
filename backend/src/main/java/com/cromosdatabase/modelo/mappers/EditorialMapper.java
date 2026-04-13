@@ -1,5 +1,6 @@
 package com.cromosdatabase.modelo.mappers;
 
+import com.cromosdatabase.modelo.dtos.editorial.EditorialDetalleResponse;
 import com.cromosdatabase.modelo.dtos.editorial.EditorialResumenResponse;
 import com.cromosdatabase.modelo.entidades.Editorial;
 import org.mapstruct.Mapper;
@@ -31,4 +32,14 @@ public interface EditorialMapper {
      * @return lista de DTOs resumidos
      */
     List<EditorialResumenResponse> toResumenResponseList(List<Editorial> editoriales);
+
+    /**
+     * Convierte una entidad Editorial en un DTO
+     * de respuesta detallada.
+     *
+     * @param editorial entidad editorial
+     * @return DTO detallado de la editorial
+     */
+    @Mapping(source = "idEditorial", target = "id")
+    EditorialDetalleResponse toDetalleResponse(Editorial editorial);
 }
