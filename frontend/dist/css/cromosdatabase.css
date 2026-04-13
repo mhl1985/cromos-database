@@ -1,0 +1,18 @@
+/* Color general de enlaces y títulos principales*/
+h1, h2, h4, a{
+    color: coral;
+}
+
+/*Título para poner encima de cada imagen de cromo*/
+div.cromo-titulo{
+    position: relative;
+    top: -142px;
+}
+div.cromo-titulo p{
+    margin: 0 20px;
+    text-align: center;
+    background-color: coral;
+    color: black;
+}
+
+/*Correciones accesibilidad*/
