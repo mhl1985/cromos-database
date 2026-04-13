@@ -1,5 +1,6 @@
 package com.cromosdatabase.modelo.mappers;
 
+import com.cromosdatabase.modelo.dtos.subcategoria.SubcategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.subcategoria.SubcategoriaColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.SubcategoriaColeccion;
 import org.mapstruct.Mapper;
@@ -35,5 +36,17 @@ public interface SubcategoriaColeccionMapper {
      */
     List<SubcategoriaColeccionResumenResponse> toResumenResponseList(
             List<SubcategoriaColeccion> subcategoriasColeccion
+    );
+
+    /**
+     * Convierte una entidad SubcategoriaColeccion en un DTO
+     * de respuesta detallada.
+     *
+     * @param subcategoriaColeccion entidad de subcategoría
+     * @return DTO detallado de la subcategoría
+     */
+    @Mapping(source = "idSubcategoria", target = "id")
+    SubcategoriaColeccionDetalleResponse toDetalleResponse(
+            SubcategoriaColeccion subcategoriaColeccion
     );
 }
