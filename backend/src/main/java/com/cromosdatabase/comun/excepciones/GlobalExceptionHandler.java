@@ -167,6 +167,25 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Gestiona el caso en el que se solicita un cromo que no existe.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 404 con el mensaje del error
+     */
+    @ExceptionHandler(CromoNoEncontradoException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleCromoNoEncontradoException(
+            CromoNoEncontradoException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
      * Gestiona errores de tipo en parámetros de entrada de la petición.
      *
      * Este caso ocurre, por ejemplo, cuando un parámetro que debería ser numérico
