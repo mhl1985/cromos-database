@@ -2,14 +2,20 @@ package com.cromosdatabase.repositorios;
 
 import com.cromosdatabase.modelo.entidades.Cromo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Repositorio JPA para la entidad Cromo.
+ *
+ * Extiende:
+ * - JpaRepository: Proporciona operaciones CRUD básicas (findAll, findById, save, delete, etc).
+ * - JpaSpecificationExecutor: Permite ejecutar consultas dinámicas utilizando Specification.
  */
-public interface CromoRepository extends JpaRepository<Cromo, Integer> {
+public interface CromoRepository extends JpaRepository<Cromo, Integer>,
+        JpaSpecificationExecutor<Cromo> {
 
     /**
      * Busca un cromo por colección y número.
