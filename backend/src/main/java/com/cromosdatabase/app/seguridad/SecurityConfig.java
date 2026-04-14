@@ -61,6 +61,7 @@ public class SecurityConfig {
                 .requestMatchers("/editoriales/**").permitAll()
                 .requestMatchers("/categorias/**").permitAll()
                 .requestMatchers("/subcategorias/**").permitAll()
+                .requestMatchers("/cromos/**").permitAll()
                 .anyRequest().authenticated()
         );
 
