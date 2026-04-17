@@ -26,4 +26,15 @@ public interface UsuarioColeccionRepository extends JpaRepository<UsuarioColecci
      * @return Lista de relaciones usuario-colección.
      */
     List<UsuarioColeccion> findByColeccion_IdColeccion(Integer idColeccion);
+
+    /**
+     * Comprueba si una colección concreta está asociada
+     * a un usuario determinado.
+     *
+     * @param idUsuario ID del usuario.
+     * @param idColeccion ID de la colección.
+     * @return true si la colección está asociada al usuario,
+     * false en caso contrario.
+     */
+    boolean existsByUsuario_IdUsuarioAndColeccion_IdColeccion(Integer idUsuario, Integer idColeccion);
 }

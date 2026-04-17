@@ -42,4 +42,14 @@ public interface CromoRepository extends JpaRepository<Cromo, Integer>,
      * @return true si existe, false en caso contrario.
      */
     boolean existsByColeccion_IdColeccionAndNumero(Integer idColeccion, String numero);
+
+    /**
+     * Obtiene los cromos de una colección cuyos IDs estén
+     * incluidos en la lista recibida.
+     *
+     * @param idColeccion ID de la colección.
+     * @param idsCromo lista de IDs de cromo.
+     * @return Lista de cromos encontrados en la colección.
+     */
+    List<Cromo> findByColeccion_IdColeccionAndIdCromoIn(Integer idColeccion, List<Integer> idsCromo);
 }
