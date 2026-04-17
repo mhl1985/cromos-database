@@ -186,6 +186,65 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Gestiona el caso en el que no se encuentra un usuario.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 404 con el mensaje del error
+     */
+    @ExceptionHandler(UsuarioNoEncontradoException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleUsuarioNoEncontradoException(
+            UsuarioNoEncontradoException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
+     * Gestiona el caso en el que una colección no está asociada
+     * al usuario autenticado.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 404 con el mensaje del error
+     */
+    @ExceptionHandler(UsuarioColeccionNoEncontradaException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleUsuarioColeccionNoEncontradaException(
+            UsuarioColeccionNoEncontradaException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
+     * Gestiona los errores de validación de negocio producidos
+     * al editar los cromos de una colección del usuario.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 400 con el mensaje del error
+     */
+    @ExceptionHandler(UsuarioColeccionCromoEdicionInvalidaException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleUsuarioColeccionCromoEdicionInvalidaException(
+            UsuarioColeccionCromoEdicionInvalidaException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    /**
      * Gestiona errores de tipo en parámetros de entrada de la petición.
      *
      * Este caso ocurre, por ejemplo, cuando un parámetro que debería ser numérico
