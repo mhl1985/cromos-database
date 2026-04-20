@@ -37,4 +37,12 @@ public interface UsuarioColeccionRepository extends JpaRepository<UsuarioColecci
      * false en caso contrario.
      */
     boolean existsByUsuario_IdUsuarioAndColeccion_IdColeccion(Integer idUsuario, Integer idColeccion);
+
+    /**
+     * Elimina la relación entre un usuario y una colección concreta.
+     *
+     * @param idUsuario id del usuario.
+     * @param idColeccion id de la colección.
+     */
+    void deleteByUsuario_IdUsuarioAndColeccion_IdColeccion(Integer idUsuario, Integer idColeccion);
 }

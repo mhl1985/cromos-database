@@ -48,4 +48,16 @@ public interface UsuarioCromoRepository extends JpaRepository<UsuarioCromo, Usua
      * @param idCromo ID del cromo.
      */
     void deleteByUsuario_IdUsuarioAndCromo_IdCromo(Integer idUsuario, Integer idCromo);
+
+    /**
+     * Elimina todas las relaciones usuario-cromo de un usuario
+     * para los cromos pertenecientes a una colección concreta.
+     *
+     * @param idUsuario ID del usuario.
+     * @param idColeccion ID de la colección.
+     */
+    void deleteByUsuario_IdUsuarioAndCromo_Coleccion_IdColeccion(
+            Integer idUsuario,
+            Integer idColeccion
+    );
 }
