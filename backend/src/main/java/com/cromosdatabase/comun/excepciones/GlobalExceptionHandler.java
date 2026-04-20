@@ -225,6 +225,26 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Gestiona el caso en el que se intenta asociar al usuario autenticado
+     * una colección que ya tiene añadida.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 409 con el mensaje del error
+     */
+    @ExceptionHandler(UsuarioColeccionDuplicadaException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleUsuarioColeccionDuplicadaException(
+            UsuarioColeccionDuplicadaException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    /**
      * Gestiona los errores de validación de negocio producidos
      * al editar los cromos de una colección del usuario.
      *
