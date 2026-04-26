@@ -1,0 +1,10 @@
+{
+  "token": "cosalargaquedicequiendebedepoderacceder",
+  "type": "Bearer",
+  "idUsuario": 1,
+  "email": "miguel@email.com",
+  "nombreMostrar": "Miguel",
+  "roles": [
+    "ROLE_USER"
+  ]
+}
