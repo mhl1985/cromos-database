@@ -3,10 +3,14 @@ package com.cromosdatabase.comun.excepciones;
 import com.cromosdatabase.modelo.dtos.comun.ErrorGenericoResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * Manejador global de excepciones.
@@ -46,6 +50,50 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    /**
+     * Gestiona errores de autenticación producidos por credenciales incorrectas.
+     *
+     * Este caso ocurre, por ejemplo, cuando el email existe pero la contraseña
+     * informada no es válida, o cuando se intenta acceder con credenciales erróneas.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 401 con mensaje genérico de autenticación
+     */
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleBadCredentialsException(
+            BadCredentialsException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                "Email o contraseña incorrectos."
+        );
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
+
+    /**
+     * Gestiona otros errores de autenticación de Spring Security.
+     *
+     * Actúa como respaldo para excepciones de autenticación distintas de
+     * BadCredentialsException.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 401 con mensaje genérico de autenticación
+     */
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleAuthenticationException(
+            AuthenticationException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                "No se ha podido autenticar al usuario."
+        );
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
     /**
@@ -282,6 +330,50 @@ public class GlobalExceptionHandler {
 
         String mensajeError = "El parámetro '" + nombreParametro
                 + "' tiene un valor no válido: '" + valorRecibido + "'.";
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                mensajeError
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    /**
+     * Gestiona peticiones a URLs no válidas o incompletas.
+     *
+     * Este caso puede ocurrir, por ejemplo, cuando se invoca un endpoint
+     * que requiere un id en el path pero no se informa.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 400 con mensaje genérico de URL no válida
+     */
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleNoResourceFoundException(
+            NoResourceFoundException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "La URL solicitada no es válida. Revise que se hayan informado todos los parámetros obligatorios."
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    /**
+     * Gestiona el caso en el que falta una variable obligatoria del path.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 400 con detalle del parámetro ausente
+     */
+    @ExceptionHandler(MissingPathVariableException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleMissingPathVariableException(
+            MissingPathVariableException ex) {
+
+        String mensajeError = "Falta un parámetro obligatorio en la URL: "
+                + ex.getVariableName() + ".";
 
         ErrorGenericoResponse response = new ErrorGenericoResponse(
                 HttpStatus.BAD_REQUEST.value(),
