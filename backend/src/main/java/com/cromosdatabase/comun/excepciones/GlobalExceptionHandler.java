@@ -356,7 +356,8 @@ public class GlobalExceptionHandler {
         ErrorGenericoResponse response = new ErrorGenericoResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
-                "La URL solicitada no es válida. Revise que se hayan informado todos los parámetros obligatorios."
+                "La URL solicitada no es válida. " +
+                        "Revise que se hayan informado todos los parámetros obligatorios."
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
