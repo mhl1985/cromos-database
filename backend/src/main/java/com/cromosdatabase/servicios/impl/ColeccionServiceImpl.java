@@ -1,6 +1,7 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.ColeccionNoEncontradaException;
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.Coleccion;
@@ -68,38 +69,38 @@ public class ColeccionServiceImpl implements ColeccionService {
          * Se eliminan espacios sobrantes al principio y al final.
          * Se convierten cadenas vacías en null.
          */
-        String nombreNormalizado = normalizarTextoFiltro(nombre);
-        String periodoNormalizado = normalizarTextoFiltro(periodo);
+        String nombreNormalizado = FiltroUtils.normalizarTextoFiltro(nombre);
+        String periodoNormalizado = FiltroUtils.normalizarTextoFiltro(periodo);
 
         Specification<Coleccion> filtroCompleto = null;
 
         // Filtro por nombre.
         if (nombreNormalizado != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(filtroCompleto,
                     ColeccionFilters.byNombre(nombreNormalizado));
         }
 
         // Filtro por categoría.
         if (idCategoria != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(filtroCompleto,
                     ColeccionFilters.byIdCategoria(idCategoria));
         }
 
         // Filtro por editorial.
         if (idEditorial != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(filtroCompleto,
                     ColeccionFilters.byIdEditorial(idEditorial));
         }
 
         // Filtro por subcategoría
         if (idSubcategoria != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(filtroCompleto,
                     ColeccionFilters.byIdSubcategoria(idSubcategoria));
         }
 
         // Filtro por periodo
         if (periodoNormalizado != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(filtroCompleto,
                     ColeccionFilters.byPeriodo(periodoNormalizado));
         }
 
@@ -147,49 +148,5 @@ public class ColeccionServiceImpl implements ColeccionService {
                 coleccionMapper.toDetalleResponse(coleccion);
 
         return response;
-    }
-
-    /**
-     * Normaliza un texto recibido como filtro.
-     *
-     * Reglas:
-     * - Si el valor es null, devuelve null
-     * - Elimina espacios al inicio y al final
-     * - Si tras el trim queda vacío, devuelve null
-     *
-     * @param texto texto recibido como filtro
-     * @return texto normalizado o null si no aporta valor para filtrar
-     */
-    private String normalizarTextoFiltro(String texto) {
-
-        if (texto == null) {
-            return null;
-        }
-
-        String textoNormalizado = texto.trim();
-
-        if (textoNormalizado.isEmpty()) {
-            return null;
-        }
-
-        return textoNormalizado;
-    }
-
-    /**
-     * Combina dos filtros mediante una operación AND.
-     *
-     * Si el filtro base es null, devuelve directamente el nuevo filtro.
-     *
-     * @param filtroBase filtro acumulado hasta el momento
-     * @param nuevoFiltro nuevo filtro a añadir
-     * @return filtro combinado
-     */
-    private Specification<Coleccion> combinarFiltros(Specification<Coleccion> filtroBase,
-                                                     Specification<Coleccion> nuevoFiltro) {
-        if (filtroBase == null) {
-            return nuevoFiltro;
-        }
-
-        return filtroBase.and(nuevoFiltro);
     }
 }

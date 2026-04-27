@@ -1,6 +1,7 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.CromoNoEncontradoException;
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.dtos.cromo.CromoDetalleResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import com.cromosdatabase.modelo.entidades.Cromo;
@@ -60,38 +61,37 @@ public class CromoServiceImpl implements CromoService {
                                                              String nombre,
                                                              String tipo) {
 
-        /*
-         * Se normalizan los filtros de texto antes de construir la consulta.
-         * Se eliminan espacios sobrantes al principio y al final.
-         * Se convierten cadenas vacías en null.
-         */
-        String numeroNormalizado = normalizarTextoFiltro(numero);
-        String nombreNormalizado = normalizarTextoFiltro(nombre);
-        String tipoNormalizado = normalizarTextoFiltro(tipo);
+        String numeroNormalizado = FiltroUtils.normalizarTextoFiltro(numero);
+        String nombreNormalizado = FiltroUtils.normalizarTextoFiltro(nombre);
+        String tipoNormalizado = FiltroUtils.normalizarTextoFiltro(tipo);
 
         Specification<Cromo> filtroCompleto = null;
 
         // Filtro por colección.
         if (idColeccion != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(
+                    filtroCompleto,
                     CromoFilters.byIdColeccion(idColeccion));
         }
 
         // Filtro por número.
         if (numeroNormalizado != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(
+                    filtroCompleto,
                     CromoFilters.byNumero(numeroNormalizado));
         }
 
         // Filtro por nombre.
         if (nombreNormalizado != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(
+                    filtroCompleto,
                     CromoFilters.byNombre(nombreNormalizado));
         }
 
         // Filtro por tipo.
         if (tipoNormalizado != null) {
-            filtroCompleto = combinarFiltros(filtroCompleto,
+            filtroCompleto = FiltroUtils.combinarFiltros(
+                    filtroCompleto,
                     CromoFilters.byTipo(tipoNormalizado));
         }
 
@@ -141,47 +141,4 @@ public class CromoServiceImpl implements CromoService {
         return response;
     }
 
-    /**
-     * Normaliza un texto recibido como filtro.
-     *
-     * Reglas:
-     * - Si el valor es null, devuelve null
-     * - Elimina espacios al inicio y al final
-     * - Si tras el trim queda vacío, devuelve null
-     *
-     * @param texto texto recibido como filtro
-     * @return texto normalizado o null si no aporta valor para filtrar
-     */
-    private String normalizarTextoFiltro(String texto) {
-
-        if (texto == null) {
-            return null;
-        }
-
-        String textoNormalizado = texto.trim();
-
-        if (textoNormalizado.isEmpty()) {
-            return null;
-        }
-
-        return textoNormalizado;
-    }
-
-    /**
-     * Combina dos filtros mediante una operación AND.
-     *
-     * Si el filtro base es null, devuelve directamente el nuevo filtro.
-     *
-     * @param filtroBase filtro acumulado hasta el momento
-     * @param nuevoFiltro nuevo filtro a añadir
-     * @return filtro combinado
-     */
-    private Specification<Cromo> combinarFiltros(Specification<Cromo> filtroBase,
-                                                 Specification<Cromo> nuevoFiltro) {
-        if (filtroBase == null) {
-            return nuevoFiltro;
-        }
-
-        return filtroBase.and(nuevoFiltro);
-    }
 }

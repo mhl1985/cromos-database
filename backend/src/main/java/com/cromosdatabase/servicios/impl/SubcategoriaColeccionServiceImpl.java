@@ -1,6 +1,7 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.SubcategoriaColeccionNoEncontradaException;
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.dtos.subcategoria.SubcategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.subcategoria.SubcategoriaColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.SubcategoriaColeccion;
@@ -55,16 +56,13 @@ public class SubcategoriaColeccionServiceImpl implements SubcategoriaColeccionSe
             String nombre,
             Integer idCategoria) {
 
-        /*
-         * Se normalizan los filtros de texto antes de construir la consulta.
-         */
-        String nombreNormalizado = normalizarTextoFiltro(nombre);
+        String nombreNormalizado = FiltroUtils.normalizarTextoFiltro(nombre);
 
         Specification<SubcategoriaColeccion> filtroCompleto = null;
 
         // Filtro por nombre
         if (nombreNormalizado != null) {
-            filtroCompleto = combinarFiltros(
+            filtroCompleto = FiltroUtils.combinarFiltros(
                     filtroCompleto,
                     SubcategoriaColeccionFilters.byNombre(nombreNormalizado)
             );
@@ -72,7 +70,7 @@ public class SubcategoriaColeccionServiceImpl implements SubcategoriaColeccionSe
 
         // Filtro por idCategoria
         if (idCategoria != null) {
-            filtroCompleto = combinarFiltros(
+            filtroCompleto = FiltroUtils.combinarFiltros(
                     filtroCompleto,
                     SubcategoriaColeccionFilters.byIdCategoria(idCategoria)
             );
@@ -117,35 +115,4 @@ public class SubcategoriaColeccionServiceImpl implements SubcategoriaColeccionSe
         return response;
     }
 
-    /**
-     * Normaliza un texto recibido como filtro.
-     */
-    private String normalizarTextoFiltro(String texto) {
-
-        if (texto == null) {
-            return null;
-        }
-
-        String textoNormalizado = texto.trim();
-
-        if (textoNormalizado.isEmpty()) {
-            return null;
-        }
-
-        return textoNormalizado;
-    }
-
-    /**
-     * Combina dos filtros mediante AND.
-     */
-    private Specification<SubcategoriaColeccion> combinarFiltros(
-            Specification<SubcategoriaColeccion> filtroBase,
-            Specification<SubcategoriaColeccion> nuevoFiltro) {
-
-        if (filtroBase == null) {
-            return nuevoFiltro;
-        }
-
-        return filtroBase.and(nuevoFiltro);
-    }
 }

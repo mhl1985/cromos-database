@@ -1,6 +1,7 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.EditorialNoEncontradaException;
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.dtos.editorial.EditorialDetalleResponse;
 import com.cromosdatabase.modelo.dtos.editorial.EditorialResumenResponse;
 import com.cromosdatabase.modelo.entidades.Editorial;
@@ -51,18 +52,13 @@ public class EditorialServiceImpl implements EditorialService {
     @Transactional(readOnly = true)
     public List<EditorialResumenResponse> obtenerEditorialesFiltradas(String nombre) {
 
-        /*
-         * Se normalizan los filtros de texto antes de construir la consulta.
-         * Se eliminan espacios sobrantes al principio y al final.
-         * Se convierten cadenas vacías en null.
-         */
-        String nombreNormalizado = normalizarTextoFiltro(nombre);
+        String nombreNormalizado = FiltroUtils.normalizarTextoFiltro(nombre);
 
         Specification<Editorial> filtroCompleto = null;
 
         // Filtro por nombre.
         if (nombreNormalizado != null) {
-            filtroCompleto = combinarFiltros(
+            filtroCompleto = FiltroUtils.combinarFiltros(
                     filtroCompleto,
                     EditorialFilters.byNombre(nombreNormalizado)
             );
@@ -114,48 +110,4 @@ public class EditorialServiceImpl implements EditorialService {
         return response;
     }
 
-    /**
-     * Normaliza un texto recibido como filtro.
-     *
-     * Reglas:
-     * - Si el valor es null, devuelve null
-     * - Elimina espacios al inicio y al final
-     * - Si tras el trim queda vacío, devuelve null
-     *
-     * @param texto texto recibido como filtro
-     * @return texto normalizado o null si no aporta valor para filtrar
-     */
-    private String normalizarTextoFiltro(String texto) {
-
-        if (texto == null) {
-            return null;
-        }
-
-        String textoNormalizado = texto.trim();
-
-        if (textoNormalizado.isEmpty()) {
-            return null;
-        }
-
-        return textoNormalizado;
-    }
-
-    /**
-     * Combina dos filtros mediante una operación AND.
-     *
-     * Si el filtro base es null, devuelve directamente el nuevo filtro.
-     *
-     * @param filtroBase filtro acumulado hasta el momento
-     * @param nuevoFiltro nuevo filtro a añadir
-     * @return filtro combinado
-     */
-    private Specification<Editorial> combinarFiltros(Specification<Editorial> filtroBase,
-                                                     Specification<Editorial> nuevoFiltro) {
-
-        if (filtroBase == null) {
-            return nuevoFiltro;
-        }
-
-        return filtroBase.and(nuevoFiltro);
-    }
 }
