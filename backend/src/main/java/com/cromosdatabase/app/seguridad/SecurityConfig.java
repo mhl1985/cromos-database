@@ -10,6 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 /**
  * Configuración principal de seguridad de la aplicación.
@@ -46,6 +51,9 @@ public class SecurityConfig {
 
         // Desactiva CSRF (API REST)
         http.csrf(csrf -> csrf.disable());
+
+        // Habilita CORS para permitir llamadas desde el frontend
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         // La aplicación no usará sesión de servidor
         http.sessionManagement(session ->
@@ -107,5 +115,59 @@ public class SecurityConfig {
                 authenticationConfiguration.getAuthenticationManager();
 
         return authenticationManager;
+    }
+
+    /**
+     * Define la configuración CORS global de la aplicación.
+     *
+     * Permite que el frontend pueda realizar peticiones HTTP
+     * al backend desde otros orígenes (dominio, puerto o protocolo),
+     * por ejemplo durante el desarrollo en local.
+     *
+     * Se configuran:
+     * - Orígenes permitidos
+     * - Métodos HTTP permitidos
+     * - Cabeceras permitidas
+     * - Aplicación de la configuración a todas las rutas
+     *
+     * @return fuente de configuración CORS
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+
+        // Configuración CORS principal
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // Orígenes permitidos para acceder al backend
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:5500",
+                "http://127.0.0.1:5500",
+                "http://localhost:3000",
+                "http://localhost:5173"
+        ));
+
+        // Métodos HTTP permitidos
+        configuration.setAllowedMethods(List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS"
+        ));
+
+        // Cabeceras permitidas en las peticiones
+        configuration.setAllowedHeaders(List.of("*"));
+
+        // Indica si se permiten cookies o credenciales
+        configuration.setAllowCredentials(false);
+
+        // Fuente de configuración basada en rutas URL
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+
+        // Aplica esta configuración a todos los endpoints
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 }
