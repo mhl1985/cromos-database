@@ -235,13 +235,13 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
     }
 
     /**
-     * Calcula el total de cromos que el usuario tiene disponibles
+     * Calcula el número total de cromos que el usuario tiene disponibles
      * para intercambio.
      *
-     * Se considera intercambiable cuando cantidadIntercambiable es mayor que 0.
+     * Suma la cantidad intercambiable de cada relación usuario-cromo.
      *
      * @param cromosUsuario lista de relaciones usuario-cromo
-     * @return número de cromos intercambiables
+     * @return número total de unidades de cromos intercambiables
      */
     private Integer calcularTotalCromosIntercambiables(List<UsuarioCromo> cromosUsuario) {
 
@@ -251,8 +251,8 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
 
             Integer cantidadIntercambiable = usuarioCromo.getCantidadIntercambiable();
 
-            if (cantidadIntercambiable != null && cantidadIntercambiable > 0) {
-                totalCromosIntercambiables++;
+            if (cantidadIntercambiable != null) {
+                totalCromosIntercambiables = totalCromosIntercambiables + cantidadIntercambiable;
             }
         }
 
