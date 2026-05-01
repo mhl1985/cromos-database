@@ -1,6 +1,6 @@
 package com.cromosdatabase.controladores;
 
-import com.cromosdatabase.modelo.dtos.paginas.InicioPageResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioResponse;
 import com.cromosdatabase.servicios.PaginaInicioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,9 +36,9 @@ public class PaginaController {
      * @return datos necesarios para pintar la página de inicio
      */
     @GetMapping("/inicio")
-    public ResponseEntity<InicioPageResponse> cargarPaginaInicio() {
+    public ResponseEntity<PaginaInicioResponse> cargarPaginaInicio() {
 
-        InicioPageResponse response = paginaInicioService.cargarPaginaInicio();
+        PaginaInicioResponse response = paginaInicioService.cargarPaginaInicio();
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

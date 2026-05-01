@@ -4,8 +4,8 @@ import com.cromosdatabase.app.seguridad.UsuarioAuth;
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
-import com.cromosdatabase.modelo.dtos.paginas.ActividadUsuarioInicioResponse;
-import com.cromosdatabase.modelo.dtos.paginas.InicioPageResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioActividadUsuarioResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioResponse;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.CategoriaColeccion;
 import com.cromosdatabase.modelo.entidades.Coleccion;
@@ -100,10 +100,10 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
      */
     @Override
     @Transactional(readOnly = true)
-    public InicioPageResponse cargarPaginaInicio() {
+    public PaginaInicioResponse cargarPaginaInicio() {
 
         // Si hay usuario autenticado, se obtiene su actividad resumida.
-        ActividadUsuarioInicioResponse actividadUsuario =
+        PaginaInicioActividadUsuarioResponse actividadUsuario =
                 obtenerActividadUsuarioSiEstaAutenticado();
 
         // Obtenemos las últimas colecciones añadidas al sistema.
@@ -136,7 +136,7 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
                 cromoMapper.toResumenResponseList(cromosAleatoriosEntidad);
 
         // Construimos la respuesta final de la página.
-        InicioPageResponse response = new InicioPageResponse(
+        PaginaInicioResponse response = new PaginaInicioResponse(
                 actividadUsuario,
                 ultimasColecciones,
                 categorias,
@@ -154,7 +154,7 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
      *
      * @return actividad resumida del usuario o null si no está autenticado
      */
-    private ActividadUsuarioInicioResponse obtenerActividadUsuarioSiEstaAutenticado() {
+    private PaginaInicioActividadUsuarioResponse obtenerActividadUsuarioSiEstaAutenticado() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -199,7 +199,7 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
         Integer totalCromosIntercambiables =
                 calcularTotalCromosIntercambiables(cromosUsuarioEntidad);
 
-        ActividadUsuarioInicioResponse response = new ActividadUsuarioInicioResponse(
+        PaginaInicioActividadUsuarioResponse response = new PaginaInicioActividadUsuarioResponse(
                 ultimasColeccionesAgregadas,
                 totalColecciones,
                 totalCromosUsuario,

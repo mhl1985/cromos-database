@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InicioPageResponse {
+public class PaginaInicioResponse {
 
     /**
      * Actividad resumida del usuario autenticado.
@@ -26,7 +26,7 @@ public class InicioPageResponse {
      * Si la petición no llega con usuario autenticado,
      * este campo se devolverá a null.
      */
-    private ActividadUsuarioInicioResponse actividadUsuario;
+    private PaginaInicioActividadUsuarioResponse actividadUsuario;
 
     /**
      * Últimas colecciones añadidas al sistema.

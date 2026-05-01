@@ -1,6 +1,6 @@
 package com.cromosdatabase.servicios;
 
-import com.cromosdatabase.modelo.dtos.paginas.InicioPageResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioResponse;
 
 /**
  * Servicio para cargar la página de inicio.
@@ -15,5 +15,5 @@ public interface PaginaInicioService {
      *
      * @return DTO con los datos de la página de inicio
      */
-    InicioPageResponse cargarPaginaInicio();
+    PaginaInicioResponse cargarPaginaInicio();
 }

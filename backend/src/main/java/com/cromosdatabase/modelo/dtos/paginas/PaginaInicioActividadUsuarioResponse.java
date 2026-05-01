@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ActividadUsuarioInicioResponse {
+public class PaginaInicioActividadUsuarioResponse {
 
     /**
      * Últimas colecciones añadidas por el usuario autenticado.
