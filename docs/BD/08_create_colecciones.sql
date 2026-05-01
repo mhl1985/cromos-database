@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS colecciones (
     id_editorial INT NOT NULL,
     id_categoria INT NOT NULL,
     id_subcategoria INT NOT NULL,
-    anio VARCHAR(20),
+    periodo VARCHAR(20),
     pais VARCHAR(50),
     descripcion VARCHAR(255),
     url_img_portada VARCHAR(255),
