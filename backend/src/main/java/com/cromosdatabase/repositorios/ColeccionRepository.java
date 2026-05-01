@@ -4,6 +4,7 @@ import com.cromosdatabase.modelo.entidades.Coleccion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,4 +24,14 @@ public interface ColeccionRepository extends JpaRepository<Coleccion, Integer>,
      * @return Optional con la colección si existe
      */
     Optional<Coleccion> findByNombre(String nombre);
+
+    /**
+     * Obtiene las 10 últimas colecciones añadidas al sistema.
+     *
+     * Actualmente, se considera como criterio de "últimas"
+     * el identificador de colección en orden descendente.
+     *
+     * @return lista de las 10 últimas colecciones
+     */
+    List<Coleccion> findTop10ByOrderByIdColeccionDesc();
 }

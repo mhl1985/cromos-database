@@ -3,7 +3,9 @@ package com.cromosdatabase.repositorios;
 import com.cromosdatabase.modelo.entidades.CategoriaColeccion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,4 +30,18 @@ public interface CategoriaColeccionRepository extends JpaRepository<CategoriaCol
      */
     boolean existsByNombre(String nombre);
 
+    /**
+     * Obtiene 5 categorías aleatorias.
+     *
+     * Se utiliza consulta nativa porque la ordenación aleatoria
+     * depende de la base de datos.
+     *
+     * @return lista de 5 categorías aleatorias
+     */
+    @Query(value =
+            "SELECT * " +
+                    "FROM categorias_coleccion " +
+                    "ORDER BY RAND() " +
+                    "LIMIT 5", nativeQuery = true)
+    List<CategoriaColeccion> find5Aleatorias();
 }
