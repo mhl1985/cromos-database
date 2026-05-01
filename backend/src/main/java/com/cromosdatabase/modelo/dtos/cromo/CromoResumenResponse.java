@@ -35,4 +35,9 @@ public class CromoResumenResponse {
      * Tipo del cromo.
      */
     private String tipo;
+
+    /**
+     * URL de la imagen delantera del cromo.
+     */
+    private String urlImgDelantera;
 }

@@ -3,6 +3,7 @@ package com.cromosdatabase.repositorios;
 import com.cromosdatabase.modelo.entidades.Cromo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,4 +53,29 @@ public interface CromoRepository extends JpaRepository<Cromo, Integer>,
      * @return Lista de cromos encontrados en la colección.
      */
     List<Cromo> findByColeccion_IdColeccionAndIdCromoIn(Integer idColeccion, List<Integer> idsCromo);
+
+    /**
+     * Obtiene los 10 últimos cromos añadidos al sistema.
+     *
+     * Actualmente, se considera como criterio de "últimos"
+     * el identificador de cromo en orden descendente.
+     *
+     * @return lista de los 10 últimos cromos
+     */
+    List<Cromo> findTop10ByOrderByIdCromoDesc();
+
+    /**
+     * Obtiene 10 cromos aleatorios.
+     *
+     * Se utiliza consulta nativa porque la ordenación aleatoria
+     * depende de la base de datos.
+     *
+     * @return lista de 10 cromos aleatorios
+     */
+    @Query(value =
+            "SELECT * " +
+                    "FROM cromos " +
+                    "ORDER BY RAND() " +
+                    "LIMIT 10", nativeQuery = true)
+    List<Cromo> find10Aleatorios();
 }

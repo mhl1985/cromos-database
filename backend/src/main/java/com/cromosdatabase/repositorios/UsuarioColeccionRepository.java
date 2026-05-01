@@ -45,4 +45,12 @@ public interface UsuarioColeccionRepository extends JpaRepository<UsuarioColecci
      * @param idColeccion id de la colección.
      */
     void deleteByUsuario_IdUsuarioAndColeccion_IdColeccion(Integer idUsuario, Integer idColeccion);
+
+    /**
+     * Obtiene las 10 últimas colecciones añadidas por un usuario.
+     *
+     * @param idUsuario id del usuario
+     * @return lista de relaciones usuario-colección ordenadas por fecha de agregación descendente
+     */
+    List<UsuarioColeccion> findTop10ByUsuario_IdUsuarioOrderByFechaAgregadaDesc(Integer idUsuario);
 }
