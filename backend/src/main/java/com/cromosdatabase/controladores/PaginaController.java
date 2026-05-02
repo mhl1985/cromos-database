@@ -1,6 +1,6 @@
 package com.cromosdatabase.controladores;
 
-import com.cromosdatabase.modelo.dtos.paginas.ColeccionPageResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaColeccionResponse;
 import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioResponse;
 import com.cromosdatabase.servicios.PaginaColeccionService;
 import com.cromosdatabase.servicios.PaginaInicioService;
@@ -63,10 +63,10 @@ public class PaginaController {
      * @return datos necesarios para pintar la página de colección
      */
     @GetMapping("/colecciones/{idColeccion}")
-    public ResponseEntity<ColeccionPageResponse> cargarPaginaColeccion(
+    public ResponseEntity<PaginaColeccionResponse> cargarPaginaColeccion(
             @PathVariable Integer idColeccion) {
 
-        ColeccionPageResponse response =
+        PaginaColeccionResponse response =
                 paginaColeccionService.cargarPaginaColeccion(idColeccion);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);

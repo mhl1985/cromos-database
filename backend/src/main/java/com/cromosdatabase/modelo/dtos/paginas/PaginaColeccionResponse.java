@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColeccionPageResponse {
+public class PaginaColeccionResponse {
 
     /**
      * Últimos cromos añadidos a la colección.

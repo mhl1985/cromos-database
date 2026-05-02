@@ -4,7 +4,7 @@ import com.cromosdatabase.app.seguridad.UsuarioAuth;
 import com.cromosdatabase.comun.excepciones.ColeccionNoEncontradaException;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
-import com.cromosdatabase.modelo.dtos.paginas.ColeccionPageResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaColeccionResponse;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionCromoResponse;
 import com.cromosdatabase.modelo.entidades.Coleccion;
 import com.cromosdatabase.modelo.entidades.Cromo;
@@ -81,7 +81,7 @@ public class PaginaColeccionServiceImpl implements PaginaColeccionService {
      */
     @Override
     @Transactional(readOnly = true)
-    public ColeccionPageResponse cargarPaginaColeccion(Integer idColeccion) {
+    public PaginaColeccionResponse cargarPaginaColeccion(Integer idColeccion) {
 
         // Obtenemos los datos de la colección.
         // Si no existe, se lanza excepción controlada.
@@ -112,7 +112,7 @@ public class PaginaColeccionServiceImpl implements PaginaColeccionService {
                 cromoMapper.toResumenResponseList(cromosColeccionEntidad);
 
         // Construimos la respuesta final de la página.
-        ColeccionPageResponse response = new ColeccionPageResponse(
+        PaginaColeccionResponse response = new PaginaColeccionResponse(
                 ultimosCromos,
                 coleccion,
                 cromos,

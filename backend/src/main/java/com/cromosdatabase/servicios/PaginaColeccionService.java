@@ -1,6 +1,6 @@
 package com.cromosdatabase.servicios;
 
-import com.cromosdatabase.modelo.dtos.paginas.ColeccionPageResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaColeccionResponse;
 
 /**
  * Servicio para cargar la página de una colección.
@@ -14,5 +14,5 @@ public interface PaginaColeccionService {
      * @param idColeccion id de la colección
      * @return DTO con los datos de la página de colección
      */
-    ColeccionPageResponse cargarPaginaColeccion(Integer idColeccion);
+    PaginaColeccionResponse cargarPaginaColeccion(Integer idColeccion);
 }
