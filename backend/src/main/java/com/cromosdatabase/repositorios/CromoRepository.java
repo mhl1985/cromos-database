@@ -78,4 +78,15 @@ public interface CromoRepository extends JpaRepository<Cromo, Integer>,
                     "ORDER BY RAND() " +
                     "LIMIT 10", nativeQuery = true)
     List<Cromo> find10Aleatorios();
+
+    /**
+     * Obtiene los 10 últimos cromos añadidos a una colección concreta.
+     *
+     * Actualmente se considera como criterio de "últimos"
+     * el identificador de cromo en orden descendente.
+     *
+     * @param idColeccion id de la colección
+     * @return lista de los 10 últimos cromos de la colección
+     */
+    List<Cromo> findTop10ByColeccion_IdColeccionOrderByIdCromoDesc(Integer idColeccion);
 }
