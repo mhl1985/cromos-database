@@ -15,4 +15,25 @@ div.cromo-titulo p{
     color: black;
 }
 
+/*Título para poner encima de cada imagen de categoria*/
+div.categoria-titulo{
+    position: relative;
+    top: 10px;
+}
+div.categoria-titulo p{
+    margin: 0 20px;
+    text-align: center;
+    background-color: coral;
+    color: black;
+}
+
+/*Clase para ocultar el aviso de error*/
+.ocultarAviso{
+  display: none;
+}
+
+.ocultarContenedor{
+  display: none;
+}
+
 /*Correciones accesibilidad*/
