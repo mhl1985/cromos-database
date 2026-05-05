@@ -1,0 +1,4 @@
+/*Clase para ocultar el aviso de error*/
+.ocultarAviso{
+  display: none;
+}

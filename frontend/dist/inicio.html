@@ -11,6 +11,7 @@
     <title>Cromos Database - Inicio</title>
     <link rel="icon" type="image/x-icon" href="img/Logo cuadrado 100.png">
     <script src="js/color-modes.js"></script>
+    <script src="js/inicio.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link
@@ -18,6 +19,7 @@
       rel="stylesheet"
     />
     <link href="css/cromosdatabase.css" rel="stylesheet" />
+    <link href="css/inicio.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <style>
       .bd-placeholder-img {
@@ -94,7 +96,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="cargaInicial()">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
@@ -231,117 +233,63 @@
       </div>
     </header>
     <main>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h2 class="fw-light">Últimos cambios</h2>
-            <p class="lead text-body-secondary">
-              Intercambios, subidas y todas tus novedades aquí.
-            </p>
+      <div id="divUltimosCambios">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h2 class="fw-light">Últimas publicaciones</h2>
+              <p class="lead text-body-secondary">
+                Estos son los últimos cromos subidos, todas tus novedades aquí.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divFilaNovedades">
+            </div>
           </div>
         </div>
-      </section>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
-                <div class="cromo-titulo">
-                  <p>
-                    Cambio 1
-                  </p>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Esto es un ejemplo de cromo cambiado recientemente de este usuario.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver colección
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver cromo
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
+      </div>
+      <div id="divColecciones">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h2 class="fw-light">Colecciones</h2>
+              <p class="lead text-body-secondary">
+                Aquí verás las diferentes colecciones que tenemos registradas.
+              </p>
             </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
-                <div class="cromo-titulo">
-                  <p>
-                    Cambio 2
-                  </p>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Esto es un ejemplo de cromo cambiado recientemente de este usuario.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver colección
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver cromo
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
+                  <div class="cromo-titulo">
+                    <p>
+                      Colección 1
+                    </p>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
-                <div class="cromo-titulo">
-                  <p>
-                    Cambio 3
-                  </p>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Esto es un ejemplo de cromo cambiado recientemente de este usuario.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver colección
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver cromo
-                      </button>
+                  <div class="card-body">
+                    <p class="card-text">
+                      Ejemplo de colección de cromos.
+                    </p>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          Ver colección
+                        </button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
                     </div>
-                    <small class="text-body-secondary">9 mins</small>
                   </div>
                 </div>
               </div>
@@ -349,43 +297,45 @@
           </div>
         </div>
       </div>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h2 class="fw-light">Colecciones</h2>
-            <p class="lead text-body-secondary">
-              Aquí verás las diferentes colecciones que tenemos registradas.
-            </p>
+      <div id="divCategorias">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h2 class="fw-light">Categorías</h2>
+              <p class="lead text-body-secondary">
+                Aquí verás las diferentes colecciones que tenemos registradas.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
-                <div class="cromo-titulo">
-                  <p>
-                    Colección 1
-                  </p>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Ejemplo de colección de cromos.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver colección
-                      </button>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
+                  <div class="cromo-titulo">
+                    <p>
+                      Categoría 1
+                    </p>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      Esto es un ejemplo de catgegoría.
+                    </p>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          Ver categoría
+                        </button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
                     </div>
-                    <small class="text-body-secondary">9 mins</small>
                   </div>
                 </div>
               </div>
@@ -393,43 +343,51 @@
           </div>
         </div>
       </div>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h2 class="fw-light">Categorías</h2>
-            <p class="lead text-body-secondary">
-              Aquí verás las diferentes colecciones que tenemos registradas.
-            </p>
+      <div id="divIntercambios">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h2 class="fw-light">Intercambios</h2>
+              <p class="lead text-body-secondary">
+                Aquí verás los últimos intercambios de cromos.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
-                <div class="cromo-titulo">
-                  <p>
-                    Categoría 1
-                  </p>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Esto es un ejemplo de catgegoría.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver categoría
-                      </button>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
+                  <div class="cromo-titulo">
+                    <p>
+                      Intercambio 1
+                    </p>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      Ejemplo de cromo intercambiado.
+                    </p>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          Ver colección
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          Ver cromo
+                        </button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
                     </div>
-                    <small class="text-body-secondary">9 mins</small>
                   </div>
                 </div>
               </div>
@@ -437,55 +395,8 @@
           </div>
         </div>
       </div>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h2 class="fw-light">Intercambios</h2>
-            <p class="lead text-body-secondary">
-              Aquí verás los últimos intercambios de cromos.
-            </p>
-          </div>
-        </div>
-      </section>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/1954_Bowman_Mickey_Mantle.jpg" alt="Cromo 1954 Bowman Mickey Mantle">
-                <div class="cromo-titulo">
-                  <p>
-                    Intercambio 1
-                  </p>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Ejemplo de cromo intercambiado.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver colección
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Ver cromo
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="alert alert-danger ocultarAviso" id="avisoErrorGeneral" role="alert">
+          Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.
       </div>
     </main>
     <footer class="text-body-secondary py-5">
