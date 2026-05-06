@@ -8,10 +8,10 @@
       name="author"
       content="Miguel Herrero y José Miguel Martín"
     />
-    <title>Cromos Database - Acceso</title>
+    <title>Cromos Database - Registro</title>
     <link rel="icon" type="image/x-icon" href="img/Logo cuadrado 100.png">
     <script src="js/color-modes.js"></script>
-    <script src="js/acceso.js"></script>
+    <script src="js/registro.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link
@@ -19,7 +19,7 @@
       rel="stylesheet"
     />
     <link href="css/cromosdatabase.css" rel="stylesheet" />
-    <link href="css/acceso.css" rel="stylesheet" />
+    <link href="css/registro.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <style>
       .bd-placeholder-img {
@@ -245,40 +245,62 @@
         width="100"
       />
       <h1 class="h3 mb-3 fw-normal">Acceso a Cromos Database</h1>
-      <form name="formularioAcceso" id="formularioAcceso">
-        <h2 class="h4 mb-3 fw-normal">Si tienes cuenta accede aquí</h1>
+      <form name="formularioCrear" id="formularioCrear">
+        <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta escribe aquí</h1>
         <div class="form-floating">
           <input
             type="email"
             class="form-control"
-            id="accesoCorreo"
+            id="crearCorreo"
             placeholder="name@example.com"
             required="true"
           />
-          <label for="accesoCorreo">Correo electrónico</label>
+          <label for="crearCorreo">Correo electrónico</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="crearNombre"
+            placeholder="NombreUsuario"
+            required="true"
+          />
+          <label for="crearNombre">Nombre de usuario a mostrar</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="crearContrasena"
+            placeholder="Password"
+            required="true"
+          />
+          <label for="crearContrasena">Contraseña</label>
         </div>
         <div class="form-floating ultimo">
           <input
             type="password"
             class="form-control"
-            id="accesoContrasena"
+            id="crearContrasena2"
             placeholder="Password"
             required="true"
           />
-          <label for="accesoContrasena">Contraseña</label>
+          <label for="crearContrasena2">Contraseña</label>
         </div>
-        <div class="alert alert-danger ocultarAviso" id="avisoErrorAcceso" role="alert">
+        <div class="alert alert-danger ocultarAviso" id="avisoErrorCrear" role="alert">
         </div>
-        <div class="alert alert-warning ocultarAviso" id="avisoDatosAcceso" role="alert">
+        <div class="alert alert-warning ocultarAviso" id="avisoDatosCrear" role="alert">
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" onclick="accederServicio()">
-          Acceder
+        <div class="alert alert-success ocultarAviso" id="avisoCorrectoCrear" role="alert">
+        </div>
+        <button class="btn btn-primary w-100 py-2" type="submit" id="botonCrear" onclick="crearUsuario()">
+          Crear
         </button>
       </form>
       <div>
         <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta accede aquí</h1>
-        <a class="btn btn-primary w-100 py-2" href="registro.html">
-          Crear cuenta
+        <a class="btn btn-primary w-100 py-2" href="acceso.html">
+          Acceder
         </a>
       </div>
     </main>

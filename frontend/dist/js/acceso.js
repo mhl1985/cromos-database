@@ -3,51 +3,63 @@ function accederServicio() {
     
     event.preventDefault();
 
-    let alertAvisoDatosAcceso = document.getElementById("avisoDatosAcceso");
-    if (alertAvisoDatosAcceso.className.indexOf("ocultarAviso")===-1){
-        alertAvisoDatosAcceso.className += " ocultarAviso";
+    let avisoDatosAcceso = document.getElementById("avisoDatosAcceso");
+    if (avisoDatosAcceso.className.indexOf("ocultarAviso")===-1){
+        avisoDatosAcceso.className += " ocultarAviso";
     }
-    let alertAvisoErrorAcceso = document.getElementById("avisoErrorAcceso");
-    if (alertAvisoErrorAcceso.className.indexOf("ocultarAviso")===-1){
-        alertAvisoErrorAcceso.className += " ocultarAviso";
+    let avisoErrorAcceso = document.getElementById("avisoErrorAcceso");
+    if (avisoErrorAcceso.className.indexOf("ocultarAviso")===-1){
+        avisoErrorAcceso.className += " ocultarAviso";
     }
 
     let formularioAcceso = document.forms["formularioAcceso"];
 
-    if ((formularioAcceso.accesoCorreo.value != "") && (formularioAcceso.accesoContrasena.value != "")){
-        let urlAcceso = "js/login.json";
-        let accesoCorreo = document.forms["formularioAcceso"].accesoCorreo.value;
-        let accesoContrasena = document.forms["formularioAcceso"].accesoContrasena.value;
-        let datosAcceso = { "email": accesoCorreo, "contrasena": accesoContrasena};
+    if (formularioAcceso.accesoCorreo.value && formularioAcceso.accesoContrasena.value){
+        let urlAcceso = "http://localhost:8080/auth/login";
+        let datosAcceso = { "email": formularioAcceso.accesoCorreo.value, "contrasena": formularioAcceso.accesoContrasena.value};
         
         fetch(urlAcceso, {
-        method: "GET",
+        method: "POST",
         headers: {"Content-Type": "application/json",},
-    //    body: JSON.stringify(datosAcceso),
+        body: JSON.stringify(datosAcceso),
         })
         .then((res) => res.json())
-        .catch((error) => errorCargaDatos(error))
-        .then((response) => cargaDatos(response));
+        .catch((error) => errorCargaDatosAcceso(error))
+        .then((response) => cargaDatosAcceso(response));
 
     }else{
-        let alertAvisoDatosAcceso = document.getElementById("avisoDatosAcceso");
-        alertAvisoDatosAcceso.className = alertAvisoDatosAcceso.className.replace(" ocultarAviso","");
+        avisoDatosAcceso.textContent = "Los campos son obligatorios.";
+        avisoDatosAcceso.className = avisoDatosAcceso.className.replace(" ocultarAviso","");
     }
 
 }
+
 
 //Cargar contenido del servicio
-function cargaDatos(respuesta){
+function cargaDatosAcceso(respuesta){
     try {
-        console.log(respuesta.email);
+        if(!respuesta.status){
+            sessionStorage.setItem("token", respuesta.token);
+            sessionStorage.setItem("type", "Bearer");
+
+            document.cookie = "token=" + respuesta.token;
+            document.cookie = "type=Bearer";
+
+        }else{
+            let avisoDatosAcceso = document.getElementById("avisoDatosAcceso");
+            avisoDatosAcceso.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            avisoDatosAcceso.className = avisoDatosAcceso.className.replace(" ocultarAviso","");
+        }
     } catch (error) {
-        errorCargaDatos(error);
+        errorCargaDatosAcceso(error);
     }
 }
 
-//Error en la cargar del servicio
-function errorCargaDatos(error){
-    let alertAvisoErrorAcceso = document.getElementById("avisoErrorAcceso");
-    alertAvisoErrorAcceso.className = alertAvisoErrorAcceso.className.replace(" ocultarAviso","");
+
+//Error en la cargar del servicio de acceso
+function errorCargaDatosAcceso(error){
+    let avisoErrorAcceso = document.getElementById("avisoErrorAcceso");
+    avisoErrorAcceso.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+    avisoErrorAcceso.className = avisoErrorAcceso.className.replace(" ocultarAviso","");
 }
 

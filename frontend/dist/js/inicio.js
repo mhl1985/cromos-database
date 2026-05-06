@@ -22,7 +22,7 @@ function cargaInicial() {
     }
 
     let urlAcceso = "http://localhost:8080/paginas/inicio";
-    
+
     fetch(urlAcceso, {
     method: "GET",
     headers: {"Content-Type": "application/json",},
@@ -30,8 +30,8 @@ function cargaInicial() {
     .then((res) => res.json())
     .catch((error) => errorCargaDatos(error))
     .then((response) => cargaDatos(response));
-
 }
+
 
 //Cargar contenido del servicio
 function cargaDatos(respuesta){
@@ -53,15 +53,15 @@ function cargaDatos(respuesta){
                     textoDivElementoCromo += "><div class='cromo-titulo'><p>";
                     textoDivElementoCromo += cromo.nombre;
                     textoDivElementoCromo += "</p></div><div class='card-body'><p class='card-text'>";
-                    textoDivElementoCromo += "Nombre: " + cromo.nombre +", estado: " + cromo.tipo;
+                    textoDivElementoCromo += "<b>Nombre y tipo:</b> " + cromo.nombre + ", " + cromo.tipo;
                     textoDivElementoCromo += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoCromo += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCromo += "botonUltimosCromos" + cromo.id + "'";
-                    textoDivElementoCromo += ">Ver cromo</button>";
+                    textoDivElementoCromo += " onClick='clickUltimosCromosCromo(" + cromo.id + ")'>Ver cromo</button>";
                     textoDivElementoCromo += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCromo += "botonColeccionUltimosCromos" + cromo.id + "'";
-                    textoDivElementoCromo += " onClick='clickColeccionCromo(" + cromo.id + ")'>Ver colección</button>";
-                    textoDivElementoCromo += "</div><small class='text-body-secondary'>" + cromo.numero;
+                    textoDivElementoCromo += " onClick='clickUltimosCromosColeccion(" + cromo.id + ")'>Ver colección</button>";
+                    textoDivElementoCromo += "</div><small class='text-body-secondary'><b><abbr title='Número'>Nº</abbr>:</b> " + cromo.numero;
                     textoDivElementoCromo += "</small></div></div></div></div>";
                     divElementoCromo = document.createElement("div");
                     divElementoCromo.innerHTML = textoDivElementoCromo;
@@ -84,12 +84,17 @@ function cargaDatos(respuesta){
                     textoDivElementoColeccion += "><div class='cromo-titulo'><p>";
                     textoDivElementoColeccion += coleccion.nombre;
                     textoDivElementoColeccion += "</p></div><div class='card-body'><p class='card-text'>";
-                    textoDivElementoColeccion += coleccion.periodo + ". " + coleccion.descripcion;
+                    textoDivElementoColeccion += "<b>Año, país y editorial</b>: " + coleccion.periodo + ", " + coleccion.pais + ", " + coleccion.editorial.nombre + ".<br/>";
+                    textoDivElementoColeccion += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ".<br/>";
+                    textoDivElementoColeccion += "<b>Descripción:</b> " + coleccion.descripcion + ".";
                     textoDivElementoColeccion += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoColeccion += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
-                    textoDivElementoColeccion += "botonUltimasColecciones" + coleccion.id + "'";
-                    textoDivElementoColeccion += ">Ver colección</button>";
-                    textoDivElementoColeccion += "</div><small class='text-body-secondary'>" + coleccion.pais;
+                    textoDivElementoColeccion += "botonUltimasColeccionesColeccion" + coleccion.id + "'";
+                    textoDivElementoColeccion += " onClick='clickUltimasColeccionesColeccion(" + coleccion.id + ")'>Ver colección</button>";
+                    textoDivElementoColeccion += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
+                    textoDivElementoColeccion += "botonUltimasColeccionesCategoria" + coleccion.categoria.id + "'";
+                    textoDivElementoColeccion += " onClick='clickUltimasColeccionesCategoria(" + coleccion.categoria.id + ")'>Ver categoría</button>";
+                    textoDivElementoColeccion += "</div><small class='text-body-secondary'>" + coleccion.categoria.nombre;
                     textoDivElementoColeccion += "</small></div></div></div></div>";
                     divElementoColeccion = document.createElement("div");
                     divElementoColeccion.innerHTML = textoDivElementoColeccion;
@@ -107,11 +112,11 @@ function cargaDatos(respuesta){
 
                 respuesta.categorias.forEach(categoria => {
                     textoDivElementoCategoria = "<div class='col'><div class='card shadow-sm'>";
-                    textoDivElementoCategoria += "<div class='card-body'><div class='d-flex justify-content-between align-items-center'>";
+                    textoDivElementoCategoria += "<div class='card-body categoria-boton'><div class='d-flex justify-content-between align-items-center'>";
                     textoDivElementoCategoria += categoria.nombre;
                     textoDivElementoCategoria += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCategoria += "botonCategoria" + categoria.id + "'";
-                    textoDivElementoCategoria += ">Ver categoría</button>";
+                    textoDivElementoCategoria += " onClick='clickCategorias(" + categoria.id + ")'>Ver categoría</button>";
                     textoDivElementoCategoria += "</div></div></div></div>";
                     divElementoCategoria = document.createElement("div");
                     divElementoCategoria.innerHTML = textoDivElementoCategoria;
@@ -135,12 +140,14 @@ function cargaDatos(respuesta){
     }
 }
 
+
 //Error en la cargar del servicio
 function errorCargaDatos(error){
     console.error("Error en la carga");
     let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
     alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 }
+
 
 function clickColeccionCromo(id){
     console.log("pulsado el botón con ID: " + id);
@@ -155,3 +162,30 @@ function clickColeccionCromo(id){
     .then((response) => console.log(response));
 
 }
+
+
+function clickUltimosCromosCromo (id){
+    console.log("clickUltimosCromosCromo id:" + id);
+}
+
+
+function clickUltimosCromosColeccion (id){
+    console.log("clickUltimosCromosColeccion id:" + id);
+}
+
+
+function clickUltimasColeccionesColeccion (id){
+    console.log("clickUltimasColeccionesColeccion id:" + id);
+}
+
+
+function clickUltimasColeccionesCategoria (id){
+    console.log("clickUltimasColeccionesCategoria id:" + id);
+}
+
+
+function clickCategorias (id){
+    console.log("clickCategorias id:" + id);
+}
+
+
