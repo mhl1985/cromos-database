@@ -67,25 +67,14 @@ function crearUsuario() {
 function cargaDatosCrear(respuesta){
     try {
         if(!respuesta.status){
-            sessionStorage.setItem("sesionCromosDatabase", respuesta.token);
-
-            let avisoDatosCrear = document.getElementById("avisoDatosCrear");
-            if (avisoDatosCrear.className.indexOf("ocultarAviso")===-1){
-                avisoDatosCrear.className += " ocultarAviso";
-            }
-            let avisoErrorCrear = document.getElementById("avisoErrorCrear");
-            if (avisoErrorCrear.className.indexOf("ocultarAviso")===-1){
-                avisoErrorCrear.className += " ocultarAviso";
-            }
-
             let avisoCorrectoCrear = document.getElementById("avisoCorrectoCrear");
-            avisoCorrectoCrear.textContent = "Usuario " + respuesta.nombreMostrar + " creado correctamente. Vuelva a la página de acceso para introducir sus datos.";
+            avisoCorrectoCrear.textContent = "Genial " + respuesta.nombreMostrar + ", ya has creado el usuario. Ahora tienes que volver a meter tus datos. En breve vamos a la página de acceso, también puedes ir tú.";
             avisoCorrectoCrear.className = avisoCorrectoCrear.className.replace(" ocultarAviso","");
-
             let botonCrear = document.getElementById("botonCrear");
             if (botonCrear.className.indexOf("ocultarAviso")===-1){
                 botonCrear.className += " ocultarAviso";
             }
+            setTimeout(navegarAcceso, 3000);
 
         }else{
             let avisoDatosCrear = document.getElementById("avisoDatosCrear");
@@ -95,6 +84,12 @@ function cargaDatosCrear(respuesta){
     } catch (error) {
         errorCargaDatosCrear(error);
     }
+}
+
+
+//Forzamos la navegación
+function navegarAcceso(){
+    window.location.href = "acceso.html";
 }
 
 
