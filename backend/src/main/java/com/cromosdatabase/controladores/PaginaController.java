@@ -1,8 +1,10 @@
 package com.cromosdatabase.controladores;
 
 import com.cromosdatabase.modelo.dtos.paginas.PaginaColeccionResponse;
+import com.cromosdatabase.modelo.dtos.paginas.PaginaCromoResponse;
 import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioResponse;
 import com.cromosdatabase.servicios.PaginaColeccionService;
+import com.cromosdatabase.servicios.PaginaCromoService;
 import com.cromosdatabase.servicios.PaginaInicioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,11 @@ public class PaginaController {
      * Servicio de carga de la página de colección.
      */
     private final PaginaColeccionService paginaColeccionService;
+
+    /**
+     * Servicio de carga de la página de cromo.
+     */
+    private final PaginaCromoService paginaCromoService;
 
     /**
      * Carga la página de inicio.
@@ -68,6 +75,26 @@ public class PaginaController {
 
         PaginaColeccionResponse response =
                 paginaColeccionService.cargarPaginaColeccion(idColeccion);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    /**
+     * Carga la página de un cromo.
+     *
+     * Endpoint público:
+     * - Sin token: devuelve información pública del cromo y su colección.
+     * - Con token válido: puede añadir información del cromo del usuario.
+     *
+     * @param idCromo id del cromo
+     * @return datos necesarios para pintar la página de cromo
+     */
+    @GetMapping("/cromos/{idCromo}")
+    public ResponseEntity<PaginaCromoResponse> cargarPaginaCromo(
+            @PathVariable Integer idCromo) {
+
+        PaginaCromoResponse response =
+                paginaCromoService.cargarPaginaCromo(idCromo);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
