@@ -2,6 +2,7 @@ package com.cromosdatabase.modelo.dtos.paginas;
 
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
+import com.cromosdatabase.modelo.dtos.cromo.CromoDetalleResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,7 +44,7 @@ public class PaginaInicioResponse {
      *
      * Actualmente, se simula mediante ordenación por id descendente.
      */
-    private List<CromoResumenResponse> ultimosCromos;
+    private List<CromoDetalleResponse> ultimosCromos;
 
     /**
      * Cromos aleatorios para mostrar en la página de inicio.

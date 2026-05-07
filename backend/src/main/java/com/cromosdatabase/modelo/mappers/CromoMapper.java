@@ -45,4 +45,13 @@ public interface CromoMapper {
     @Mapping(source = "coleccion.idColeccion", target = "idColeccion")
     @Mapping(source = "coleccion.nombre", target = "nombreColeccion")
     CromoDetalleResponse toDetalleResponse(Cromo cromo);
+
+    /**
+     * Convierte una lista de entidades Cromo en una lista
+     * de DTOs de respuesta detallada.
+     *
+     * @param cromos lista de cromos
+     * @return lista de DTOs detallados
+     */
+    List<CromoDetalleResponse> toDetalleResponseList(List<Cromo> cromos);
 }
