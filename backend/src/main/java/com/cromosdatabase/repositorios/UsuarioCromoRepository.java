@@ -60,4 +60,15 @@ public interface UsuarioCromoRepository extends JpaRepository<UsuarioCromo, Usua
             Integer idUsuario,
             Integer idColeccion
     );
+
+    /**
+     * Obtiene los usuarios que tienen un cromo disponible para intercambio.
+     *
+     * @param idCromo id del cromo
+     * @return lista de relaciones usuario-cromo con cantidad intercambiable mayor que cero
+     */
+    List<UsuarioCromo> findByCromo_IdCromoAndCantidadIntercambiableGreaterThan(
+            Integer idCromo,
+            Integer cantidadIntercambiable
+    );
 }
