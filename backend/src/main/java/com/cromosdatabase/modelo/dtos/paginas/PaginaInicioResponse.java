@@ -3,7 +3,6 @@ package com.cromosdatabase.modelo.dtos.paginas;
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoDetalleResponse;
-import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,5 +48,5 @@ public class PaginaInicioResponse {
     /**
      * Cromos aleatorios para mostrar en la página de inicio.
      */
-    private List<CromoResumenResponse> cromosAleatorios;
+    private List<CromoDetalleResponse> cromosAleatorios;
 }
