@@ -49,4 +49,15 @@ public interface CategoriaColeccionMapper {
     CategoriaColeccionDetalleResponse toDetalleResponse(
             CategoriaColeccion categoriaColeccion
     );
+
+    /**
+     * Convierte una lista de entidades CategoriaColeccion
+     * en una lista de DTOs de respuesta detallada.
+     *
+     * @param categoriasColeccion lista de categorías
+     * @return lista de DTOs detallados
+     */
+    List<CategoriaColeccionDetalleResponse> toDetalleResponseList(
+            List<CategoriaColeccion> categoriasColeccion
+    );
 }

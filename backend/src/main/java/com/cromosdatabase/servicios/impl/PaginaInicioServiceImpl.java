@@ -1,7 +1,7 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.app.seguridad.UsuarioAuth;
-import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
+import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioActividadUsuarioResponse;
@@ -126,8 +126,8 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
         List<ColeccionResumenResponse> ultimasColecciones =
                 coleccionMapper.toResumenResponseList(ultimasColeccionesEntidad);
 
-        List<CategoriaColeccionResumenResponse> categorias =
-                categoriaColeccionMapper.toResumenResponseList(categoriasEntidad);
+        List<CategoriaColeccionDetalleResponse> categorias =
+                categoriaColeccionMapper.toDetalleResponseList(categoriasEntidad);
 
         List<CromoResumenResponse> ultimosCromos =
                 cromoMapper.toResumenResponseList(ultimosCromosEntidad);

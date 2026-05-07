@@ -1,6 +1,6 @@
 package com.cromosdatabase.modelo.dtos.paginas;
 
-import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
+import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.coleccion.ColeccionResumenResponse;
 import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,7 @@ public class PaginaInicioResponse {
     /**
      * Categorías principales de colección.
      */
-    private List<CategoriaColeccionResumenResponse> categorias;
+    private List<CategoriaColeccionDetalleResponse> categorias;
 
     /**
      * Últimos cromos añadidos al sistema.
