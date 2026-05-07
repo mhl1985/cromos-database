@@ -114,7 +114,7 @@ public class RegistroUsuarioServiceImpl implements RegistroUsuarioService {
         usuario.setNombreMostrar(request.getNombreMostrar());
 
         // Ciframos la contraseña antes de guardarla en base de datos.
-        String contrasenaCifrada = passwordEncoder.encode(request.getPassword());
+        String contrasenaCifrada = passwordEncoder.encode(request.getContrasena());
         usuario.setContrasena(contrasenaCifrada);
 
         // Todos los usuarios nuevos se crean activos por defecto.

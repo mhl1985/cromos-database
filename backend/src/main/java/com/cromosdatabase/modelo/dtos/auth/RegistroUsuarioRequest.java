@@ -41,7 +41,7 @@ public class RegistroUsuarioRequest {
      */
     @NotBlank(message = "La contraseña es obligatoria.")
     @Size(min = 4, max = 255, message = "La contraseña debe tener entre 4 y 255 caracteres.")
-    private String password;
+    private String contrasena;
 
     /**
      * Nombre visible del usuario dentro de la aplicación.
