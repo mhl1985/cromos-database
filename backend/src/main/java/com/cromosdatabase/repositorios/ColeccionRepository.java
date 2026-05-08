@@ -34,4 +34,16 @@ public interface ColeccionRepository extends JpaRepository<Coleccion, Integer>,
      * @return lista de las 10 últimas colecciones
      */
     List<Coleccion> findTop10ByOrderByIdColeccionDesc();
+
+    /**
+     * Obtiene las colecciones asociadas a una categoría y subcategoría concretas.
+     *
+     * @param idCategoria id de la categoría
+     * @param idSubcategoria id de la subcategoría
+     * @return lista de colecciones de esa subcategoría
+     */
+    List<Coleccion> findByCategoria_IdCategoriaAndIdSubcategoria(
+            Integer idCategoria,
+            Integer idSubcategoria
+    );
 }
