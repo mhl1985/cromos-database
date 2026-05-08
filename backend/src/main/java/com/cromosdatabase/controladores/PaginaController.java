@@ -1,8 +1,10 @@
 package com.cromosdatabase.controladores;
 
+import com.cromosdatabase.modelo.dtos.paginas.PaginaCategoriaResponse;
 import com.cromosdatabase.modelo.dtos.paginas.PaginaColeccionResponse;
 import com.cromosdatabase.modelo.dtos.paginas.PaginaCromoResponse;
 import com.cromosdatabase.modelo.dtos.paginas.PaginaInicioResponse;
+import com.cromosdatabase.servicios.PaginaCategoriaService;
 import com.cromosdatabase.servicios.PaginaColeccionService;
 import com.cromosdatabase.servicios.PaginaCromoService;
 import com.cromosdatabase.servicios.PaginaInicioService;
@@ -40,6 +42,11 @@ public class PaginaController {
      * Servicio de carga de la página de cromo.
      */
     private final PaginaCromoService paginaCromoService;
+
+    /**
+     * Servicio de carga de la página de categoría.
+     */
+    private final PaginaCategoriaService paginaCategoriaService;
 
     /**
      * Carga la página de inicio.
@@ -98,4 +105,26 @@ public class PaginaController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    /**
+     * Carga la página de una categoría.
+     *
+     * Endpoint público:
+     * - Devuelve los datos de la categoría.
+     * - Devuelve sus subcategorías.
+     * - Dentro de cada subcategoría devuelve sus colecciones asociadas.
+     *
+     * @param idCategoria id de la categoría
+     * @return datos necesarios para pintar la página de categoría
+     */
+    @GetMapping("/categoria/{idCategoria}")
+    public ResponseEntity<PaginaCategoriaResponse> cargarPaginaCategoria(
+            @PathVariable Integer idCategoria) {
+
+        PaginaCategoriaResponse response =
+                paginaCategoriaService.cargarPaginaCategoria(idCategoria);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
