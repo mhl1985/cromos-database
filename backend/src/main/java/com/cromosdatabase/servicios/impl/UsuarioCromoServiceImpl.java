@@ -1,7 +1,6 @@
 package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.UsuarioColeccionCromoEdicionInvalidaException;
-import com.cromosdatabase.comun.excepciones.UsuarioColeccionNoEncontradaException;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionCromoEdicionRequest;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionCromoResponse;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionListaCromosEdicionRequest;
@@ -11,9 +10,9 @@ import com.cromosdatabase.modelo.entidades.UsuarioCromo;
 import com.cromosdatabase.modelo.entidades.UsuarioCromoId;
 import com.cromosdatabase.modelo.mappers.UsuarioCromoMapper;
 import com.cromosdatabase.repositorios.CromoRepository;
-import com.cromosdatabase.repositorios.UsuarioColeccionRepository;
 import com.cromosdatabase.repositorios.UsuarioCromoRepository;
 import com.cromosdatabase.servicios.AuthService;
+import com.cromosdatabase.servicios.UsuarioColeccionService;
 import com.cromosdatabase.servicios.UsuarioCromoService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -36,20 +35,20 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
 
     private final CromoRepository cromoRepository;
     private final UsuarioCromoRepository usuarioCromoRepository;
-    private final UsuarioColeccionRepository usuarioColeccionRepository;
     private final UsuarioCromoMapper usuarioCromoMapper;
     private final AuthService authService;
+    private final UsuarioColeccionService usuarioColeccionService;
 
     public UsuarioCromoServiceImpl(CromoRepository cromoRepository,
                                    UsuarioCromoRepository usuarioCromoRepository,
-                                   UsuarioColeccionRepository usuarioColeccionRepository,
                                    UsuarioCromoMapper usuarioCromoMapper,
-                                   AuthService authService) {
+                                   AuthService authService,
+                                   UsuarioColeccionService usuarioColeccionService) {
         this.cromoRepository = cromoRepository;
         this.usuarioCromoRepository = usuarioCromoRepository;
-        this.usuarioColeccionRepository = usuarioColeccionRepository;
         this.usuarioCromoMapper = usuarioCromoMapper;
         this.authService = authService;
+        this.usuarioColeccionService = usuarioColeccionService;
     }
 
     /**
@@ -68,7 +67,10 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
 
         // Validamos que la colección que se quiere consultar
         // esté realmente asociada al usuario autenticado.
-        validarSiColeccionEsAsociadaAUsuario(usuarioAutenticado.getIdUsuario(), idColeccion);
+        usuarioColeccionService.validarColeccionAsociadaAUsuario(
+                usuarioAutenticado.getIdUsuario(),
+                idColeccion
+        );
 
         // Listado completo de cromos de la colección.
         List<Cromo> cromosColeccion = cromoRepository.findByColeccion_IdColeccion(idColeccion);
@@ -122,7 +124,10 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
 
         // Validamos que la colección que se quiere consultar
         // esté realmente asociada al usuario autenticado.
-        validarSiColeccionEsAsociadaAUsuario(usuarioAutenticado.getIdUsuario(), idColeccion);
+        usuarioColeccionService.validarColeccionAsociadaAUsuario(
+                usuarioAutenticado.getIdUsuario(),
+                idColeccion
+        );
 
         // Extraemos lista de cromos enviada desde frontend.
         List<UsuarioColeccionCromoEdicionRequest> listaCromosRequest = request.getCromos();
@@ -144,30 +149,6 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
         List<UsuarioColeccionCromoResponse> listadoActualizado = obtenerCromosColeccionUsuario(idColeccion);
 
         return listadoActualizado;
-    }
-
-    /**
-     * Valida que la colección indicada esté asociada
-     * al usuario autenticado.
-     *
-     * @param idUsuario id del usuario.
-     * @param idColeccion id de la colección.
-     */
-    private void validarSiColeccionEsAsociadaAUsuario(Integer idUsuario, Integer idColeccion) {
-
-        // Comprobamos si existe la relación entre este usuario y
-        // esta colección en la tabla usuarios_colecciones.
-        boolean existeRelacion =
-                usuarioColeccionRepository.existsByUsuario_IdUsuarioAndColeccion_IdColeccion(
-                        idUsuario,
-                        idColeccion
-                );
-
-        if (!existeRelacion) {
-            throw new UsuarioColeccionNoEncontradaException(
-                    "La colección con id " + idColeccion + " no está asociada al usuario autenticado."
-            );
-        }
     }
 
     /**

@@ -35,4 +35,15 @@ public interface UsuarioColeccionService {
      * @param idColeccion ID de la colección a desasociar.
      */
     void eliminarColeccionUsuarioAutenticado(Integer idColeccion);
+
+    /**
+     * Valida que una colección esté asociada a un usuario.
+     *
+     * Si no existe la relación usuario-colección, lanza una excepción
+     * controlada para que sea gestionada por el GlobalExceptionHandler.
+     *
+     * @param idUsuario id del usuario
+     * @param idColeccion id de la colección
+     */
+    void validarColeccionAsociadaAUsuario(Integer idUsuario, Integer idColeccion);
 }

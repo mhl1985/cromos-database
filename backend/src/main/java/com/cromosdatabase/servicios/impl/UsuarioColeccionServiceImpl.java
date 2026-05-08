@@ -112,9 +112,9 @@ public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
 
         Usuario usuarioAutenticado = authService.obtenerUsuarioAutenticado();
 
-        validarSiColeccionEsAsociadaAUsuario(usuarioAutenticado.getIdUsuario(), idColeccion);
+        validarColeccionAsociadaAUsuario(usuarioAutenticado.getIdUsuario(), idColeccion);
 
-        // Eliminamos los cromos del usuario perteneciente sa esta colección.
+        // Eliminamos los cromos del usuario perteneciente a esta colección.
         usuarioCromoRepository.deleteByUsuario_IdUsuarioAndCromo_Coleccion_IdColeccion(
                 usuarioAutenticado.getIdUsuario(),
                 idColeccion
@@ -153,14 +153,18 @@ public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
      * @param idUsuario id del usuario.
      * @param idColeccion id de la colección.
      */
-    private void validarSiColeccionEsAsociadaAUsuario(Integer idUsuario, Integer idColeccion) {
+    @Override
+    public void validarColeccionAsociadaAUsuario(Integer idUsuario, Integer idColeccion) {
 
+        // Comprobamos si existe la relación entre este usuario y
+        // esta colección en la tabla usuarios_colecciones.
         boolean coleccionYaRelacionadaConUsuario =
                 usuarioColeccionRepository.existsByUsuario_IdUsuarioAndColeccion_IdColeccion(
                         idUsuario,
                         idColeccion
                 );
 
+        // Si no existe relación, el usuario no puede operar sobre esa colección.
         if (!coleccionYaRelacionadaConUsuario) {
             throw new UsuarioColeccionNoEncontradaException(
                     "La colección con id " + idColeccion + " no está asociada al usuario autenticado."
