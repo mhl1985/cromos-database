@@ -52,4 +52,13 @@ public interface ColeccionMapper {
      */
     @Mapping(source = "idColeccion", target = "id")
     ColeccionDetalleResponse toDetalleResponse(Coleccion coleccion);
+
+    /**
+     * Convierte una lista de entidades Coleccion en una lista
+     * de DTOs de respuesta detallada.
+     *
+     * @param colecciones lista de colecciones
+     * @return lista de DTOs detallados
+     */
+    List<ColeccionDetalleResponse> toDetalleResponseList(List<Coleccion> colecciones);
 }
