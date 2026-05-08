@@ -3,6 +3,7 @@ package com.cromosdatabase.servicios;
 import com.cromosdatabase.modelo.dtos.auth.LoginResponse;
 import com.cromosdatabase.modelo.dtos.auth.LoginRequest;
 import com.cromosdatabase.modelo.dtos.auth.PerfilUsuarioAuthResponse;
+import com.cromosdatabase.modelo.entidades.Usuario;
 
 /**
  * Servicio encargado de gestionar la autenticación de usuarios.
@@ -32,4 +33,14 @@ public interface AuthService {
      * @return datos del perfil del usuario autenticado actual
      */
     PerfilUsuarioAuthResponse obtenerPerfilUsuarioAutenticado();
+
+    /**
+     * Obtiene la entidad Usuario correspondiente al usuario autenticado actual.
+     *
+     * Se utiliza desde servicios que necesitan trabajar con la entidad
+     * persistida en base de datos, no solo con los datos del token.
+     *
+     * @return entidad Usuario del usuario autenticado actual
+     */
+    Usuario obtenerUsuarioAutenticado();
 }

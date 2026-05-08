@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.cromosdatabase.comun.excepciones.UsuarioNoEncontradoException;
+import com.cromosdatabase.modelo.entidades.Usuario;
+import com.cromosdatabase.repositorios.UsuarioRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,6 +45,11 @@ public class AuthServiceImpl implements AuthService {
      * Servicio encargado de generar y validar tokens JWT.
      */
     private final JwtService jwtService;
+
+    /**
+     * Repositorio de acceso a datos de usuarios.
+     */
+    private final UsuarioRepository usuarioRepository;
 
     /**
      * Autentica a un usuario a partir de sus credenciales de acceso.
@@ -120,6 +128,32 @@ public class AuthServiceImpl implements AuthService {
         perfilUsuarioAuthResponse.setRoles(roles);
 
         return perfilUsuarioAuthResponse;
+    }
+
+    /**
+     * Obtiene la entidad Usuario correspondiente al usuario autenticado actual.
+     *
+     * Se parte del principal almacenado por Spring Security en el contexto
+     * de la petición. A partir de su id se recupera la entidad real desde BD.
+     *
+     * @return entidad Usuario del usuario autenticado actual
+     */
+    @Override
+    public Usuario obtenerUsuarioAutenticado() {
+
+        // Obtenemos la autenticación actual del contexto de seguridad.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Obtenemos el usuario autenticado almacenado por Spring Security.
+        UsuarioAuth usuarioAuth = (UsuarioAuth) authentication.getPrincipal();
+
+        // Buscamos en BD la entidad Usuario real a partir del id autenticado.
+        Usuario usuario = usuarioRepository.findById(usuarioAuth.getIdUsuario())
+                .orElseThrow(() -> new UsuarioNoEncontradoException(
+                        "No se ha encontrado el usuario autenticado."
+                ));
+
+        return usuario;
     }
 
     /**

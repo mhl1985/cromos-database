@@ -2,7 +2,6 @@ package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.UsuarioColeccionCromoEdicionInvalidaException;
 import com.cromosdatabase.comun.excepciones.UsuarioColeccionNoEncontradaException;
-import com.cromosdatabase.comun.excepciones.UsuarioNoEncontradoException;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionCromoEdicionRequest;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionCromoResponse;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionListaCromosEdicionRequest;
@@ -14,11 +13,9 @@ import com.cromosdatabase.modelo.mappers.UsuarioCromoMapper;
 import com.cromosdatabase.repositorios.CromoRepository;
 import com.cromosdatabase.repositorios.UsuarioColeccionRepository;
 import com.cromosdatabase.repositorios.UsuarioCromoRepository;
-import com.cromosdatabase.repositorios.UsuarioRepository;
+import com.cromosdatabase.servicios.AuthService;
 import com.cromosdatabase.servicios.UsuarioCromoService;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,22 +34,22 @@ import java.util.Set;
 @Transactional
 public class UsuarioCromoServiceImpl implements UsuarioCromoService {
 
-    private final UsuarioRepository usuarioRepository;
     private final CromoRepository cromoRepository;
     private final UsuarioCromoRepository usuarioCromoRepository;
     private final UsuarioColeccionRepository usuarioColeccionRepository;
     private final UsuarioCromoMapper usuarioCromoMapper;
+    private final AuthService authService;
 
-    public UsuarioCromoServiceImpl(UsuarioRepository usuarioRepository,
-                                   CromoRepository cromoRepository,
+    public UsuarioCromoServiceImpl(CromoRepository cromoRepository,
                                    UsuarioCromoRepository usuarioCromoRepository,
                                    UsuarioColeccionRepository usuarioColeccionRepository,
-                                   UsuarioCromoMapper usuarioCromoMapper) {
-        this.usuarioRepository = usuarioRepository;
+                                   UsuarioCromoMapper usuarioCromoMapper,
+                                   AuthService authService) {
         this.cromoRepository = cromoRepository;
         this.usuarioCromoRepository = usuarioCromoRepository;
         this.usuarioColeccionRepository = usuarioColeccionRepository;
         this.usuarioCromoMapper = usuarioCromoMapper;
+        this.authService = authService;
     }
 
     /**
@@ -67,7 +64,7 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
     @Override
     public List<UsuarioColeccionCromoResponse> obtenerCromosColeccionUsuario(Integer idColeccion) {
 
-        Usuario usuarioAutenticado = obtenerUsuarioAutenticado();
+        Usuario usuarioAutenticado = authService.obtenerUsuarioAutenticado();
 
         // Validamos que la colección que se quiere consultar
         // esté realmente asociada al usuario autenticado.
@@ -121,7 +118,7 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
             Integer idColeccion,
             UsuarioColeccionListaCromosEdicionRequest request) {
 
-        Usuario usuarioAutenticado = obtenerUsuarioAutenticado();
+        Usuario usuarioAutenticado = authService.obtenerUsuarioAutenticado();
 
         // Validamos que la colección que se quiere consultar
         // esté realmente asociada al usuario autenticado.
@@ -147,31 +144,6 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
         List<UsuarioColeccionCromoResponse> listadoActualizado = obtenerCromosColeccionUsuario(idColeccion);
 
         return listadoActualizado;
-    }
-
-    /**
-     * Obtiene el usuario autenticado a partir del contexto de seguridad.
-     *
-     * @return usuario autenticado.
-     */
-    private Usuario obtenerUsuarioAutenticado() {
-
-        // Objeto Authentication del contexto de seguridad de Spring Security.
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // En nuestro caso el nombre del principal es el email.
-        String emailUsuario = authentication.getName();
-
-        // Buscamos en BD el usuario real a partir del email.
-        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(emailUsuario);
-        // Lanzamos excepción si no existe el user en BD.
-        if (usuarioOptional.isEmpty()) {
-            throw new UsuarioNoEncontradoException(
-                    "No se ha encontrado el usuario autenticado."
-            );
-        }
-
-        // Devolvemos la entidad Usuario.
-        return usuarioOptional.get();
     }
 
     /**

@@ -3,7 +3,6 @@ package com.cromosdatabase.servicios.impl;
 import com.cromosdatabase.comun.excepciones.ColeccionNoEncontradaException;
 import com.cromosdatabase.comun.excepciones.UsuarioColeccionDuplicadaException;
 import com.cromosdatabase.comun.excepciones.UsuarioColeccionNoEncontradaException;
-import com.cromosdatabase.comun.excepciones.UsuarioNoEncontradoException;
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.Coleccion;
 import com.cromosdatabase.modelo.entidades.Usuario;
@@ -13,11 +12,9 @@ import com.cromosdatabase.modelo.mappers.UsuarioColeccionMapper;
 import com.cromosdatabase.repositorios.ColeccionRepository;
 import com.cromosdatabase.repositorios.UsuarioColeccionRepository;
 import com.cromosdatabase.repositorios.UsuarioCromoRepository;
-import com.cromosdatabase.repositorios.UsuarioRepository;
+import com.cromosdatabase.servicios.AuthService;
 import com.cromosdatabase.servicios.UsuarioColeccionService;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,22 +28,22 @@ import java.util.Optional;
 @Transactional
 public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
 
-    private final UsuarioRepository usuarioRepository;
     private final ColeccionRepository coleccionRepository;
     private final UsuarioColeccionRepository usuarioColeccionRepository;
     private final UsuarioCromoRepository usuarioCromoRepository;
     private final UsuarioColeccionMapper usuarioColeccionMapper;
+    private final AuthService authService;
 
-    public UsuarioColeccionServiceImpl(UsuarioRepository usuarioRepository,
-                                       ColeccionRepository coleccionRepository,
+    public UsuarioColeccionServiceImpl(ColeccionRepository coleccionRepository,
                                        UsuarioColeccionRepository usuarioColeccionRepository,
                                        UsuarioCromoRepository usuarioCromoRepository,
-                                       UsuarioColeccionMapper usuarioColeccionMapper) {
-        this.usuarioRepository = usuarioRepository;
+                                       UsuarioColeccionMapper usuarioColeccionMapper,
+                                       AuthService authService) {
         this.coleccionRepository = coleccionRepository;
         this.usuarioColeccionRepository = usuarioColeccionRepository;
         this.usuarioCromoRepository = usuarioCromoRepository;
         this.usuarioColeccionMapper = usuarioColeccionMapper;
+        this.authService = authService;
     }
 
     /**
@@ -58,7 +55,7 @@ public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
     @Override
     public List<UsuarioColeccionResumenResponse> obtenerColeccionesUsuarioAutenticado() {
 
-        Usuario usuarioAutenticado = obtenerUsuarioAutenticado();
+        Usuario usuarioAutenticado = authService.obtenerUsuarioAutenticado();
 
         List<UsuarioColeccion> listaUsuarioColeccion =
                 usuarioColeccionRepository.findByUsuario_IdUsuario(usuarioAutenticado.getIdUsuario());
@@ -74,7 +71,7 @@ public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
     @Override
     public void anadirColeccionUsuarioAutenticado(Integer idColeccion) {
 
-        Usuario usuarioAutenticado = obtenerUsuarioAutenticado();
+        Usuario usuarioAutenticado = authService.obtenerUsuarioAutenticado();
 
         Coleccion coleccion = obtenerColeccionPorId(idColeccion);
 
@@ -113,7 +110,7 @@ public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
     @Override
     public void eliminarColeccionUsuarioAutenticado(Integer idColeccion) {
 
-        Usuario usuarioAutenticado = obtenerUsuarioAutenticado();
+        Usuario usuarioAutenticado = authService.obtenerUsuarioAutenticado();
 
         validarSiColeccionEsAsociadaAUsuario(usuarioAutenticado.getIdUsuario(), idColeccion);
 
@@ -128,27 +125,6 @@ public class UsuarioColeccionServiceImpl implements UsuarioColeccionService {
                 usuarioAutenticado.getIdUsuario(),
                 idColeccion
         );
-    }
-
-    /**
-     * Obtiene el usuario autenticado a partir del contexto de seguridad.
-     *
-     * @return usuario autenticado.
-     */
-    private Usuario obtenerUsuarioAutenticado() {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String emailUsuario = authentication.getName();
-
-        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(emailUsuario);
-
-        if (usuarioOptional.isEmpty()) {
-            throw new UsuarioNoEncontradoException(
-                    "No se ha encontrado el usuario autenticado."
-            );
-        }
-
-        return usuarioOptional.get();
     }
 
     /**
