@@ -51,6 +51,14 @@ div.categoria-titulo p{
 }
 
 
+/*Formulario cuando se edita la colección*/
+.form-coleccion{
+  padding: 30px 0 10px;
+}
+
+.form-espacio{
+  padding-top: 12px;
+}
 
 /*Correciones accesibilidad*/
 
