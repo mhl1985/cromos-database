@@ -98,7 +98,7 @@ function cargaDatos(respuesta){
                 respuesta.cromos.forEach(cromo => {
                     textoDivElementoCromo = "<div class='col'><div class='card shadow-sm'><img src=";
                     textoDivElementoCromo += "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
-                    textoDivElementoCromo += " alt=" + cromo.nombre;
+                    textoDivElementoCromo += " alt='Imagen del cromo " + cromo.nombre + "'";
                     textoDivElementoCromo += "><div class='cromo-titulo'><p>";
                     textoDivElementoCromo += cromo.nombre;
                     textoDivElementoCromo += "</p></div><div class='card-body'><p class='card-text'>";

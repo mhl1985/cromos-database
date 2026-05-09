@@ -61,4 +61,28 @@ div.categoria-titulo p{
 }
 
 /*Correciones accesibilidad*/
+[data-bs-theme = "dark"]{
+  div.btn-group button {
+    color: white;
+  }
+}
 
+[data-bs-theme = "light"]{
+
+  h1, h2, h3, h4, a{
+    color: chocolate;
+  }
+
+  header h1, header h2, header h3, header h4, header a{
+    color: coral;
+  }
+
+  a.btn{
+    color:white;
+  }
+
+  footer a, section a{
+    color: brown;
+  }
+  
+}

@@ -56,7 +56,7 @@ function cargaDatos(respuesta){
                 respuesta.cromosAleatorios.forEach(cromoAle => {
                     textoDivElementoCromoAleatorio = "<div class='col'><div class='card shadow-sm'><img src=";
                     textoDivElementoCromoAleatorio += "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
-                    textoDivElementoCromoAleatorio += " alt=" + cromoAle.nombre;
+                    textoDivElementoCromoAleatorio += " alt='Imagen del cromo " + cromoAle.nombre + "'";
                     textoDivElementoCromoAleatorio += "><div class='cromo-titulo'><p>";
                     textoDivElementoCromoAleatorio += cromoAle.nombre;
                     textoDivElementoCromoAleatorio += "</p></div><div class='card-body'><p class='card-text'>";
@@ -68,7 +68,7 @@ function cargaDatos(respuesta){
                     textoDivElementoCromoAleatorio += "botonUltimosCromos" + cromoAle.id + "'";
                     textoDivElementoCromoAleatorio += " onClick='clickVerCromo(" + cromoAle.id + ")'>Ver cromo</button>";
                     textoDivElementoCromoAleatorio += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
-                    textoDivElementoCromoAleatorio += "botonColeccionUltimosCromos" + cromoAle.idColeccion + "'";
+                    textoDivElementoCromoAleatorio += "botonColeccionUltimosCromos" + cromoAle.id + "-" + cromoAle.idColeccion + "'";
                     textoDivElementoCromoAleatorio += " onClick='clickVerColeccion(" + cromoAle.idColeccion + ")'>Ver colección</button>";
                     textoDivElementoCromoAleatorio += "</div><small class='text-body-secondary'><b><abbr title='Número'>Nº</abbr>:</b> " + cromoAle.numero;
                     textoDivElementoCromoAleatorio += "</small></div></div></div></div>";
@@ -89,7 +89,7 @@ function cargaDatos(respuesta){
                 respuesta.ultimasColecciones.forEach(coleccion => {
                     textoDivElementoColeccion = "<div class='col'><div class='card shadow-sm'><img src=";
                     textoDivElementoColeccion += "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
-                    textoDivElementoColeccion += " alt=" + coleccion.nombre;
+                    textoDivElementoColeccion += " alt='Imagen de la colección " + coleccion.nombre + "'";
                     textoDivElementoColeccion += "><div class='cromo-titulo'><p>";
                     textoDivElementoColeccion += coleccion.nombre;
                     textoDivElementoColeccion += "</p></div><div class='card-body'><p class='card-text'>";
@@ -101,7 +101,7 @@ function cargaDatos(respuesta){
                     textoDivElementoColeccion += "botonUltimasColeccionesColeccion" + coleccion.id + "'";
                     textoDivElementoColeccion += " onClick='clickVerColeccion(" + coleccion.id + ")'>Ver colección</button>";
                     textoDivElementoColeccion += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
-                    textoDivElementoColeccion += "botonUltimasColeccionesCategoria" + coleccion.categoria.id + "'";
+                    textoDivElementoColeccion += "botonUltimasColeccionesCategoria" + coleccion.id + "-" + coleccion.categoria.id + "'";
                     textoDivElementoColeccion += " onClick='clickVerCategoria(" + coleccion.categoria.id + ")'>Ver categoría</button>";
                     textoDivElementoColeccion += "</div><small class='text-body-secondary'>" + coleccion.subcategoria.nombre;
                     textoDivElementoColeccion += "</small></div></div></div></div>";
@@ -194,7 +194,7 @@ function cargaDatos(respuesta){
                 actividad.ultimasColeccionesAgregadas.forEach(coleccionUsu => {
                     textoDivElementoUsuario = "<div class='col'><div class='card shadow-sm'><img src=";
                     textoDivElementoUsuario += "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
-                    textoDivElementoUsuario += " alt=" + coleccionUsu.nombre;
+                    textoDivElementoUsuario += " alt='Imagen de la colección " + coleccionUsu.nombre + "'";
                     textoDivElementoUsuario += "><div class='cromo-titulo'><p>";
                     textoDivElementoUsuario += coleccionUsu.nombre;
                     textoDivElementoUsuario += "</p></div><div class='card-body'><p class='card-text'>";
@@ -206,7 +206,7 @@ function cargaDatos(respuesta){
                     textoDivElementoUsuario += "botonUltimasColeccionesColeccion" + coleccionUsu.id + "'";
                     textoDivElementoUsuario += " onClick='clickVerColeccion(" + coleccionUsu.id + ")'>Ver colección</button>";
                     textoDivElementoUsuario += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
-                    textoDivElementoUsuario += "botonUltimasColeccionesCategoria" + coleccionUsu.categoria.id + "'";
+                    textoDivElementoUsuario += "botonUltimasColeccionesInterCategoria" + coleccionUsu.id + "-" + coleccionUsu.categoria.id + "'";
                     textoDivElementoUsuario += " onClick='clickVerCategoria(" + coleccionUsu.categoria.id + ")'>Ver categoría</button>";
                     textoDivElementoUsuario += "</div><small class='text-body-secondary'>" + coleccionUsu.categoria.nombre;
                     textoDivElementoUsuario += "</small></div></div></div></div>";

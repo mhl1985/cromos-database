@@ -70,7 +70,7 @@ function cargaDatos(respuesta){
                 subcate.coleccionesSubcategoria.forEach(coleccion => {
                     textoColecciones += "<div class='col'><div class='card shadow-sm'><img src=";
                     textoColecciones += "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
-                    textoColecciones += " alt=" + coleccion.nombre;
+                    textoColecciones += " alt='Imagen de la colección " + coleccion.nombre + "'";
                     textoColecciones += "><div class='cromo-titulo'><p>";
                     textoColecciones += coleccion.nombre;
                     textoColecciones += "</p></div><div class='card-body'><p class='card-text'>";
