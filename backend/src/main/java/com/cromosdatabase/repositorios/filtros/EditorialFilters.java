@@ -1,5 +1,6 @@
 package com.cromosdatabase.repositorios.filtros;
 
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.entidades.Editorial;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -25,17 +26,6 @@ public final class EditorialFilters {
      */
     public static Specification<Editorial> byNombre(String nombre) {
 
-        Specification<Editorial> filtroNombre =
-                (root, query, criteriaBuilder) -> {
-
-                    String patronBusqueda = "%" + nombre.toLowerCase() + "%";
-
-                    return criteriaBuilder.like(
-                            criteriaBuilder.lower(root.get("nombre")),
-                            patronBusqueda
-                    );
-                };
-
-        return filtroNombre;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("nombre", nombre);
     }
 }

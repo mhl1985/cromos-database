@@ -1,5 +1,6 @@
 package com.cromosdatabase.repositorios.filtros;
 
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.entidades.Cromo;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -55,26 +56,7 @@ public final class CromoFilters {
      */
     public static Specification<Cromo> byNumero(String numero) {
 
-        Specification<Cromo> filtroNumero =
-                (root, query, criteriaBuilder) -> {
-                    /*
-                     * Se aplica una búsqueda parcial sobre el campo "numero".
-                     *
-                     * Se convierte tanto el valor del campo como el texto recibido
-                     * a minúsculas para evitar diferencias entre mayúsculas/minúsculas.
-                     *
-                     * Equivale conceptualmente a:
-                     * WHERE LOWER(numero) LIKE '%valor%'
-                     */
-                    String patronBusqueda = "%" + numero.toLowerCase() + "%";
-
-                    return criteriaBuilder.like(
-                            criteriaBuilder.lower(root.get("numero")),
-                            patronBusqueda
-                    );
-                };
-
-        return filtroNumero;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("numero", numero);
     }
 
     /**
@@ -90,26 +72,7 @@ public final class CromoFilters {
      */
     public static Specification<Cromo> byNombre(String nombre) {
 
-        Specification<Cromo> filtroNombre =
-                (root, query, criteriaBuilder) -> {
-                    /*
-                     * Se aplica una búsqueda parcial sobre el campo "nombre".
-                     *
-                     * Se convierte tanto el valor del campo como el texto recibido
-                     * a minúsculas para evitar diferencias entre mayúsculas/minúsculas.
-                     *
-                     * Equivale conceptualmente a:
-                     * WHERE LOWER(nombre) LIKE '%valor%'
-                     */
-                    String patronBusqueda = "%" + nombre.toLowerCase() + "%";
-
-                    return criteriaBuilder.like(
-                            criteriaBuilder.lower(root.get("nombre")),
-                            patronBusqueda
-                    );
-                };
-
-        return filtroNombre;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("nombre", nombre);
     }
 
     /**
@@ -126,25 +89,6 @@ public final class CromoFilters {
      */
     public static Specification<Cromo> byTipo(String tipo) {
 
-        Specification<Cromo> filtroTipo =
-                (root, query, criteriaBuilder) -> {
-                    /*
-                     * Se aplica una búsqueda parcial sobre el campo "tipo".
-                     *
-                     * Se convierte tanto el valor del campo como el texto recibido
-                     * a minúsculas para evitar diferencias entre mayúsculas/minúsculas.
-                     *
-                     * Equivale conceptualmente a:
-                     * WHERE LOWER(tipo) LIKE '%valor%'
-                     */
-                    String patronBusqueda = "%" + tipo.toLowerCase() + "%";
-
-                    return criteriaBuilder.like(
-                            criteriaBuilder.lower(root.get("tipo")),
-                            patronBusqueda
-                    );
-                };
-
-        return filtroTipo;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("tipo", tipo);
     }
 }

@@ -1,5 +1,6 @@
 package com.cromosdatabase.repositorios.filtros;
 
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.entidades.SubcategoriaColeccion;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -25,18 +26,7 @@ public final class SubcategoriaColeccionFilters {
      */
     public static Specification<SubcategoriaColeccion> byNombre(String nombre) {
 
-        Specification<SubcategoriaColeccion> filtroNombre =
-                (root, query, criteriaBuilder) -> {
-
-                    String patronBusqueda = "%" + nombre.toLowerCase() + "%";
-
-                    return criteriaBuilder.like(
-                            criteriaBuilder.lower(root.get("nombre")),
-                            patronBusqueda
-                    );
-                };
-
-        return filtroNombre;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("nombre", nombre);
     }
 
     /**

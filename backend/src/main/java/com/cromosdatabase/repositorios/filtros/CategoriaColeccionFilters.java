@@ -1,5 +1,6 @@
 package com.cromosdatabase.repositorios.filtros;
 
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.entidades.CategoriaColeccion;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,8 @@ public final class CategoriaColeccionFilters {
     /**
      * Filtro por nombre de categoría.
      *
-     * Realiza una búsqueda parcial (LIKE) sin distinguir entre mayúsculas
-     * y minúsculas.
+     * Realiza una búsqueda parcial (LIKE) sin distinguir entre
+     * mayúsculas y minúsculas.
      *
      * Ejemplo: "dep" devuelve coincidencias como "Deportes".
      *
@@ -25,17 +26,7 @@ public final class CategoriaColeccionFilters {
      */
     public static Specification<CategoriaColeccion> byNombre(String nombre) {
 
-        Specification<CategoriaColeccion> filtroNombre =
-                (root, query, criteriaBuilder) -> {
-
-                    String patronBusqueda = "%" + nombre.toLowerCase() + "%";
-
-                    return criteriaBuilder.like(
-                            criteriaBuilder.lower(root.get("nombre")),
-                            patronBusqueda
-                    );
-                };
-
-        return filtroNombre;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("nombre", nombre);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.cromosdatabase.repositorios.filtros;
 
+import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.entidades.Coleccion;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -25,34 +26,7 @@ public final class ColeccionFilters {
      */
     public static Specification<Coleccion> byNombre(String nombre) {
 
-        Specification<Coleccion> filtroNombre =
-                (root, query, criteriaBuilder) -> {
-            /*
-             * root:
-             * Representa la entidad principal de la consulta, en este caso Coleccion.
-             * Permite acceder a sus atributos mediante root.get("campo").
-             *
-             * Ejemplo:
-             * root.get("nombre") accede al campo "nombre" de la entidad.
-             *
-             * query:
-             * Representa la consulta completa que se está construyendo.
-             * Permite modificar aspectos globales (joins, distinct, etc).
-             * En este caso no se utiliza, pero forma parte del contexto.
-             *
-             * criteriaBuilder:
-             * Es una herramienta de JPA que permite construir condiciones
-             * de consulta (equal, like, and, or, etc).
-             */
-            String patronBusqueda = "%" + nombre.toLowerCase() + "%";
-
-            return criteriaBuilder.like(
-                    criteriaBuilder.lower(root.get("nombre")),
-                    patronBusqueda
-            );
-        };
-
-        return filtroNombre;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("nombre", nombre);
     }
 
     /**
@@ -159,25 +133,6 @@ public final class ColeccionFilters {
      */
     public static Specification<Coleccion> byPeriodo(String periodo) {
 
-        Specification<Coleccion> filtroPeriodo =
-                (root, query, criteriaBuilder) -> {
-            /*
-             * Se aplica una búsqueda parcial sobre el campo "periodo".
-             *
-             * Se convierte tanto el valor del campo como el texto recibido
-             * a minúsculas para evitar diferencias entre mayúsculas/minúsculas.
-             *
-             * Equivale conceptualmente a:
-             * WHERE LOWER(periodo) LIKE '%valor%'
-             */
-            String patronBusqueda = "%" + periodo.toLowerCase() + "%";
-
-            return criteriaBuilder.like(
-                    criteriaBuilder.lower(root.get("periodo")),
-                    patronBusqueda
-            );
-        };
-
-        return filtroPeriodo;
+        return FiltroUtils.crearFiltroParaTextoLikeIgnoreCase("periodo", periodo);
     }
 }
