@@ -12,10 +12,10 @@ function cargaInicial() {
 
     let urlAcceso = "http://localhost:8080/paginas/colecciones/";
     let idColeccion = sessionStorage.getItem("CromosDatabaseCole");
-    if (idColeccion !== ""){
+    if (parseInt(idColeccion)){
         urlAcceso += idColeccion;
     }else{
-        urlAcceso += parseInt(Math.random()*10+1);
+        urlAcceso += parseInt((Math.random()*10)+1);
     }
     let autenticacion = sessionStorage.getItem("CromosDatabaseAuth");
 
@@ -46,15 +46,15 @@ function cargaDatos(respuesta){
             textoDescripcionColeccion += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ".<br/>";
             textoDescripcionColeccion += "<b>Descripción:</b> " + coleccion.descripcion + "<br/>";
 
-            if (sessionStorage.getItem("CromosDatabaseAuth") !== "" & cromosDatabaseNomb !== ""){
+            if (sessionStorage.getItem("CromosDatabaseAuth") && cromosDatabaseNomb){
                 if (respuesta.cromosUsuario){
                     textoDescripcionColeccion += "<br/>Tienes esta colección agregada a tu cuenta. Puedes editar los cromos que tienes, pero no te olvides de darle a guardar abajo del todo!";
                 }else{
                     textoDescripcionColeccion += "<br/><b>" + cromosDatabaseNomb + "</b>";
                     textoDescripcionColeccion += ", puedes agregar esta colección a tu cuenta pulsando aquí: ";
-                    textoDescripcionColeccion += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
+                    textoDescripcionColeccion += "<div><button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDescripcionColeccion += "botonAgregarColeccionUsuario" + coleccion.id + "'";
-                    textoDescripcionColeccion += " onClick='clickBotonAgregarColeccionUsuario(" + coleccion.id + ")'>Agregar colección</button>";
+                    textoDescripcionColeccion += " onClick='clickBotonAgregarColeccionUsuario(" + coleccion.id + ")'>Agregar colección</button></div>";
                 }
 
                 if (cromosDatabaseNomb){
@@ -71,10 +71,10 @@ function cargaDatos(respuesta){
             pElementoTituloColeccion.innerHTML = textoDescripcionColeccion;
             descripcionColeccion.appendChild(pElementoTituloColeccion);
 
+            let divCromos = document.getElementById("divCromos");
 
-            // Añadimos los cromos aleatorios recuperando el DIV, generando elementos dinámicamente y los añadimos
+            // Añadimos los cromos de la colección recuperando el DIV, generando elementos dinámicamente y los añadimos
             if (respuesta.cromos){
-                let divCromos = document.getElementById("divCromos");
                 let divFilaCromos = document.getElementById("divFilaCromos");
                 let textoDivElementoCromo;
                 let divElementoCromo;
@@ -90,16 +90,16 @@ function cargaDatos(respuesta){
                     textoDivElementoCromo += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoCromo += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCromo += "botonCromo" + cromo.id + "'";
-                    textoDivElementoCromo += " onClick='clickCromo(" + cromo.id + ")'>Ver cromo</button>";
+                    textoDivElementoCromo += " onClick='clickVerCromo(" + cromo.id + ")'>Ver cromo</button>";
                     textoDivElementoCromo += "</div><small class='text-body-secondary'><b><abbr title='Número'>Nº</abbr>:</b> " + cromo.numero;
                     textoDivElementoCromo += "</small></div></div></div></div>";
                     divElementoCromo = document.createElement("div");
                     divElementoCromo.innerHTML = textoDivElementoCromo;
                     divFilaCromos.appendChild(divElementoCromo);
                 });
-                divCromos.className = divCromos.className.replace(" ocultarContenedor","");
             }
 
+            divCromos.className = divCromos.className.replace(" ocultarContenedor","");
 
         } else {
             let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
@@ -119,27 +119,28 @@ function cargaDatos(respuesta){
 
 //Error en la cargar del servicio
 function errorCargaDatos(error){
-    console.error("Error en la carga");
     let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
     alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 }
 
 
 function clickBotonAgregarColeccionUsuario(id){
-    console.log("clickBotonAgregarColeccionUsuario id:" + id);
 }
 
 
-function clickCromo(id){
-    console.log("clickCromo id:" + id);
+function clickVerCromo(id){
+    sessionStorage.setItem("CromosDatabaseCrom", id);
+    window.location.href = "cromo.html";
 }
 
 
 function clickEnlaceAcceso (){
-    console.log("clickEnlaceAcceso");
     if (enlaceAcceso.textContent != "Acceso"){
         sessionStorage.setItem("CromosDatabaseAuth", "");
         sessionStorage.setItem("CromosDatabaseNomb", "");
+        sessionStorage.setItem("CromosDatabaseCrom", "");
+        sessionStorage.setItem("CromosDatabaseCole", "");
+        sessionStorage.setItem("CromosDatabaseCate", "");
         event.preventDefault();
         location.reload();
     }

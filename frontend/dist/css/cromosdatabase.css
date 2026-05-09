@@ -1,5 +1,5 @@
 /* Color general de enlaces y títulos principales*/
-h1, h2, h4, a{
+h1, h2, h3, h4, a{
     color: coral;
 }
 
@@ -36,4 +36,21 @@ div.categoria-titulo p{
   display: none;
 }
 
+
+/*Tamaños de alertas*/
+@media (max-width:767px){
+  div.alert {
+    margin: 100px 50px;
+  }
+}
+
+@media (min-width:768px){
+  div.alert {
+    margin: 200px;
+  }
+}
+
+
+
 /*Correciones accesibilidad*/
+

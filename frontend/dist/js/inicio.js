@@ -60,14 +60,16 @@ function cargaDatos(respuesta){
                     textoDivElementoCromoAleatorio += "><div class='cromo-titulo'><p>";
                     textoDivElementoCromoAleatorio += cromoAle.nombre;
                     textoDivElementoCromoAleatorio += "</p></div><div class='card-body'><p class='card-text'>";
-                    textoDivElementoCromoAleatorio += "<b>Nombre y tipo:</b> " + cromoAle.nombre + ", " + cromoAle.tipo;
+                    textoDivElementoCromoAleatorio += "<b>Nombre:</b> " + cromoAle.nombre + "<br/>";
+                    textoDivElementoCromoAleatorio += "<b>Descripción:</b> " + cromoAle.descripcion + "<br/>";
+                    textoDivElementoCromoAleatorio += "<b>Colección y tipo:</b> " + cromoAle.nombreColeccion + ", " + cromoAle.tipo;
                     textoDivElementoCromoAleatorio += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoCromoAleatorio += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCromoAleatorio += "botonUltimosCromos" + cromoAle.id + "'";
-                    textoDivElementoCromoAleatorio += " onClick='clickUltimosCromosCromo(" + cromoAle.id + ")'>Ver cromo</button>";
+                    textoDivElementoCromoAleatorio += " onClick='clickVerCromo(" + cromoAle.id + ")'>Ver cromo</button>";
                     textoDivElementoCromoAleatorio += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
-                    textoDivElementoCromoAleatorio += "botonColeccionUltimosCromos" + cromoAle.id + "'";
-                    textoDivElementoCromoAleatorio += " onClick='clickUltimosCromosColeccion(" + cromoAle.id + ")'>Ver colección</button>";
+                    textoDivElementoCromoAleatorio += "botonColeccionUltimosCromos" + cromoAle.idColeccion + "'";
+                    textoDivElementoCromoAleatorio += " onClick='clickVerColeccion(" + cromoAle.idColeccion + ")'>Ver colección</button>";
                     textoDivElementoCromoAleatorio += "</div><small class='text-body-secondary'><b><abbr title='Número'>Nº</abbr>:</b> " + cromoAle.numero;
                     textoDivElementoCromoAleatorio += "</small></div></div></div></div>";
                     divElementoCromoAleatorio = document.createElement("div");
@@ -97,11 +99,11 @@ function cargaDatos(respuesta){
                     textoDivElementoColeccion += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoColeccion += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoColeccion += "botonUltimasColeccionesColeccion" + coleccion.id + "'";
-                    textoDivElementoColeccion += " onClick='clickUltimasColeccionesColeccion(" + coleccion.id + ")'>Ver colección</button>";
+                    textoDivElementoColeccion += " onClick='clickVerColeccion(" + coleccion.id + ")'>Ver colección</button>";
                     textoDivElementoColeccion += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoColeccion += "botonUltimasColeccionesCategoria" + coleccion.categoria.id + "'";
-                    textoDivElementoColeccion += " onClick='clickUltimasColeccionesCategoria(" + coleccion.categoria.id + ")'>Ver categoría</button>";
-                    textoDivElementoColeccion += "</div><small class='text-body-secondary'>" + coleccion.categoria.nombre;
+                    textoDivElementoColeccion += " onClick='clickVerCategoria(" + coleccion.categoria.id + ")'>Ver categoría</button>";
+                    textoDivElementoColeccion += "</div><small class='text-body-secondary'>" + coleccion.subcategoria.nombre;
                     textoDivElementoColeccion += "</small></div></div></div></div>";
                     divElementoColeccion = document.createElement("div");
                     divElementoColeccion.innerHTML = textoDivElementoColeccion;
@@ -118,16 +120,19 @@ function cargaDatos(respuesta){
                 let divElementoCategoria;
 
                 respuesta.categorias.forEach(categoria => {
-                    textoDivElementoCategoria = "<div class='col'><div class='card shadow-sm'>";
-                    textoDivElementoCategoria += "<div class='card-body categoria-boton'><div class='d-flex justify-content-between align-items-center'>";
-                    textoDivElementoCategoria += categoria.nombre;
+                    textoDivElementoCategoria = "<div class='col'><div class='card shadow-sm'><div class='card-body'><p class='card-text'>";
+                    textoDivElementoCategoria += "<b>Nombre:</b> " + categoria.nombre + "<br/>";
+                    textoDivElementoCategoria += "<b>Descripción:</b> " + categoria.descripcion + "</p>";
+                    textoDivElementoCategoria += "<div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoCategoria += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCategoria += "botonCategoria" + categoria.id + "'";
-                    textoDivElementoCategoria += " onClick='clickCategorias(" + categoria.id + ")'>Ver categoría</button>";
-                    textoDivElementoCategoria += "</div></div></div></div>";
+                    textoDivElementoCategoria += " onClick='clickVerCategoria(" + categoria.id + ")'>Ver categoría</button>";
+                    textoDivElementoCategoria += "</div><small class='text-body-secondary'>" + categoria.nombre;
+                    textoDivElementoCategoria += "</small></div></div></div></div>";
                     divElementoCategoria = document.createElement("div");
                     divElementoCategoria.innerHTML = textoDivElementoCategoria;
                     divFilaCategorias.appendChild(divElementoCategoria);
+
                 });
                 divCategorias.className = divCategorias.className.replace(" ocultarContenedor","");
             }
@@ -156,11 +161,11 @@ function cargaDatos(respuesta){
                 // Informamos de las Colecciones agregadas
                 textoDivElementoUsuario = "<div class='col'><div class='card shadow-sm'>";
                 textoDivElementoUsuario += "<div class='card-body categoria-boton'><div class='d-flex justify-content-between align-items-center'>";
-                textoDivElementoUsuario += "Tienes " + actividad.totalColecciones + " colecciones agregadas.";
+                textoDivElementoUsuario += "<p>Tienes " + actividad.totalColecciones + " colecciones agregadas.";
                 if (actividad.totalColecciones!==0){
                     textoDivElementoUsuario += " Más abajo puedes ver las últimas.";
                 }
-                textoDivElementoUsuario += "</div></div></div></div>";
+                textoDivElementoUsuario += "</p></div></div></div></div>";
                 divElementoUsuario = document.createElement("div");
                 divElementoUsuario.innerHTML = textoDivElementoUsuario;
                 divFilaUsuario.appendChild(divElementoUsuario);
@@ -169,7 +174,7 @@ function cargaDatos(respuesta){
                 // Informamos de los cromos del usuario
                 textoDivElementoUsuario = "<div class='col'><div class='card shadow-sm'>";
                 textoDivElementoUsuario += "<div class='card-body categoria-boton'><div class='d-flex justify-content-between align-items-center'>";
-                textoDivElementoUsuario += "Tienes " + actividad.totalCromosUsuario + " cromos en tu colección.";
+                textoDivElementoUsuario += "<p>Tienes " + actividad.totalCromosUsuario + " cromos en tu colección.</p>";
                 textoDivElementoUsuario += "</div></div></div></div>";
                 divElementoUsuario = document.createElement("div");
                 divElementoUsuario.innerHTML = textoDivElementoUsuario;
@@ -179,7 +184,7 @@ function cargaDatos(respuesta){
                 // Informamos de los cromos intercambiables
                 textoDivElementoUsuario = "<div class='col'><div class='card shadow-sm'>";
                 textoDivElementoUsuario += "<div class='card-body categoria-boton'><div class='d-flex justify-content-between align-items-center'>";
-                textoDivElementoUsuario += "Tienes " + actividad.totalCromosIntercambiables + " cromos disponibles para el intercambio.";
+                textoDivElementoUsuario += "<p>Tienes " + actividad.totalCromosIntercambiables + " cromos disponibles para el intercambio.</p>";
                 textoDivElementoUsuario += "</div></div></div></div>";
                 divElementoUsuario = document.createElement("div");
                 divElementoUsuario.innerHTML = textoDivElementoUsuario;
@@ -199,10 +204,10 @@ function cargaDatos(respuesta){
                     textoDivElementoUsuario += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoUsuario += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoUsuario += "botonUltimasColeccionesColeccion" + coleccionUsu.id + "'";
-                    textoDivElementoUsuario += " onClick='clickUltimasColeccionesColeccion(" + coleccionUsu.id + ")'>Ver colección</button>";
+                    textoDivElementoUsuario += " onClick='clickVerColeccion(" + coleccionUsu.id + ")'>Ver colección</button>";
                     textoDivElementoUsuario += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoUsuario += "botonUltimasColeccionesCategoria" + coleccionUsu.categoria.id + "'";
-                    textoDivElementoUsuario += " onClick='clickUltimasColeccionesCategoria(" + coleccionUsu.categoria.id + ")'>Ver categoría</button>";
+                    textoDivElementoUsuario += " onClick='clickVerCategoria(" + coleccionUsu.categoria.id + ")'>Ver categoría</button>";
                     textoDivElementoUsuario += "</div><small class='text-body-secondary'>" + coleccionUsu.categoria.nombre;
                     textoDivElementoUsuario += "</small></div></div></div></div>";
                     divElementoUsuario = document.createElement("div");
@@ -231,60 +236,36 @@ function cargaDatos(respuesta){
 
 //Error en la cargar del servicio
 function errorCargaDatos(error){
-    console.error("Error en la carga");
     let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
     alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 }
 
 
-function clickColeccionCromo(id){
-    console.log("pulsado el botón con ID: " + id);
-    let urlAcceso = "http://localhost:8080/paginas/colecciones/" + id;
-    
-    fetch(urlAcceso, {
-    method: "GET",
-    headers: {"Content-Type": "application/json",},
-    })
-    .then((res) => res.json())
-    .catch((error) => console.error(error))
-    .then((response) => console.log(response));
-
+function clickVerCromo(id){
+    sessionStorage.setItem("CromosDatabaseCrom", id);
+    window.location.href = "cromo.html";
 }
 
 
-function clickUltimosCromosCromo (id){
-    console.log("clickUltimosCromosCromo id:" + id);
-}
-
-
-function clickUltimosCromosColeccion (id){
-    console.log("clickUltimosCromosColeccion id:" + id);
-}
-
-
-function clickUltimasColeccionesColeccion (id){
-    console.log("clickUltimasColeccionesColeccion id:" + id);
+function clickVerColeccion (id){
     sessionStorage.setItem("CromosDatabaseCole", id);
     window.location.href = "coleccion.html";
 }
 
 
-function clickUltimasColeccionesCategoria (id){
-    console.log("clickUltimasColeccionesCategoria id:" + id);
-}
-
-
-function clickCategorias (id){
-    console.log("clickCategorias id:" + id);
+function clickVerCategoria (id){
+    sessionStorage.setItem("CromosDatabaseCate", id);
+    window.location.href = "categoria.html";
 }
 
 
 function clickEnlaceAcceso (){
-    console.log("clickEnlaceAcceso");
     if (enlaceAcceso.textContent != "Acceso"){
         sessionStorage.setItem("CromosDatabaseAuth", "");
         sessionStorage.setItem("CromosDatabaseNomb", "");
+        sessionStorage.setItem("CromosDatabaseCrom", "");
         sessionStorage.setItem("CromosDatabaseCole", "");
+        sessionStorage.setItem("CromosDatabaseCate", "");
         event.preventDefault();
         location.reload();
     }

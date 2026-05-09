@@ -40,7 +40,7 @@ function crearUsuario() {
         formularioCrear.crearContrasena.value && formularioCrear.crearContrasena2.value){
             if(formularioCrear.crearContrasena.value === formularioCrear.crearContrasena2.value){
                 let urlAcceso = "http://localhost:8080/auth/registro";
-                let datosAcceso = {"email": formularioCrear.crearCorreo.value, "password": formularioCrear.crearContrasena.value, "nombreMostrar": formularioCrear.crearNombre.value};
+                let datosAcceso = {"email": formularioCrear.crearCorreo.value, "contrasena": formularioCrear.crearContrasena.value, "nombreMostrar": formularioCrear.crearNombre.value};
                 
                 fetch(urlAcceso, {
                 method: "POST",
