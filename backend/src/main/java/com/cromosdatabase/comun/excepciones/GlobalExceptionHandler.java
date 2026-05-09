@@ -14,7 +14,6 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * Manejador global de excepciones.
- *
  * Centraliza el tratamiento de errores.
  */
 @RestControllerAdvice
@@ -23,8 +22,7 @@ public class GlobalExceptionHandler {
     /**
      * Gestiona los errores de validación producidos por @Valid
      * en los DTOs de entrada.
-     *
-     * Este tipo de excepción se lanza cuando uno o varios campos
+     * Ejemplo: Cuando uno o varios campos
      * no cumplen las restricciones definidas con anotaciones
      * como @NotBlank, @Size o @Email.
      *
@@ -54,9 +52,8 @@ public class GlobalExceptionHandler {
 
     /**
      * Gestiona errores de autenticación producidos por credenciales incorrectas.
-     *
-     * Este caso ocurre, por ejemplo, cuando el email existe pero la contraseña
-     * informada no es válida, o cuando se intenta acceder con credenciales erróneas.
+     * Ejemplo: Cuando el email existe pero la contraseña informada no es
+     * válida, o cuando se intenta acceder con credenciales erróneas.
      *
      * @param ex excepción capturada
      * @return respuesta HTTP 401 con mensaje genérico de autenticación
@@ -76,8 +73,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Gestiona otros errores de autenticación de Spring Security.
-     *
-     * Actúa como respaldo para excepciones de autenticación distintas de
+     * Respaldo para excepciones de autenticación distintas de
      * BadCredentialsException.
      *
      * @param ex excepción capturada
@@ -139,129 +135,22 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Gestiona el caso en el que se solicita una colección que no existe.
+     * Gestiona los casos en los que se solicita un recurso que no existe
+     * o no está disponible para el usuario autenticado.
      *
-     * @param ex excepción capturada
+     * @param ex excepción de recurso no encontrado capturada
      * @return respuesta HTTP 404 con el mensaje del error
      */
-    @ExceptionHandler(ColeccionNoEncontradaException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleColeccionNoEncontradaException(
-            ColeccionNoEncontradaException ex) {
-
-        ErrorGenericoResponse response = new ErrorGenericoResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
-    /**
-     * Gestiona el caso en el que se solicita una editorial que no existe.
-     *
-     * @param ex excepción capturada
-     * @return respuesta HTTP 404 con el mensaje del error
-     */
-    @ExceptionHandler(EditorialNoEncontradaException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleEditorialNoEncontradaException(
-            EditorialNoEncontradaException ex) {
-
-        ErrorGenericoResponse response = new ErrorGenericoResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
-    /**
-     * Gestiona el caso en el que se solicita una categoría que no existe.
-     *
-     * @param ex excepción capturada
-     * @return respuesta HTTP 404 con el mensaje del error
-     */
-    @ExceptionHandler(CategoriaColeccionNoEncontradaException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleCategoriaColeccionNoEncontradaException(
-            CategoriaColeccionNoEncontradaException ex) {
-
-        ErrorGenericoResponse response = new ErrorGenericoResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
-    /**
-     * Gestiona el caso en el que se solicita una subcategoría que no existe.
-     *
-     * @param ex excepción capturada
-     * @return respuesta HTTP 404 con el mensaje del error
-     */
-    @ExceptionHandler(SubcategoriaColeccionNoEncontradaException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleSubcategoriaColeccionNoEncontradaException(
-            SubcategoriaColeccionNoEncontradaException ex) {
-
-        ErrorGenericoResponse response = new ErrorGenericoResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
-    /**
-     * Gestiona el caso en el que se solicita un cromo que no existe.
-     *
-     * @param ex excepción capturada
-     * @return respuesta HTTP 404 con el mensaje del error
-     */
-    @ExceptionHandler(CromoNoEncontradoException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleCromoNoEncontradoException(
-            CromoNoEncontradoException ex) {
-
-        ErrorGenericoResponse response = new ErrorGenericoResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
-    /**
-     * Gestiona el caso en el que no se encuentra un usuario.
-     *
-     * @param ex excepción capturada
-     * @return respuesta HTTP 404 con el mensaje del error
-     */
-    @ExceptionHandler(UsuarioNoEncontradoException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleUsuarioNoEncontradoException(
-            UsuarioNoEncontradoException ex) {
-
-        ErrorGenericoResponse response = new ErrorGenericoResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
-    /**
-     * Gestiona el caso en el que una colección no está asociada
-     * al usuario autenticado.
-     *
-     * @param ex excepción capturada
-     * @return respuesta HTTP 404 con el mensaje del error
-     */
-    @ExceptionHandler(UsuarioColeccionNoEncontradaException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleUsuarioColeccionNoEncontradaException(
-            UsuarioColeccionNoEncontradaException ex) {
+    @ExceptionHandler({
+            ColeccionNoEncontradaException.class,
+            EditorialNoEncontradaException.class,
+            CategoriaColeccionNoEncontradaException.class,
+            SubcategoriaColeccionNoEncontradaException.class,
+            CromoNoEncontradoException.class,
+            UsuarioNoEncontradoException.class,
+            UsuarioColeccionNoEncontradaException.class
+    })
+    public ResponseEntity<ErrorGenericoResponse> handleRecursoNoEncontradoException(RuntimeException ex) {
 
         ErrorGenericoResponse response = new ErrorGenericoResponse(
                 HttpStatus.NOT_FOUND.value(),
@@ -314,8 +203,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Gestiona errores de tipo en parámetros de entrada de la petición.
-     *
-     * Este caso ocurre, por ejemplo, cuando un parámetro que debería ser numérico
+     * Ejemplo: Cuando un parámetro que debería ser numérico
      * recibe un valor no válido, como idCategoria=abc.
      *
      * @param ex excepción capturada
@@ -342,9 +230,8 @@ public class GlobalExceptionHandler {
 
     /**
      * Gestiona peticiones a URLs no válidas o incompletas.
-     *
-     * Este caso puede ocurrir, por ejemplo, cuando se invoca un endpoint
-     * que requiere un id en el path pero no se informa.
+     * Ejemplo: Cuando se invoca un endpoint que requiere
+     * un id en el path pero este no se informa.
      *
      * @param ex excepción capturada
      * @return respuesta HTTP 400 con mensaje genérico de URL no válida
@@ -387,7 +274,6 @@ public class GlobalExceptionHandler {
 
     /**
      * Gestiona cualquier error no controlado de forma específica.
-     *
      * Actúa como último nivel de captura para evitar que la API
      * devuelva respuestas no uniformes o exponga información interna.
      *
@@ -405,4 +291,5 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
+
 }
