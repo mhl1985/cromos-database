@@ -15,6 +15,7 @@ import com.cromosdatabase.servicios.AuthService;
 import com.cromosdatabase.servicios.UsuarioColeccionService;
 import com.cromosdatabase.servicios.UsuarioCromoService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import java.util.Set;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UsuarioCromoServiceImpl implements UsuarioCromoService {
 
     private final CromoRepository cromoRepository;
@@ -39,17 +41,6 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
     private final AuthService authService;
     private final UsuarioColeccionService usuarioColeccionService;
 
-    public UsuarioCromoServiceImpl(CromoRepository cromoRepository,
-                                   UsuarioCromoRepository usuarioCromoRepository,
-                                   UsuarioCromoMapper usuarioCromoMapper,
-                                   AuthService authService,
-                                   UsuarioColeccionService usuarioColeccionService) {
-        this.cromoRepository = cromoRepository;
-        this.usuarioCromoRepository = usuarioCromoRepository;
-        this.usuarioCromoMapper = usuarioCromoMapper;
-        this.authService = authService;
-        this.usuarioColeccionService = usuarioColeccionService;
-    }
 
     /**
      * Obtiene el listado completo de cromos de una colección
