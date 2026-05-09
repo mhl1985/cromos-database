@@ -39,13 +39,13 @@ div.categoria-titulo p{
 
 /*Tamaños de alertas*/
 @media (max-width:767px){
-  div.alert {
+  div.alertErrorGeneral {
     margin: 100px 50px;
   }
 }
 
 @media (min-width:768px){
-  div.alert {
+  div.alertErrorGeneral {
     margin: 200px;
   }
 }
