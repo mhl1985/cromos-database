@@ -103,21 +103,7 @@ public final class ColeccionFilters {
      */
     public static Specification<Coleccion> byIdSubcategoria(Integer idSubcategoria) {
 
-        Specification<Coleccion> filtroIdSubcategoria =
-                (root, query, criteriaBuilder) -> {
-            /*
-             * Se accede directamente al campo "idSubcategoria" de la entidad Coleccion.
-             *
-             * Equivale conceptualmente a:
-             * WHERE id_subcategoria = :idSubcategoria
-             */
-            return criteriaBuilder.equal(
-                    root.get("idSubcategoria"),
-                    idSubcategoria
-            );
-        };
-
-        return filtroIdSubcategoria;
+        return FiltroUtils.crearFiltroPorCampoIgualA("idSubcategoria", idSubcategoria);
     }
 
     /**

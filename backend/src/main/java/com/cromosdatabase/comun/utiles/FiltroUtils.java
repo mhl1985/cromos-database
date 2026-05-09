@@ -81,4 +81,35 @@ public final class FiltroUtils {
             );
         };
     }
+
+    /**
+     * Crea un filtro de igualdad para un campo simple de la entidad.
+     *
+     * Se utiliza cuando se quiere comparar directamente un campo de la entidad
+     * con un valor concreto.
+     *
+     * Equivale a:
+     * WHERE campo = valor
+     *
+     * @param campo nombre del campo de la entidad sobre el que se aplica el filtro
+     * @param valor valor que debe tener el campo indicado
+     * @return Specification con el filtro de igualdad aplicado
+     */
+    public static <T> Specification<T> crearFiltroPorCampoIgualA(
+            String campo,
+            Object valor) {
+
+        return (root, query, criteriaBuilder) -> {
+
+            // Accedemos al campo indicado de la entidad.
+            Expression<Object> campoEntidad = root.get(campo);
+
+            // Creamos el filtro final y lo devolvemos:
+            // WHERE campo = valor
+            return criteriaBuilder.equal(
+                    campoEntidad,
+                    valor
+            );
+        };
+    }
 }
