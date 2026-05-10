@@ -104,6 +104,10 @@ div.categoria-titulo p{
 /*Fin: Cosas de las páginas de formulario principal*/
 
 
+/*Página de accebilidad*/
+div.accesibilidad p{
+  padding-bottom: 12px;
+}
 
 
 /*Correciones accesibilidad*/
@@ -127,9 +131,11 @@ div.categoria-titulo p{
     color:white;
   }
 
-  footer a, section a{
+  footer a, section a, div.accesibilidad a{
     color: brown;
   }
+
+
   
 }
 /*Fin: Correciones accesibilidad*/

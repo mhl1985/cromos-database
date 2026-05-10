@@ -8,10 +8,10 @@
       name="author"
       content="Miguel Herrero y José Miguel Martín"
     />
-    <title>Cromos Database - Registro</title>
+    <title>Cromos Database - Política de privacidad</title>
     <link rel="icon" type="image/x-icon" href="img/Logocuadrado100.png">
     <script src="js/color-modes.js"></script>
-    <script src="js/registro.js"></script>
+    <script src="js/privavidad.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link
@@ -95,7 +95,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="cargaInicial()">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
@@ -205,6 +205,9 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <h4>Acceso</h4>
               <ul class="list-unstyled">
+                <li>
+                  <a id="enlaceAcceso" href="acceso.html" class="text-white" onclick="clickEnlaceAcceso()">Acceso</a>
+                </li>
                 <li><a href="buscar.html" class="text-white">Buscar</a></li>
               </ul>
             </div>
@@ -230,77 +233,69 @@
         </div>
       </div>
     </header>
-    <main class="form-signin w-100 m-auto">
-      <img
-        class="mb-4 logoAccesoRectangular"
-        src="img/Logorectangular100.png"
-        alt="Logotipo de Cromos Database"
-        width="628"
-      />
-      <img
-        class="mb-4 logoAccesoCuadrado"
-        src="img/Logocuadrado100.png"
-        alt="Logotipo de Cromos Database"
-        width="100"
-      />
-      <h1 class="h3 mb-3 fw-normal">Acceso a Cromos Database</h1>
-      <form name="formularioCrear" id="formularioCrear">
-        <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta escribe aquí</h2>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="crearCorreo"
-            placeholder="name@example.com"
-            required
-          />
-          <label for="crearCorreo">Correo electrónico</label>
+    <main>
+      <div">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-10 mx-auto">
+              <h2 class="fw-light">Política de privacidad</h2>
+            </div>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary accesibilidad">
+          <div class="container">
+            <div>
+              <h3>
+                Quiénes somos
+              </h3>
+              <p>
+                Esta página está desarrollada por Miguel y José Miguel como proyecto de la FP de Técnico Superior en Desarrollo de Aplicaciones Web.
+              </p>
+              <h3>
+                Qué datos personales recogemos y por qué los recogemos
+              </h3>
+              <p>
+                Toda la información que se recoge en esta página tiene como objetivo que quien la use pueda inventariar e intercambiar sus cromos.
+              </p>
+              <h3>
+                Con quién compartimos tus datos
+              </h3>
+              <p>
+                Todos los datos que introducen en nuestra web pueden ser consultados públicamente por otros usuarios, incluida tu dirección de correo.
+              </p>
+              <h3>
+                Cuánto tiempo conservamos tus datos
+              </h3>
+              <p>
+                Los datos se mantendrán de manera ilimitada hasta que decidas darte de baja o modificar los mismos.
+              </p>
+              <h3>
+                Política de privacidad
+              </h3>
+              <p>
+                Todos los usuarios pueden ver, editar o eliminar la información de sus cromos en cualquier momento. Si se desea borrar la cuenta o editar el correo o el nombre a mostrar deberá ponerse en conctacto con <a href="mailto:contacto@cromosdatabase.com">contacto@cromosdatabase.com</a> para que los administradores de la web puedan editar esa información.
+              </p>
+              <h3>
+                Qué derechos tienes sobre tus datos
+              </h3>
+              <p>
+                En cualquier momento puedes consultar, editar o borrar tus datos poniéndote en conctacto con <a href="mailto:contacto@cromosdatabase.com">contacto@cromosdatabase.com</a>.
+              </p>
+              <h3>
+                Información de contacto
+              </h3>
+              <p>
+                En cualquier momento puedes escribirnos <a href="mailto:contacto@cromosdatabase.com">contacto@cromosdatabase.com</a>.
+              </p>
+              <h3>
+                Información adicional
+              </h3>
+              <p>
+                Esta web utiliza la propiedad "sessionStorage" de tu navegador para funcionar. Cuando cierras el navegador los datos desapaceren.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="crearNombre"
-            placeholder="NombreUsuario"
-            required
-          />
-          <label for="crearNombre">Nombre de usuario a mostrar</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="crearContrasena"
-            placeholder="Password"
-            required
-          />
-          <label for="crearContrasena">Contraseña</label>
-        </div>
-        <div class="form-floating ultimo">
-          <input
-            type="password"
-            class="form-control"
-            id="crearContrasena2"
-            placeholder="Password"
-            required
-          />
-          <label for="crearContrasena2">Contraseña</label>
-        </div>
-        <div class="alert alert-danger ocultarAviso" id="avisoErrorCrear" role="alert">
-        </div>
-        <div class="alert alert-warning ocultarAviso" id="avisoDatosCrear" role="alert">
-        </div>
-        <div class="alert alert-success ocultarAviso" id="avisoCorrectoCrear" role="alert">
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" id="botonCrear" onclick="crearUsuario()">
-          Crear
-        </button>
-      </form>
-      <div>
-        <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta accede aquí</h2>
-        <a class="btn btn-primary w-100 py-2" href="acceso.html">
-          Acceder
-        </a>
       </div>
     </main>
     <footer class="text-body-secondary py-5">
@@ -308,7 +303,7 @@
         <p class="float-end mb-1"><a href="#">Volver arriba</a></p>
         <p class="mb-1">
           Cromos Database es una aplicación para la gestión e intercambio de cromos.
-          La información aquí publicada tiene el &copy; de sus autores.
+          La información aquí publicada tiene &copy; de sus autores.
         </p>
         <p class="mb-0">
           Si quires más información puedes ver: 

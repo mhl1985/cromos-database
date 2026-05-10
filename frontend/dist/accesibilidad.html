@@ -8,10 +8,10 @@
       name="author"
       content="Miguel Herrero y José Miguel Martín"
     />
-    <title>Cromos Database - Registro</title>
+    <title>Cromos Database - Declaración de Accesibilidad</title>
     <link rel="icon" type="image/x-icon" href="img/Logocuadrado100.png">
     <script src="js/color-modes.js"></script>
-    <script src="js/registro.js"></script>
+    <script src="js/accesibilidad.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link
@@ -95,7 +95,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="cargaInicial()">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
@@ -205,6 +205,9 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <h4>Acceso</h4>
               <ul class="list-unstyled">
+                <li>
+                  <a id="enlaceAcceso" href="acceso.html" class="text-white" onclick="clickEnlaceAcceso()">Acceso</a>
+                </li>
                 <li><a href="buscar.html" class="text-white">Buscar</a></li>
               </ul>
             </div>
@@ -230,77 +233,91 @@
         </div>
       </div>
     </header>
-    <main class="form-signin w-100 m-auto">
-      <img
-        class="mb-4 logoAccesoRectangular"
-        src="img/Logorectangular100.png"
-        alt="Logotipo de Cromos Database"
-        width="628"
-      />
-      <img
-        class="mb-4 logoAccesoCuadrado"
-        src="img/Logocuadrado100.png"
-        alt="Logotipo de Cromos Database"
-        width="100"
-      />
-      <h1 class="h3 mb-3 fw-normal">Acceso a Cromos Database</h1>
-      <form name="formularioCrear" id="formularioCrear">
-        <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta escribe aquí</h2>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="crearCorreo"
-            placeholder="name@example.com"
-            required
-          />
-          <label for="crearCorreo">Correo electrónico</label>
+    <main>
+      <div">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-10 mx-auto">
+              <h2 class="fw-light">Declaración de Accesibilidad</h2>
+            </div>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary accesibilidad">
+          <div class="container">
+            <div>
+              <p>
+                La página Cromos Database está comprometida con la accesibilidad y con hacer que su web sea accesible a todos los niveles posibles, para ello se ha utilizado de referencia el <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2018-12699">Real Decreto 1112/2018, de 7 de septiembre, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público</a>.
+              </p>
+              <h3>
+                Situación de cumplimiento
+              </h3>
+              <p>
+                Se han realizado pruebas y revisiones para que todo el contenido sea accesible, no se han encontrado problemas.
+              </p>
+              <h3>
+                Preparación de la presente declaración de accesibilidad
+              </h3>
+              <p>
+                La presente declaración fue preparada <strong>10 de mayo de 2026</strong>.
+              </p>
+              <p>
+                El método empleado para preparar la declaración ha sido una autoevaluación llevada a cabo internamente.
+              </p>
+              <p>
+                Última revisión de la declaración: <strong>10 de mayo de 2026</strong>.
+              </p>
+              <h3>
+                Observaciones y datos de contacto
+              </h3>
+              <p>
+                Usted puede presentar comunicaciones sobre requisitos de accesibilidad como:
+              </p>
+              <ul>
+                <li>
+                  Informar sobre cualquier incumplimientos por parte este sitio web de los requisitos de accesibilidad establecidos.
+                </li>
+                <li>
+                  Transmitirnos otras dificultades de acceso al contenido.
+                </li>
+                <li>
+                  Formular cualquier otra consulta o sugerencia de mejora relativa a la accesibilidad de este sitio web.
+                </li>
+              </ul>
+              <p>
+                Escribiendo a <a href="mailto:contacto@cromosdatabase.com">contacto@cromosdatabase.com</a>.
+              </p>
+              <p>
+                Igualmente, usted puede presentar:
+              </p>
+              <ul>
+                <li>
+                  Una queja relativa al cumplimiento de los requisitos del RD 1112/2018.
+                </li>
+                <li>
+                  Una solicitud de información accesible relativa a contenidos que están excluidos del ámbito de aplicación del RD 1112/2018 según lo establecido en su artículo 3, apartado 4, o exentos del cumplimiento de los requisitos de accesibilidad por imponer una carga desproporcionada.
+                </li>
+              </ul>
+              <p>
+                Las solicitudes de información accesible deberán concretar, con toda claridad, los hechos razones y petición que permitan constatar que se trata de una petición razonable y legítima.
+              </p>
+              <p>
+                Puede realizar la comunicación escribiendo a <a href="mailto:contacto@cromosdatabase.com">contacto@cromosdatabase.com</a>.
+              </p>
+              <h3>
+                Contenido opcional
+              </h3>
+              <p>
+                Tenemos como objetivo principal que su sitio web sea todo lo accesible y usable posible.
+                Por ello, se ha diseñado adaptándose a los estándares y normativas vigentes en relación a la accesibilidad, cumpliendo con todos los puntos de verificación de prioridad 2 (AA) definidos en la especificación de Pautas de Accesibilidad al Contenido en la Web (WCAG 2.1) por la Iniciativa de Accesibilidad Web (WAI) del Consorcio World Wide Web (W3C), para lo cual se realizan revisiones previas a cada publicación de nuevos contenidos.
+                En cualquier caso, es posible que encuentre alguna página que no se adapte al 100% a estos estándares, ya que algunas de las secciones contenidas en el portal están en proceso de adaptación y mejora. Si usted experimenta alguna dificultad en el acceso la información contenida en este sitio web, por favor, contacte con nosotros mediante el correo <a href="mailto:contacto@cromosdatabase.com">contacto@cromosdatabase.com</a>.
+                Realizaremos las mejoras necesarias a la mayor brevedad posible.
+              </p>
+              <p>
+                El sitio web está diseñado con la técnica de diseño responsive o adaptativo, con lo que se visualiza de forma óptima desde ordenadores de escritorio a tabletas y móviles.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="crearNombre"
-            placeholder="NombreUsuario"
-            required
-          />
-          <label for="crearNombre">Nombre de usuario a mostrar</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="crearContrasena"
-            placeholder="Password"
-            required
-          />
-          <label for="crearContrasena">Contraseña</label>
-        </div>
-        <div class="form-floating ultimo">
-          <input
-            type="password"
-            class="form-control"
-            id="crearContrasena2"
-            placeholder="Password"
-            required
-          />
-          <label for="crearContrasena2">Contraseña</label>
-        </div>
-        <div class="alert alert-danger ocultarAviso" id="avisoErrorCrear" role="alert">
-        </div>
-        <div class="alert alert-warning ocultarAviso" id="avisoDatosCrear" role="alert">
-        </div>
-        <div class="alert alert-success ocultarAviso" id="avisoCorrectoCrear" role="alert">
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" id="botonCrear" onclick="crearUsuario()">
-          Crear
-        </button>
-      </form>
-      <div>
-        <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta accede aquí</h2>
-        <a class="btn btn-primary w-100 py-2" href="acceso.html">
-          Acceder
-        </a>
       </div>
     </main>
     <footer class="text-body-secondary py-5">
@@ -308,7 +325,7 @@
         <p class="float-end mb-1"><a href="#">Volver arriba</a></p>
         <p class="mb-1">
           Cromos Database es una aplicación para la gestión e intercambio de cromos.
-          La información aquí publicada tiene el &copy; de sus autores.
+          La información aquí publicada tiene &copy; de sus autores.
         </p>
         <p class="mb-0">
           Si quires más información puedes ver: 
