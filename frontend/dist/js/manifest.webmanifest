@@ -1,0 +1,19 @@
+{
+  "lang": "es",
+  "dir": "ltr",
+  "name": "Cromos Database: Tu página para el intercambio y la información de cromos.",
+  "short_name": "Cromos Database",
+  "icons": [{
+    "src": "./Logocuadrado100.png",
+    "sizes": "100x100"
+  }, {
+    "src": "./Logorectangular100.png",
+    "sizes": "649x100"
+  }],
+  "id": "cromosdatabase",
+  "start_url": "/inicio.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "coral",
+  "background_color": "black"
+}

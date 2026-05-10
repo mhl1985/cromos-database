@@ -84,7 +84,7 @@ function cargaDatos(respuesta){
                 textoDescripcionColeccion += "<a href='acceso.html'>Acceder</a>.";
             }
 
-            let pElementoTituloColeccion = document.createElement("p");
+            let pElementoTituloColeccion = document.createElement("div");
             pElementoTituloColeccion.innerHTML = textoDescripcionColeccion;
             descripcionColeccion.appendChild(pElementoTituloColeccion);
 
