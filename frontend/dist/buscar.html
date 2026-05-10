@@ -8,10 +8,10 @@
       name="author"
       content="Miguel Herrero y José Miguel Martín"
     />
-    <title>Cromos Database - Acceso</title>
+    <title>Cromos Database - Buscar</title>
     <link rel="icon" type="image/x-icon" href="img/Logocuadrado100.png">
     <script src="js/color-modes.js"></script>
-    <script src="js/acceso.js"></script>
+    <script src="js/buscar.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link
@@ -95,7 +95,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="cargaInicial()">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
@@ -205,7 +205,9 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <h4>Acceso</h4>
               <ul class="list-unstyled">
-                <li><a href="buscar.html" class="text-white">Buscar</a></li>
+                <li>
+                  <a id="enlaceAcceso" href="acceso.html" class="text-white" onclick="clickEnlaceAcceso()">Acceso</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -230,57 +232,103 @@
         </div>
       </div>
     </header>
-    <main class="form-signin w-100 m-auto">
-      <img
-        class="mb-4 logoAccesoRectangular"
-        src="img/Logorectangular100.png"
-        alt="Logotipo de Cromos Database"
-        width="628"
-      />
-      <img
-        class="mb-4 logoAccesoCuadrado"
-        src="img/Logocuadrado100.png"
-        alt="Logotipo de Cromos Database"
-        width="100"
-      />
-      <h1 class="h3 mb-3 fw-normal">Acceso a Cromos Database</h1>
-      <form name="formularioAcceso" id="formularioAcceso">
-        <h2 class="h4 mb-3 fw-normal">Si tienes cuenta accede aquí</h2>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="accesoCorreo"
-            placeholder="name@example.com"
-            required
-          />
-          <label for="accesoCorreo">Correo electrónico</label>
+    <main>
+      <div class="form-signin w-100 m-auto" id="divBuscar">
+        <img
+          class="mb-4 logoAccesoRectangular"
+          src="img/Logorectangular100.png"
+          alt="Logotipo de Cromos Database"
+          width="628"
+        />
+        <img
+          class="mb-4 logoAccesoCuadrado"
+          src="img/Logocuadrado100.png"
+          alt="Logotipo de Cromos Database"
+          width="100"
+        />
+        <h1 class="h3 mb-3 fw-normal">Búsqueda en Cromos Database</h1>
+        <form name="formularioBusqueda" id="formularioBusqueda">
+          <h2 class="h4 mb-3 fw-normal">Cromos, colecciones y categorías: rellena el siguiente buscador!</h2>
+          <div class="form-floating">
+            <select class="form-control" id="tipoBusqueda">
+              <option value="crom">Cromos</option>
+              <option value="cole">Colecciones</option>
+              <option value="cate">Categorías</option>
+            </select>
+            <label for="tipoBusqueda">Buscar entre</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="textoBusqueda"
+              placeholder="charmander"
+              required
+            />
+            <label for="textoBusqueda">Texto a buscar</label>
+          </div>
+          <div class="alert alert-warning ocultarAviso" id="avisoDatosBusqueda" role="alert">
+          </div>
+          <button class="btn btn-primary w-100 py-2" type="submit" id="botonBuscar" onclick="clickBuscar()">
+            Buscar
+          </button>
+        </form>
+      </div>
+      <div id="divCromos" class=" ocultarContenedor">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-10 mx-auto">
+              <h2 class="fw-light">Cromos varios</h2>
+              <p class="lead text-body-secondary">
+                Estos son los cromos que coinciden con tu búsqueda.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divFilaCromos">
+            </div>
+          </div>
         </div>
-        <div class="form-floating ultimo">
-          <input
-            type="password"
-            class="form-control"
-            id="accesoContrasena"
-            placeholder="Password"
-            required
-          />
-          <label for="accesoContrasena">Contraseña</label>
+      </div>
+      <div id="divColecciones" class=" ocultarContenedor">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-10 mx-auto">
+              <h2 class="fw-light">Colecciones</h2>
+              <p class="lead text-body-secondary">
+                Estas son las colecciones que coinciden con tu búsqueda.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divFilaColecciones">
+            </div>
+          </div>
         </div>
-        <div class="alert alert-danger ocultarAviso" id="avisoErrorAcceso" role="alert">
+      </div>
+      <div id="divCategorias" class=" ocultarContenedor">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-10 mx-auto">
+              <h2 class="fw-light">Categorías</h2>
+              <p class="lead text-body-secondary">
+                Estas son las categorías que coinciden con tu búsqueda.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divFilaCategorias">
+            </div>
+          </div>
         </div>
-        <div class="alert alert-warning ocultarAviso" id="avisoDatosAcceso" role="alert">
-        </div>
-        <div class="alert alert-success ocultarAviso" id="avisoCorrectoAcceso" role="alert">
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" id="botonAcceder" onclick="accederServicio()">
-          Acceder
-        </button>
-      </form>
-      <div>
-        <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta accede aquí</h2>
-        <a class="btn btn-primary w-100 py-2" href="registro.html">
-          Crear cuenta
-        </a>
+      </div>
+      <div class="alert alert-danger ocultarAviso alertErrorGeneral" id="avisoErrorGeneral" role="alert">
       </div>
     </main>
     <footer class="text-body-secondary py-5">
@@ -288,7 +336,7 @@
         <p class="float-end mb-1"><a href="#">Volver arriba</a></p>
         <p class="mb-1">
           Cromos Database es una aplicación para la gestión e intercambio de cromos.
-          La información aquí publicada tiene el &copy; de sus autores.
+          La información aquí publicada tiene &copy; de sus autores.
         </p>
         <p class="mb-0">
           Si quires más información puedes ver: 

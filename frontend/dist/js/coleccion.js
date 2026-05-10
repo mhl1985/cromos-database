@@ -46,10 +46,11 @@ function cargaDatos(respuesta){
             let coleccion = respuesta.coleccion;
             let tituloColeccion = document.getElementById("tituloColeccion");
             tituloColeccion.textContent = coleccion.nombre;
+            sessionStorage.setItem("CromosDatabaseCate", respuesta.coleccion.categoria.id);
 
             let descripcionColeccion = document.getElementById("descripcionColeccion");
             let textoDescripcionColeccion = "<b>Año, país y editorial</b>: " + coleccion.periodo + ", " + coleccion.pais + ", " + coleccion.editorial.nombre + ".<br/>";
-            textoDescripcionColeccion += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ".<br/>";
+            textoDescripcionColeccion += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ". <a href='categoria.html'>Ver categoría</a>.<br/>";
             textoDescripcionColeccion += "<b>Descripción:</b> " + coleccion.descripcion + "<br/>";
 
             if (sessionStorage.getItem("CromosDatabaseAuth") && cromosDatabaseNomb){

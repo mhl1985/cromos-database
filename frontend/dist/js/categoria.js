@@ -35,8 +35,15 @@ function cargaDatos(respuesta){
         //Comprobamos que no se ha devuelto ningún código de error
         if (!respuesta.status){
 
-            // Metemos la cabecera de la colección
+            //Personalizamos la página si es posible
+            let enlaceAcceso = document.getElementById("enlaceAcceso");
             let cromosDatabaseNomb = sessionStorage.getItem("CromosDatabaseNomb");
+            if (cromosDatabaseNomb){
+                enlaceAcceso.textContent = "Desconéctate como: " + cromosDatabaseNomb;
+                enlaceAcceso.href = "#";
+            }
+
+            // Metemos la cabecera de la colección
             let tituloCategoria = document.getElementById("tituloCategoria");
             tituloCategoria.textContent = respuesta.nombreCategoria;
             let subcategorias = respuesta.subcategorias;

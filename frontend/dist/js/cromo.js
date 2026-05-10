@@ -37,16 +37,18 @@ function cargaDatos(respuesta){
 
             // Metemos la cabecera de la colección
             let cromosDatabaseNomb = sessionStorage.getItem("CromosDatabaseNomb");
+            sessionStorage.setItem("CromosDatabaseCole", respuesta.coleccion.id);
+            sessionStorage.setItem("CromosDatabaseCate", respuesta.coleccion.categoria.id);
             let cromo = respuesta.cromo;
             let coleccion = respuesta.coleccion;
             let tituloCromo = document.getElementById("tituloCromo");
             tituloCromo.textContent = cromo.nombre;
 
             let descripcionCromo = document.getElementById("descripcionCromo");
-            let textoDescripcionCromo = "<b>Colección</b>: " + coleccion.nombre + ".<br/>";
+            let textoDescripcionCromo = "<b>Colección</b>: " + coleccion.nombre + ". <a href='coleccion.html'>Ver colección</a>.<br/>";
             textoDescripcionCromo += "<b>Descripción:</b> " + cromo.descripcion + "<br/>";
             textoDescripcionCromo += "<b>Año, país y editorial</b>: " + coleccion.periodo + ", " + coleccion.pais + ", " + coleccion.editorial.nombre + ".<br/>";
-            textoDescripcionCromo += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ".<br/>";
+            textoDescripcionCromo += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ". <a href='categoria.html'>Ver categoría</a>.<br/>";
 
             if (sessionStorage.getItem("CromosDatabaseAuth") && cromosDatabaseNomb){
                 if (respuesta.cromoUsuario){

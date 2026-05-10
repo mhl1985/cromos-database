@@ -60,6 +60,52 @@ div.categoria-titulo p{
   padding-top: 12px;
 }
 
+/*Cosas de las páginas de formulario principal*/
+@media (max-width:767px){
+  .form-signin {
+    max-width: 330px;
+    padding: 1rem;
+  }
+
+  main img.mb-4{
+    margin-left: 100px;
+  }
+
+  img.logoAccesoRectangular{
+    display: none;
+  }
+
+}
+
+@media (min-width:768px){
+  .form-signin {
+    max-width: 660px;
+    padding: 1rem;
+  }
+
+  img.logoAccesoCuadrado{ 
+    display: none;
+  }
+
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin h2 {
+  margin-top: 100px;
+}
+
+.form-signin div.form-floating input.form-control {
+  margin-bottom: 2px;
+}
+
+/*Fin: Cosas de las páginas de formulario principal*/
+
+
+
+
 /*Correciones accesibilidad*/
 [data-bs-theme = "dark"]{
   div.btn-group button {
@@ -86,3 +132,4 @@ div.categoria-titulo p{
   }
   
 }
+/*Fin: Correciones accesibilidad*/
