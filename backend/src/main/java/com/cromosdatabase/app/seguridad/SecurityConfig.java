@@ -139,14 +139,32 @@ public class SecurityConfig {
         // Configuración CORS principal
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Orígenes permitidos para acceder al backend
+        /**
+         * Configuración de orígenes permitidos para peticiones CORS.
+         * Se habilitan distintos hosts y puertos habituales de desarrollo local
+         * para permitir que el frontend pueda comunicarse con el backend
+         * desde diferentes herramientas y entornos de ejecución.
+         *
+         * - localhost:5500
+         *      Usado normalmente por Live Server de VSCode.
+         *
+         * - localhost / localhost:80
+         *      Acceso local mediante puerto HTTP estándar.
+         *
+         * - 127.0.0.1:5500
+         *      Variante usando IP loopback en lugar de localhost.
+         *
+         * - localhost:63342
+         *      Puerto utilizado por el servidor embebido de IntelliJ IDEA.
+         *
+         * Esto evita bloqueos CORS durante el desarrollo local del frontend.
+         */
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5500",
                 "http://localhost",
                 "http://localhost:80",
                 "http://127.0.0.1:5500",
-                "http://localhost:3000",
-                "http://localhost:5173"
+                "http://localhost:63342"
         ));
 
         // Métodos HTTP permitidos
