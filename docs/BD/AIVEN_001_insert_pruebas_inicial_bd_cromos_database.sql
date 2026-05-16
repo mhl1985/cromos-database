@@ -136,11 +136,11 @@ INSERT INTO subcategorias_coleccion (id_subcategoria, id_categoria, nombre, desc
 -- -- /img/colecciones/{idColeccion}_{nombreColeccion}_portada.webp
 -- =========================================================
 INSERT INTO colecciones (id_coleccion, nombre, id_editorial, id_categoria, id_subcategoria, periodo, pais, descripcion, url_img_portada) VALUES
-    (1, 'Panini FIFA World Cup Qatar 2022', 1, 1, 1, '2022', 'Qatar', 'Álbum de stickers del Mundial FIFA Qatar 2022.', '/img/muestras/coleccion_portada.webp'),
-    (2, 'Panini FIFA World Cup Russia 2018', 1, 1, 1, '2018', 'Rusia', 'Álbum de stickers del Mundial FIFA Rusia 2018.', '/img/muestras/coleccion_portada.webp'),
-    (3, 'Panini FIFA World Cup Brazil 2014', 1, 1, 1, '2014', 'Brasil', 'Álbum de stickers del Mundial FIFA Brasil 2014.', '/img/muestras/coleccion_portada.webp'),
-    (4, 'Panini FIFA World Cup France 98', 1, 1, 1, '1998', 'Francia', 'Álbum de stickers del Mundial FIFA Francia 1998.', '/img/muestras/coleccion_portada.webp'),
-    (5, 'Panini FIFA World Cup USA 94', 1, 1, 1, '1994', 'Estados Unidos', 'Álbum de stickers del Mundial FIFA Estados Unidos 1994.', '/img/muestras/coleccion_portada.webp'),
+    (1, 'Panini FIFA World Cup Qatar 2022', 1, 1, 1, '2022', 'Qatar', 'Álbum de stickers del Mundial FIFA Qatar 2022.', '/img/colecciones/1_panini-fifa-world-cup-qatar-2022_portada.webp'),
+    (2, 'Panini FIFA World Cup Russia 2018', 1, 1, 1, '2018', 'Rusia', 'Álbum de stickers del Mundial FIFA Rusia 2018.', '/img/colecciones/2_panini-fifa-world-cup-russia-2018_portada.webp'),
+    (3, 'Panini FIFA World Cup Brazil 2014', 1, 1, 1, '2014', 'Brasil', 'Álbum de stickers del Mundial FIFA Brasil 2014.', '/img/colecciones/3_panini-fifa-world-cup-brazil-2014_portada.webp'),
+    (4, 'Panini FIFA World Cup France 98', 1, 1, 1, '1998', 'Francia', 'Álbum de stickers del Mundial FIFA Francia 1998.', '/img/colecciones/4_panini-fifa-world-cup-france-98_portada.webp'),
+    (5, 'Panini FIFA World Cup USA 94', 1, 1, 1, '1994', 'Estados Unidos', 'Álbum de stickers del Mundial FIFA Estados Unidos 1994.', '/img/colecciones/5_panini-fifa-world-cup-usa-94_portada.webp'),
     (6, 'Panini NBA 2023-2024 Sticker Collection', 1, 1, 2, '2023-2024', 'Estados Unidos', 'Colección de stickers NBA 2023-2024.', '/img/muestras/coleccion_portada.webp'),
     (7, 'Panini NBA Hoops 2022-2023', 1, 1, 2, '2022-2023', 'Estados Unidos', 'Colección de trading cards NBA Hoops 2022-2023.', '/img/muestras/coleccion_portada.webp'),
     (8, 'Panini EuroLeague 2023-2024', 1, 1, 2, '2023-2024', 'Europa', 'Colección de baloncesto europeo EuroLeague.', '/img/muestras/coleccion_portada.webp'),
