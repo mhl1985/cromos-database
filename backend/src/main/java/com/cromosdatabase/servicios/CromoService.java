@@ -1,7 +1,6 @@
 package com.cromosdatabase.servicios;
 
 import com.cromosdatabase.modelo.dtos.cromo.CromoDetalleResponse;
-import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 
 import java.util.List;
 
@@ -25,9 +24,9 @@ public interface CromoService {
      * @param numero texto a buscar dentro del número del cromo
      * @param nombre texto a buscar dentro del nombre del cromo
      * @param tipo texto a buscar dentro del tipo del cromo
-     * @return lista de DTO´s de cromos en formato resumido que cumplen los filtros
+     * @return lista de DTO´s de cromos que cumplen los filtros
      */
-    List<CromoResumenResponse> obtenerCromosFiltrados(Integer idColeccion,
+    List<CromoDetalleResponse> obtenerCromosFiltrados(Integer idColeccion,
                                                       String numero,
                                                       String nombre,
                                                       String tipo);

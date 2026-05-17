@@ -1,7 +1,6 @@
 package com.cromosdatabase.controladores;
 
 import com.cromosdatabase.modelo.dtos.cromo.CromoDetalleResponse;
-import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import com.cromosdatabase.servicios.CromoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +31,16 @@ public class CromoController {
      * @param numero texto a buscar dentro del número del cromo
      * @param nombre texto a buscar dentro del nombre del cromo
      * @param tipo texto a buscar dentro del tipo del cromo
-     * @return DTO de lista de cromos filtrados en formato resumido
+     * @return DTO de lista de cromos filtrados
      */
     @GetMapping
-    public List<CromoResumenResponse> obtenerCromos(
+    public List<CromoDetalleResponse> obtenerCromos(
             @RequestParam(required = false) Integer idColeccion,
             @RequestParam(required = false) String numero,
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) String tipo) {
 
-        List<CromoResumenResponse> response =
+        List<CromoDetalleResponse> response =
                 cromoService.obtenerCromosFiltrados(
                         idColeccion,
                         numero,

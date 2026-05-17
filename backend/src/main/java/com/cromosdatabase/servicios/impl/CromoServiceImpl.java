@@ -3,7 +3,6 @@ package com.cromosdatabase.servicios.impl;
 import com.cromosdatabase.comun.excepciones.CromoNoEncontradoException;
 import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.dtos.cromo.CromoDetalleResponse;
-import com.cromosdatabase.modelo.dtos.cromo.CromoResumenResponse;
 import com.cromosdatabase.modelo.entidades.Cromo;
 import com.cromosdatabase.modelo.mappers.CromoMapper;
 import com.cromosdatabase.repositorios.CromoRepository;
@@ -56,7 +55,7 @@ public class CromoServiceImpl implements CromoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<CromoResumenResponse> obtenerCromosFiltrados(Integer idColeccion,
+    public List<CromoDetalleResponse> obtenerCromosFiltrados(Integer idColeccion,
                                                              String numero,
                                                              String nombre,
                                                              String tipo) {
@@ -109,8 +108,8 @@ public class CromoServiceImpl implements CromoService {
         }
 
         // Mapeo a DTO
-        List<CromoResumenResponse> response =
-                cromoMapper.toResumenResponseList(cromos);
+        List<CromoDetalleResponse> response =
+                cromoMapper.toDetalleResponseList(cromos);
 
         return response;
     }
