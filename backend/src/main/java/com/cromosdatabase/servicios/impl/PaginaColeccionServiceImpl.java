@@ -175,9 +175,11 @@ public class PaginaColeccionServiceImpl implements PaginaColeccionService {
                         idColeccion
                 );
 
-        // Si el usuario no tiene cromos de esta colección, devolvemos null.
+        // Si el usuario tiene agregada la colección, pero todavía
+        // no tiene cromos de ella, devolvemos lista vacía para que
+        // el frontend pueda diferenciarlo de una colección no agregada.
         if (usuarioCromos.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
 
         List<UsuarioColeccionCromoResponse> cromosUsuario = new ArrayList<>();

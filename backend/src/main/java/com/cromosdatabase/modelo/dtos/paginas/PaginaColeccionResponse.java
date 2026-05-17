@@ -38,7 +38,8 @@ public class PaginaColeccionResponse {
      * Se devuelve null en estos casos:
      * - si la petición no llega con usuario autenticado.
      * - si el usuario autenticado no tiene agregada esta colección.
-     * - si el usuario autenticado tiene la colección, pero no tiene cromos de ella.
+     * Se devuelve lista vacía en este caso:
+     * - si el usuario autenticado tiene la colección agregada, pero todavía no tiene cromos de ella.
      */
     private List<UsuarioColeccionCromoResponse> cromosUsuario;
 }
