@@ -246,7 +246,8 @@ public class PaginaCromoServiceImpl implements PaginaCromoService {
             UsuarioPoseedorCromoResponse dto = new UsuarioPoseedorCromoResponse(
                     usuario.getIdUsuario(),
                     usuario.getNombreMostrar(),
-                    usuario.getEmail()
+                    usuario.getEmail(),
+                    usuarioCromo.getCantidadIntercambiable()
             );
 
             usuariosPoseedores.add(dto);

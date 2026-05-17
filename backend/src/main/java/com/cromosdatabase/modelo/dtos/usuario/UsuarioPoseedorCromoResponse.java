@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * DTO de respuesta con los datos públicos de un usuario
- * que tiene un cromo disponible para intercambio.
+ * que tiene un cromo disponible para intercambio y
+ * adicionalmente, el número de cromos disponibles.
  */
 @Data
 @NoArgsConstructor
@@ -27,4 +28,10 @@ public class UsuarioPoseedorCromoResponse {
      * Email del usuario.
      */
     private String email;
+
+    /**
+     * Número de unidades de este cromo que el usuario
+     * tiene disponibles para intercambio.
+     */
+    private Integer numIntercambiables;
 }
