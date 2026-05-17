@@ -1,7 +1,6 @@
 package com.cromosdatabase.controladores;
 
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
-import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
 import com.cromosdatabase.servicios.CategoriaColeccionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +28,13 @@ public class CategoriaColeccionController {
      * Obtiene el listado de DTO´s de categorías aplicando filtros opcionales.
      *
      * @param nombre texto a buscar dentro del nombre de la categoría
-     * @return DTO de lista de categorías filtradas en formato resumido
+     * @return DTO de lista de categorías filtradas en formato detallado
      */
     @GetMapping
-    public List<CategoriaColeccionResumenResponse> obtenerCategorias(
+    public List<CategoriaColeccionDetalleResponse> obtenerCategorias(
             @RequestParam(required = false) String nombre) {
 
-        List<CategoriaColeccionResumenResponse> response =
+        List<CategoriaColeccionDetalleResponse> response =
                 categoriaColeccionService.obtenerCategoriasFiltradas(nombre);
 
         return response;

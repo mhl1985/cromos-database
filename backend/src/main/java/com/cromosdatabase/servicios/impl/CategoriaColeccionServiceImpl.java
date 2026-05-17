@@ -3,7 +3,6 @@ package com.cromosdatabase.servicios.impl;
 import com.cromosdatabase.comun.excepciones.CategoriaColeccionNoEncontradaException;
 import com.cromosdatabase.comun.utiles.FiltroUtils;
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
-import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
 import com.cromosdatabase.modelo.entidades.CategoriaColeccion;
 import com.cromosdatabase.modelo.mappers.CategoriaColeccionMapper;
 import com.cromosdatabase.repositorios.CategoriaColeccionRepository;
@@ -46,11 +45,11 @@ public class CategoriaColeccionServiceImpl implements CategoriaColeccionService 
      * - nombre: búsqueda parcial sin distinguir mayúsculas/minúsculas
      *
      * @param nombre texto a buscar dentro del nombre de la categoría
-     * @return DTO de lista de categorías que cumplen los filtros en formato resumido
+     * @return DTO de lista de categorías que cumplen los filtros
      */
     @Override
     @Transactional(readOnly = true)
-    public List<CategoriaColeccionResumenResponse> obtenerCategoriasFiltradas(String nombre) {
+    public List<CategoriaColeccionDetalleResponse> obtenerCategoriasFiltradas(String nombre) {
 
         /*
          * Se normalizan los filtros de texto antes de construir la consulta.
@@ -83,8 +82,8 @@ public class CategoriaColeccionServiceImpl implements CategoriaColeccionService 
         }
 
         // Mapeo a DTO
-        List<CategoriaColeccionResumenResponse> response =
-                categoriaColeccionMapper.toResumenResponseList(categorias);
+        List<CategoriaColeccionDetalleResponse> response =
+                categoriaColeccionMapper.toDetalleResponseList(categorias);
 
         return response;
     }

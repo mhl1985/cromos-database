@@ -1,7 +1,6 @@
 package com.cromosdatabase.servicios;
 
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
-import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionResumenResponse;
 
 import java.util.List;
 
@@ -19,9 +18,9 @@ public interface CategoriaColeccionService {
      * - nombre: búsqueda parcial sin distinguir mayúsculas/minúsculas
      *
      * @param nombre texto a buscar dentro del nombre de la categoría
-     * @return lista de DTO´s de categorías en formato resumido que cumplen los filtros
+     * @return lista de DTO´s de categorías que cumplen los filtros
      */
-    List<CategoriaColeccionResumenResponse> obtenerCategoriasFiltradas(String nombre);
+    List<CategoriaColeccionDetalleResponse> obtenerCategoriasFiltradas(String nombre);
 
     /**
      * Obtiene el detalle de una categoría por su identificador.
