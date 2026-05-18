@@ -72,10 +72,10 @@ function cargaDatos(respuesta){
             }
 
             let imagenDelantera = document.getElementById("imagenDelantera");
-            imagenDelantera.src = "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
+            imagenDelantera.src = "." + cromo.urlImgDelantera;
             imagenDelantera.alt = "Imagen delantera del cromo " + cromo.nombre;
             let imagenTrasera = document.getElementById("imagenTrasera");
-            imagenTrasera.src = "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgTrase
+            imagenTrasera.src = "." + cromo.urlImgTrasera;
             imagenTrasera.alt = "Imagen trasera del cromo " + cromo.nombre;
 
             let pElementoTituloCromo = document.createElement("p");
@@ -113,10 +113,11 @@ function cargaDatos(respuesta){
                     textoDivElementoCromo = "<div class='col'><div class='card shadow-sm'><div class='card-body'><p class='card-text'>";
                     textoDivElementoCromo += "<p><b>Nombre:</b> " + usuario.nombreMostrar + "<br/>";
                     if (cromosDatabaseNomb){
-                        textoDivElementoCromo += "<b>Correo:</b> " + usuario.email + "<br/></p>";
+                        textoDivElementoCromo += "<b>Correo:</b> " + usuario.email + "<br/>";
                     } else{
-                        textoDivElementoCromo += "<b>Correo:</b> Solo los usuarios logados pueden ver el correo: <a href='acceso.html'>Acceder</a>.<br/></p>";
+                        textoDivElementoCromo += "<b>Correo:</b> Solo los usuarios logados pueden ver el correo: <a href='acceso.html'>Acceder</a>.<br/>";
                     }
+                    textoDivElementoCromo += "<b>Número de cromos para intercambiar:</b> " + usuario.numIntercambiables + "<br/></p>";
                     textoDivElementoCromo += "</div></div></div>";
                     divElementoCromo = document.createElement("div");
                     divElementoCromo.innerHTML = textoDivElementoCromo;

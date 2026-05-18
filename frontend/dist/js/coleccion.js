@@ -60,7 +60,7 @@ function cargaDatos(respuesta){
                     textoDescripcionColeccion += "<div><button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDescripcionColeccion += "botonAgregarColeccionUsuario" + coleccion.id + "'";
                     textoDescripcionColeccion += " onClick='clickBotonAgregarColeccionUsuario(" + coleccion.id + ")'>Agregar colección</button></div>";
-                }else if(respuesta.cromosUsuario === []){
+                }else if(respuesta.cromosUsuario.length === 0){
                     textoDescripcionColeccion += "<br/>Tienes esta colección agregada a tu cuenta, pero aún no has puesto qué cromos tienes. Pulsa este botón para agregarlos:";
                     textoDescripcionColeccion += "<div><button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDescripcionColeccion += "botonEditarColeccion'";
@@ -98,7 +98,7 @@ function cargaDatos(respuesta){
 
                 respuesta.cromos.forEach(cromo => {
                     textoDivElementoCromo = "<div class='col'><div class='card shadow-sm'><img src=";
-                    textoDivElementoCromo += "img/1954_Bowman_Mickey_Mantle.jpg"; //cambiar por urlImgDelantera
+                    textoDivElementoCromo += "." + cromo.urlImgDelantera;
                     textoDivElementoCromo += " alt='Imagen del cromo " + cromo.nombre + "'";
                     textoDivElementoCromo += "><div class='cromo-titulo'><p>";
                     textoDivElementoCromo += cromo.nombre;
