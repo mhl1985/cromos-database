@@ -76,7 +76,7 @@ function cargaDatos(respuesta){
                 textoColecciones = "";
                 subcate.coleccionesSubcategoria.forEach(coleccion => {
                     textoColecciones += "<div class='col'><div class='card shadow-sm'><img src=";
-                    textoColecciones += "." + coleccion.urlImgPortada;
+                    textoColecciones += coleccion.urlImgPortada;
                     textoColecciones += " alt='Imagen de la colección " + coleccion.nombre + "'";
                     textoColecciones += "><div class='cromo-titulo'><p>";
                     textoColecciones += coleccion.nombre;

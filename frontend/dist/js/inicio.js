@@ -55,7 +55,7 @@ function cargaDatos(respuesta){
 
                 respuesta.cromosAleatorios.forEach(cromoAle => {
                     textoDivElementoCromoAleatorio = "<div class='col'><div class='card shadow-sm'><img src=";
-                    textoDivElementoCromoAleatorio += "." + cromoAle.urlImgDelantera;
+                    textoDivElementoCromoAleatorio += cromoAle.urlImgDelantera;
                     textoDivElementoCromoAleatorio += " alt='Imagen del cromo " + cromoAle.nombre + "'";
                     textoDivElementoCromoAleatorio += "><div class='cromo-titulo'><p>";
                     textoDivElementoCromoAleatorio += cromoAle.nombre;
@@ -88,7 +88,7 @@ function cargaDatos(respuesta){
 
                 respuesta.ultimasColecciones.forEach(coleccion => {
                     textoDivElementoColeccion = "<div class='col'><div class='card shadow-sm'><img src=";
-                    textoDivElementoColeccion += "." + coleccion.urlImgPortada;
+                    textoDivElementoColeccion += coleccion.urlImgPortada;
                     textoDivElementoColeccion += " alt='Imagen de la colección " + coleccion.nombre + "'";
                     textoDivElementoColeccion += "><div class='cromo-titulo'><p>";
                     textoDivElementoColeccion += coleccion.nombre;
@@ -193,7 +193,7 @@ function cargaDatos(respuesta){
 
                 actividad.ultimasColeccionesAgregadas.forEach(coleccionUsu => {
                     textoDivElementoUsuario = "<div class='col'><div class='card shadow-sm'><img src=";
-                    textoDivElementoUsuario += "." + coleccionUsu.urlImgPortada;
+                    textoDivElementoUsuario += coleccionUsu.urlImgPortada;
                     textoDivElementoUsuario += " alt='Imagen de la colección " + coleccionUsu.nombre + "'";
                     textoDivElementoUsuario += "><div class='cromo-titulo'><p>";
                     textoDivElementoUsuario += coleccionUsu.nombre;
