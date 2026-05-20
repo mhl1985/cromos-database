@@ -48,6 +48,12 @@ function cargaDatos(respuesta){
             tituloColeccion.textContent = coleccion.nombre;
             sessionStorage.setItem("CromosDatabaseCate", respuesta.coleccion.categoria.id);
 
+            let imagenColeccion = document.getElementById("imagenColeccion");
+            let textoImagenColeccion = "<div class='imagenPortadaColeccionTitulo'><img src='" + coleccion.urlImgPortada + "' alt='Imagen de portada de la colección " + coleccion.descripcion + "'></div>";
+            let divElementoImagenColeccion = document.createElement("div");
+            divElementoImagenColeccion.innerHTML = textoImagenColeccion;
+            imagenColeccion.appendChild(divElementoImagenColeccion);
+
             let descripcionColeccion = document.getElementById("descripcionColeccion");
             let textoDescripcionColeccion = "<b>Año, país y editorial</b>: " + coleccion.periodo + ", " + coleccion.pais + ", " + coleccion.editorial.nombre + ".<br/>";
             textoDescripcionColeccion += "<b>Categoría y subcategoría:</b> " + coleccion.categoria.nombre + " / " + coleccion.subcategoria.nombre + ". <a href='categoria.html'>Ver categoría</a>.<br/>";

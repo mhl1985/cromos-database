@@ -34,15 +34,15 @@ function cargaDatosCromo(respuesta){
                     textoDivElementoCromo += cromo.nombre;
                     textoDivElementoCromo += "</p></div><div class='card-body'><p class='card-text'>";
                     textoDivElementoCromo += "<b>Nombre:</b> " + cromo.nombre + "<br/>";
-//                    textoDivElementoCromo += "<b>Descripción:</b> " + cromo.descripcion + "<br/>";
-//                    textoDivElementoCromo += "<b>Colección y tipo:</b> " + cromo.nombreColeccion + ", " + cromo.tipo;
+                    textoDivElementoCromo += "<b>Descripción:</b> " + cromo.descripcion + "<br/>";
+                    textoDivElementoCromo += "<b>Colección y tipo:</b> " + cromo.nombreColeccion + ", " + cromo.tipo;
                     textoDivElementoCromo += "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoCromo += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCromo += "botonUltimosCromos" + cromo.id + "'";
                     textoDivElementoCromo += " onClick='clickVerCromo(" + cromo.id + ")'>Ver cromo</button>";
-//                    textoDivElementoCromo += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
-//                    textoDivElementoCromo += "botonColeccionUltimosCromos" + cromo.id + "-" + cromo.idColeccion + "'";
-//                    textoDivElementoCromo += " onClick='clickVerColeccion(" + cromo.idColeccion + ")'>Ver colección</button>";
+                    textoDivElementoCromo += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
+                    textoDivElementoCromo += "botonColeccionUltimosCromos" + cromo.id + "-" + cromo.idColeccion + "'";
+                    textoDivElementoCromo += " onClick='clickVerColeccion(" + cromo.idColeccion + ")'>Ver colección</button>";
                     textoDivElementoCromo += "</div><small class='text-body-secondary'><b><abbr title='Número'>Nº</abbr>:</b> " + cromo.numero;
                     textoDivElementoCromo += "</small></div></div></div></div>";
                     divElementoCromo = document.createElement("div");
@@ -155,7 +155,7 @@ function cargaDatosCategoria(respuesta){
                 respuesta.forEach(categoria => {
                     textoDivElementoCategoria = "<div class='col'><div class='card shadow-sm'><div class='card-body'><p class='card-text'>";
                     textoDivElementoCategoria += "<b>Nombre:</b> " + categoria.nombre + "<br/>";
-//                    textoDivElementoCategoria += "<b>Descripción:</b> " + categoria.descripcion + "</p>";
+                    textoDivElementoCategoria += "<b>Descripción:</b> " + categoria.descripcion + "</p>";
                     textoDivElementoCategoria += "<div class='d-flex justify-content-between align-items-center'><div class='btn-group'>";
                     textoDivElementoCategoria += "<button type='button' class='btn btn-sm btn-outline-secondary' id='"
                     textoDivElementoCategoria += "botonCategoria" + categoria.id + "'";
