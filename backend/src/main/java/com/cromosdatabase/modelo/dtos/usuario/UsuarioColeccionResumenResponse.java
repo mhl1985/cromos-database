@@ -52,6 +52,16 @@ public class UsuarioColeccionResumenResponse {
     private String periodo;
 
     /**
+     * País asociado a la colección.
+     */
+    private String pais;
+
+    /**
+     * Descripción de la colección.
+     */
+    private String descripcion;
+
+    /**
      * URL de la imagen de portada de la colección.
      */
     private String urlImgPortada;

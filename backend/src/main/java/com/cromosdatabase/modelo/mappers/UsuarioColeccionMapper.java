@@ -35,6 +35,8 @@ public interface UsuarioColeccionMapper {
     @Mapping(source = "coleccion.categoria", target = "categoria")
     @Mapping(source = "coleccion.subcategoria", target = "subcategoria")
     @Mapping(source = "coleccion.periodo", target = "periodo")
+    @Mapping(source = "coleccion.pais", target = "pais")
+    @Mapping(source = "coleccion.descripcion", target = "descripcion")
     @Mapping(source = "coleccion.urlImgPortada", target = "urlImgPortada")
     @Mapping(source = "fechaAgregada", target = "fechaAgregada")
     UsuarioColeccionResumenResponse toResumenResponse(UsuarioColeccion usuarioColeccion);
