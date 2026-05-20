@@ -72,10 +72,10 @@ function cargaDatos(respuesta){
             }
 
             let imagenDelantera = document.getElementById("imagenDelantera");
-            imagenDelantera.src = "." + cromo.urlImgDelantera;
+            imagenDelantera.src = cromo.urlImgDelantera;
             imagenDelantera.alt = "Imagen delantera del cromo " + cromo.nombre;
             let imagenTrasera = document.getElementById("imagenTrasera");
-            imagenTrasera.src = "." + cromo.urlImgTrasera;
+            imagenTrasera.src = cromo.urlImgTrasera;
             imagenTrasera.alt = "Imagen trasera del cromo " + cromo.nombre;
 
             let pElementoTituloCromo = document.createElement("p");
@@ -87,17 +87,6 @@ function cargaDatos(respuesta){
             let divFilaUsuariosDescripcion = document.getElementById("divFilaUsuariosDescripcion");
             let textoDivFilaUsuariosDescripcion;
             let divElementoTexto;
-
-/* Aquí se añade un botón para ver la colección, pero no estoy convencido de ponerlo...
-
-            textoDescripcionCromo = "<div><button type='button' class='btn btn-sm btn-outline-secondary' id='";
-            textoDescripcionCromo += "botonVerColeccion" + coleccion.id + "'";
-            textoDescripcionCromo += " onClick='clickVerColeccion(" + coleccion.id + ")'>Ver colección</button></div>";
-
-            divElementoTexto = document.createElement("div");
-            divElementoTexto.innerHTML = textoDescripcionCromo;
-            divFilaUsuariosDescripcion.appendChild(divElementoTexto);
-*/
 
             // Añadimos los usuario que tienen este cromo recuperando el DIV, generando elementos dinámicamente y los añadimos
             if (respuesta.usuariosPoseedores && respuesta.usuariosPoseedores.length){
@@ -113,7 +102,7 @@ function cargaDatos(respuesta){
                     textoDivElementoCromo = "<div class='col'><div class='card shadow-sm'><div class='card-body'><p class='card-text'>";
                     textoDivElementoCromo += "<p><b>Nombre:</b> " + usuario.nombreMostrar + "<br/>";
                     if (cromosDatabaseNomb){
-                        textoDivElementoCromo += "<b>Correo:</b> " + usuario.email + "<br/>";
+                        textoDivElementoCromo += "<b>Correo:</b> <a href='mailto:" + usuario.email + "'>" + usuario.email + "</a><br/>";
                     } else{
                         textoDivElementoCromo += "<b>Correo:</b> Solo los usuarios logados pueden ver el correo: <a href='acceso.html'>Acceder</a>.<br/>";
                     }

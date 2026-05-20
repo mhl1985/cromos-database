@@ -15,6 +15,20 @@ div.cromo-titulo p{
     color: black;
 }
 
+/*Formato para la imagen del título de la colección*/
+@media (max-width:767px){
+  div.imagenPortadaColeccionTitulo img{
+    display: none;
+  }
+}
+
+@media (min-width:768px){
+  div.imagenPortadaColeccionTitulo img{
+    max-width: 500px;
+    padding: 40px 0;
+  }
+}
+
 /*Título para poner encima de cada imagen de categoria*/
 div.categoria-titulo{
     position: relative;
@@ -36,6 +50,10 @@ div.categoria-titulo p{
   display: none;
 }
 
+/*Correción por si falla la carga de la imagen*/
+div.card img{
+  min-height: 200px;
+}
 
 /*Tamaños de alertas*/
 @media (max-width:767px){
