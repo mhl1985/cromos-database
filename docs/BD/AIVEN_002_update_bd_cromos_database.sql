@@ -1,0 +1,34 @@
+-- =========================================================
+-- IMPORTANTE (ENTORNO AIVEN / BD REMOTA)
+--
+-- En Aiven la base de datos ya existe y se llama defaultdb.
+-- No se ejecuta USE cromos_database.
+-- Este script debe lanzarse estando conectado directamente a defaultdb.
+--
+-- =========================================================
+-- Script: AIVEN_002_update_bd_cromos_database.sql
+--   Ejecutar después del insert inicial.
+--
+-- =========================================================
+-- IMGs PORTADAS COLECCIONES DE FÚTBOL
+-- =========================================================
+UPDATE colecciones
+SET url_img_portada = 'img/colecciones/1_panini-fifa-world-cup-qatar-2022_portada.webp'
+WHERE id_coleccion = 1;
+
+UPDATE colecciones
+SET url_img_portada = 'img/colecciones/2_panini-fifa-world-cup-russia-2018_portada.webp'
+WHERE id_coleccion = 2;
+
+UPDATE colecciones
+SET url_img_portada = 'img/colecciones/3_panini-fifa-world-cup-brazil-2014_portada.webp'
+WHERE id_coleccion = 3;
+
+UPDATE colecciones
+SET url_img_portada = 'img/colecciones/4_panini-fifa-world-cup-france-98_portada.webp'
+WHERE id_coleccion = 4;
+
+UPDATE colecciones
+SET url_img_portada = 'img/colecciones/5_panini-fifa-world-cup-usa-94_portada.webp'
+WHERE id_coleccion = 5;
+

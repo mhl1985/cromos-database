@@ -1,5 +1,5 @@
 -- =========================================================
--- Script: 00_master_creacion_completa_cromos_database.sql
+-- Script: LOCAL_000_creacion_completa_bd_cromos_database.sql
 --
 -- Descripción:
 --   Script maestro para reconstruir desde cero la base de datos
