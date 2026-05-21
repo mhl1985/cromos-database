@@ -62,6 +62,7 @@ public class SecurityConfig {
 
         // Configuración de accesos
         http.authorizeHttpRequests(auth -> auth
+                // Endpoints públicos
                 .requestMatchers("/auth/login").permitAll()
                 .requestMatchers("/auth/registro").permitAll()
                 .requestMatchers("/public/**").permitAll()
@@ -71,6 +72,9 @@ public class SecurityConfig {
                 .requestMatchers("/subcategorias/**").permitAll()
                 .requestMatchers("/cromos/**").permitAll()
                 .requestMatchers("/paginas/**").permitAll()
+                // Endpoints exclusivos para administradores.
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                // Cualquier otra petición requiere login.
                 .anyRequest().authenticated()
         );
 
@@ -139,7 +143,7 @@ public class SecurityConfig {
         // Configuración CORS principal
         CorsConfiguration configuration = new CorsConfiguration();
 
-        /**
+        /*
          * Configuración de orígenes permitidos para peticiones CORS.
          * Se habilitan distintos hosts y puertos habituales de desarrollo local
          * para permitir que el frontend pueda comunicarse con el backend
