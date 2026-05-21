@@ -42,7 +42,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
      * Busca un usuario por su nombre visible.
      *
      * @param nombreMostrar Nombre visible del usuario.
-     * @return Optional con el usuario si existe.
+     * @return Optional con el usuario encontrado o vacío si no existe
      */
     Optional<Usuario> findByNombreMostrar(String nombreMostrar);
 
