@@ -1,8 +1,8 @@
 package com.cromosdatabase.comun.excepciones;
 
 /**
- * Excepción lanzada cuando no existe en base de datos
- * el rol por defecto necesario para registrar usuarios.
+ * Excepción lanzada cuando se intenta utilizar
+ * un rol que no existe en el sistema.
  */
 public class RolNoEncontradoException extends RuntimeException {
 

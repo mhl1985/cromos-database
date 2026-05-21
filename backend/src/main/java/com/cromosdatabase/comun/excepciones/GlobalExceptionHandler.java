@@ -121,9 +121,9 @@ public class GlobalExceptionHandler {
      * @param ex excepción capturada
      * @return respuesta HTTP 500 con el mensaje del error
      */
-    @ExceptionHandler(RolNoEncontradoException.class)
-    public ResponseEntity<ErrorGenericoResponse> handleRolNoEncontradoException(
-            RolNoEncontradoException ex) {
+    @ExceptionHandler(RolPorDefectoNoEncontradoException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleRolPorDefectoNoEncontradoException(
+            RolPorDefectoNoEncontradoException ex) {
 
         ErrorGenericoResponse response = new ErrorGenericoResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -132,6 +132,26 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
+    /**
+     * Gestiona el caso en el que se intenta utilizar
+     * un rol que no existe.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 400 con el mensaje del error
+     */
+    @ExceptionHandler(RolNoEncontradoException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleRolNoEncontradoException(
+            RolNoEncontradoException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     /**

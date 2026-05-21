@@ -2,7 +2,7 @@ package com.cromosdatabase.servicios.impl;
 
 import com.cromosdatabase.comun.excepciones.EmailDuplicadoException;
 import com.cromosdatabase.comun.excepciones.NombreAMostrarDuplicadoException;
-import com.cromosdatabase.comun.excepciones.RolNoEncontradoException;
+import com.cromosdatabase.comun.excepciones.RolPorDefectoNoEncontradoException;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioRequest;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioResponse;
 import com.cromosdatabase.modelo.entidades.Rol;
@@ -106,7 +106,7 @@ public class RegistroUsuarioServiceImpl implements RegistroUsuarioService {
 
         // Recuperamos el rol por defecto que se asignará al nuevo usuario.
         Rol rolPorDefecto = rolRepository.findByNombre(NOMBRE_ROL_POR_DEFECTO)
-                .orElseThrow(() -> new RolNoEncontradoException("No existe el rol por defecto."));
+                .orElseThrow(() -> new RolPorDefectoNoEncontradoException("No existe el rol por defecto."));
 
         // Creamos la entidad Usuario con los datos recibidos en la petición.
         Usuario usuario = new Usuario();
