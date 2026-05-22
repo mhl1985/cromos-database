@@ -80,9 +80,18 @@ function cargaDatos(respuesta){
                     textoDescripcionColeccion += "Recuerda darle otra vez al botón para guardar tus cambios.";
                 }
 
+                //Personalizamos la página si es posible
+                let enlaceAcceso = document.getElementById("enlaceAcceso");
                 if (cromosDatabaseNomb){
                     enlaceAcceso.textContent = "Desconéctate como: " + cromosDatabaseNomb;
                     enlaceAcceso.href = "#";
+                }
+
+                // Si es administrador mostramos enlace
+                let cromosDatabaseAdmi = sessionStorage.getItem("CromosDatabaseAdmi");
+                if (cromosDatabaseAdmi === "ROLE_ADMIN"){
+                    let enlaceAdministrar = document.getElementById("enlaceAdministrar");
+                    enlaceAdministrar.className = enlaceAdministrar.className.replace(" ocultarContenedor","");
                 }
 
             }else{
@@ -129,14 +138,14 @@ function cargaDatos(respuesta){
 
         } else {
             let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");            
 
         }
     } catch (error) {
         errorCargaDatos(error);
         let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
         alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 
     }
@@ -244,21 +253,20 @@ function botonEditarColeccion(){
         });
 
 
+        let formularioAcceso = document.forms["formularioAcceso"];
 
-    let formularioAcceso = document.forms["formularioAcceso"];
-
-    let urlAcceso = "http://localhost:8080/mis-colecciones/" + sessionStorage.getItem("CromosDatabaseCole") + "/cromos";
-    let datosPut = { "cromos": datosCromos};
-    let autenticacion = sessionStorage.getItem("CromosDatabaseAuth");
-    
-    fetch(urlAcceso, {
-    method: "PUT",
-    headers: {"Content-Type": "application/json","Authorization": autenticacion},
-    body: JSON.stringify(datosPut),
-    })
-    .then((res) => res.json())
-    .catch((error) => errorCargaDatos(error))
-    .then((response) => mostrarAvisoOK(response));
+        let urlAcceso = "http://localhost:8080/mis-colecciones/" + sessionStorage.getItem("CromosDatabaseCole") + "/cromos";
+        let datosPut = { "cromos": datosCromos};
+        let autenticacion = sessionStorage.getItem("CromosDatabaseAuth");
+        
+        fetch(urlAcceso, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json","Authorization": autenticacion},
+            body: JSON.stringify(datosPut),
+        })
+        .then((res) => res.json())
+        .catch((error) => errorCargaDatos(error))
+        .then((response) => mostrarAvisoOK(response));
     }
 }
 
@@ -297,10 +305,12 @@ function clickVerCromo(id){
 }
 
 
+//Borramos datos de usuario
 function clickEnlaceAcceso (){
     if (enlaceAcceso.textContent != "Acceso"){
         sessionStorage.setItem("CromosDatabaseAuth", "");
         sessionStorage.setItem("CromosDatabaseNomb", "");
+        sessionStorage.setItem("CromosDatabaseAdmi", "");
         sessionStorage.setItem("CromosDatabaseCrom", "");
         sessionStorage.setItem("CromosDatabaseCole", "");
         sessionStorage.setItem("CromosDatabaseCate", "");

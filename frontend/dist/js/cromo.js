@@ -61,9 +61,18 @@ function cargaDatos(respuesta){
                     textoDescripcionCromo += " onClick='clickBotonAgregarColeccionUsuario(" + coleccion.id + ")'>Agregar colección</button></div>";
                 }
 
+                //Personalizamos la página si es posible
+                let enlaceAcceso = document.getElementById("enlaceAcceso");
                 if (cromosDatabaseNomb){
                     enlaceAcceso.textContent = "Desconéctate como: " + cromosDatabaseNomb;
                     enlaceAcceso.href = "#";
+                }
+
+                // Si es administrador mostramos enlace
+                let cromosDatabaseAdmi = sessionStorage.getItem("CromosDatabaseAdmi");
+                if (cromosDatabaseAdmi === "ROLE_ADMIN"){
+                    let enlaceAdministrar = document.getElementById("enlaceAdministrar");
+                    enlaceAdministrar.className = enlaceAdministrar.className.replace(" ocultarContenedor","");
                 }
 
             }else{
@@ -127,14 +136,14 @@ function cargaDatos(respuesta){
 
         } else {
             let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");            
 
         }
     } catch (error) {
         errorCargaDatos(error);
         let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
         alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 
     }
@@ -159,10 +168,12 @@ function clickVerCromo(id){
 }
 
 
+//Borramos datos de usuario
 function clickEnlaceAcceso (){
     if (enlaceAcceso.textContent != "Acceso"){
         sessionStorage.setItem("CromosDatabaseAuth", "");
         sessionStorage.setItem("CromosDatabaseNomb", "");
+        sessionStorage.setItem("CromosDatabaseAdmi", "");
         sessionStorage.setItem("CromosDatabaseCrom", "");
         sessionStorage.setItem("CromosDatabaseCole", "");
         sessionStorage.setItem("CromosDatabaseCate", "");

@@ -247,25 +247,29 @@
       <h1 class="h3 mb-3 fw-normal">Acceso a Cromos Database</h1>
       <form name="formularioAcceso" id="formularioAcceso">
         <h2 class="h4 mb-3 fw-normal">Si tienes cuenta accede aquí</h2>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="accesoCorreo"
-            placeholder="name@example.com"
-            required
-          />
-          <label for="accesoCorreo">Correo electrónico</label>
+        <div class="form-espacio">
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="accesoCorreo"
+              placeholder="name@example.com"
+              required
+            />
+            <label for="accesoCorreo">Correo electrónico</label>
+          </div>
         </div>
-        <div class="form-floating ultimo">
-          <input
-            type="password"
-            class="form-control"
-            id="accesoContrasena"
-            placeholder="Password"
-            required
-          />
-          <label for="accesoContrasena">Contraseña</label>
+        <div class="form-espacio">
+          <div class="form-floating ultimo">
+            <input
+              type="password"
+              class="form-control"
+              id="accesoContrasena"
+              placeholder="Password"
+              required
+            />
+            <label for="accesoContrasena">Contraseña</label>
+          </div>
         </div>
         <div class="alert alert-danger ocultarAviso" id="avisoErrorAcceso" role="alert">
         </div>
@@ -273,9 +277,11 @@
         </div>
         <div class="alert alert-success ocultarAviso" id="avisoCorrectoAcceso" role="alert">
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" id="botonAcceder" onclick="accederServicio()">
-          Acceder
-        </button>
+        <div class="form-espacio">
+          <button class="btn btn-primary w-100 py-2" type="submit" id="botonAcceder" onclick="accederServicio()">
+            Acceder
+          </button>
+        </div>
       </form>
       <div>
         <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta accede aquí</h2>

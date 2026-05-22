@@ -1,11 +1,34 @@
 //Primera carga de datos para mostrar la página
 function cargaInicial() {
+
     //Personalizamos la página si es posible
     let enlaceAcceso = document.getElementById("enlaceAcceso");
     let cromosDatabaseNomb = sessionStorage.getItem("CromosDatabaseNomb");
     if (cromosDatabaseNomb){
         enlaceAcceso.textContent = "Desconéctate como: " + cromosDatabaseNomb;
         enlaceAcceso.href = "#";
+    }
+
+    // Si es administrador mostramos enlace
+    let cromosDatabaseAdmi = sessionStorage.getItem("CromosDatabaseAdmi");
+    if (cromosDatabaseAdmi === "ROLE_ADMIN"){
+        let enlaceAdministrar = document.getElementById("enlaceAdministrar");
+        enlaceAdministrar.className = enlaceAdministrar.className.replace(" ocultarContenedor","");
+    }
+
+}
+
+//Borramos datos de usuario
+function clickEnlaceAcceso (){
+    if (enlaceAcceso.textContent != "Acceso"){
+        sessionStorage.setItem("CromosDatabaseAuth", "");
+        sessionStorage.setItem("CromosDatabaseNomb", "");
+        sessionStorage.setItem("CromosDatabaseAdmi", "");
+        sessionStorage.setItem("CromosDatabaseCrom", "");
+        sessionStorage.setItem("CromosDatabaseCole", "");
+        sessionStorage.setItem("CromosDatabaseCate", "");
+        event.preventDefault();
+        location.reload();
     }
 }
 
@@ -59,13 +82,13 @@ function cargaDatosCromo(respuesta){
 
         } else {
             let avisoDatosBusqueda = document.getElementById("avisoDatosBusqueda");
-            avisoDatosBusqueda.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            avisoDatosBusqueda.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             avisoDatosBusqueda.className = avisoDatosBusqueda.className.replace(" ocultarAviso","");
         }
     } catch (error) {
         errorCargaDatos(error);
         let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
         alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 
     }
@@ -121,14 +144,14 @@ function cargaDatosColeccion(respuesta){
 
         } else {
             let avisoDatosBusqueda = document.getElementById("avisoDatosBusqueda");
-            avisoDatosBusqueda.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            avisoDatosBusqueda.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             avisoDatosBusqueda.className = avisoDatosBusqueda.className.replace(" ocultarAviso","");
 
         }
     } catch (error) {
         errorCargaDatos(error);
         let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
         alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 
     }
@@ -176,14 +199,14 @@ function cargaDatosCategoria(respuesta){
 
         } else {
             let avisoDatosBusqueda = document.getElementById("avisoDatosBusqueda");
-            avisoDatosBusqueda.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            avisoDatosBusqueda.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             avisoDatosBusqueda.className = avisoDatosBusqueda.className.replace(" ocultarAviso","");
 
         }
     } catch (error) {
         errorCargaDatos(error);
         let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
         alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 
     }
@@ -209,7 +232,7 @@ function errorCargaDatos(error){
         divCategorias.className += " ocultarContenedor";
     }
     let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-    alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+    alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
     alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 }
 
@@ -229,19 +252,6 @@ function clickVerColeccion (id){
 function clickVerCategoria (id){
     sessionStorage.setItem("CromosDatabaseCate", id);
     window.location.href = "categoria.html";
-}
-
-
-function clickEnlaceAcceso (){
-    if (enlaceAcceso.textContent != "Acceso"){
-        sessionStorage.setItem("CromosDatabaseAuth", "");
-        sessionStorage.setItem("CromosDatabaseNomb", "");
-        sessionStorage.setItem("CromosDatabaseCrom", "");
-        sessionStorage.setItem("CromosDatabaseCole", "");
-        sessionStorage.setItem("CromosDatabaseCate", "");
-        event.preventDefault();
-        location.reload();
-    }
 }
 
 

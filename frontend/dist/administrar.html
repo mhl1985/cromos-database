@@ -8,10 +8,10 @@
       name="author"
       content="Miguel Herrero y José Miguel Martín"
     />
-    <title>Cromos Database - Categoría</title>
+    <title>Cromos Database - Administrar</title>
     <link rel="icon" type="image/x-icon" href="img/Logocuadrado100.png">
     <script src="js/color-modes.js"></script>
-    <script src="js/categoria.js"></script>
+    <script src="js/administrar.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link
@@ -212,9 +212,6 @@
                 <li>
                   <a href="buscar.html" class="text-white">Buscar</a>
                 </li>
-                <li id="enlaceAdministrar">
-                  <a href="administrar.html" class="text-white">Administrar</a>
-                </li>
               </ul>
             </div>
           </div>
@@ -240,27 +237,29 @@
       </div>
     </header>
     <main>
-      <div id="divCabecera">
+      <div id="divUsuarios">
         <section class="py-5 text-center container">
           <div class="row py-lg-5">
             <div class="col-lg-10 mx-auto">
-              <h2 id="tituloCategoria" class="fw-light"></h2>
-              </p>
+              <h2 id="tituloUsuariosColeccion" class="fw-light">
+                Listado de usuarios para administrar
+              </h2>
+              <div id="descripcionUsuarios" class="lead text-body-secondary">
+              </div>
             </div>
           </div>
         </section>
         <div class="album py-5 bg-body-tertiary">
           <div class="container">
-            <div class="row row-cols-1">
-              <div id="descripcionCategoria" class="lead text-body-secondary">
-              </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divFilaUsuarios">
             </div>
           </div>
         </div>
       </div>
-      <div id="divListaSubCategorias">
-      </div>
       <div class="alert alert-danger ocultarAviso alertErrorGeneral" id="avisoErrorGeneral" role="alert">
+      </div>
+      <div class="alert alert-success ocultarAviso alertErrorGeneral" id="avisoCorrectoCambio" role="alert">
+        <p>Cambios guardados correctamente. Si quieres seguir editando pincha <a href="administrar.html">aquí</a>.</p>
       </div>
     </main>
     <footer class="text-body-secondary py-5">

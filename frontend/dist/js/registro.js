@@ -11,7 +11,7 @@ function errorCargaDatosCrear(error){
     }
 
     let avisoErrorCrear = document.getElementById("avisoErrorCrear");
-    avisoErrorCrear.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+    avisoErrorCrear.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
     avisoErrorCrear.className = avisoErrorCrear.className.replace(" ocultarAviso","");
 }
 
@@ -78,7 +78,7 @@ function cargaDatosCrear(respuesta){
 
         }else{
             let avisoDatosCrear = document.getElementById("avisoDatosCrear");
-            avisoDatosCrear.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            avisoDatosCrear.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             avisoDatosCrear.className = avisoDatosCrear.className.replace(" ocultarAviso","");
         }
     } catch (error) {

@@ -209,6 +209,9 @@
                 <li>
                   <a id="enlaceAcceso" href="acceso.html" class="text-white" onclick="clickEnlaceAcceso()">Acceso</a>
                 </li>
+                <li id="enlaceAdministrar">
+                  <a href="administrar.html" class="text-white">Administrar</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -250,31 +253,38 @@
         <h1 class="h3 mb-3 fw-normal">Búsqueda en Cromos Database</h1>
         <form name="formularioBusqueda" id="formularioBusqueda">
           <h2 class="h4 mb-3 fw-normal">Cromos, colecciones y categorías: rellena el siguiente buscador!</h2>
-          <div class="form-floating">
-            <select class="form-control" id="tipoBusqueda">
-              <option value="crom">Cromos</option>
-              <option value="cole">Colecciones</option>
-              <option value="cate">Categorías</option>
-            </select>
-            <label for="tipoBusqueda">Buscar entre</label>
+          <div class="form-espacio">
+            <div class="form-floating">
+              <select class="form-control" id="tipoBusqueda">
+                <option value="crom">Cromos</option>
+                <option value="cole">Colecciones</option>
+                <option value="cate">Categorías</option>
+              </select>
+              <label for="tipoBusqueda">Buscar entre</label>
+            </div>
           </div>
-          <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="textoBusqueda"
-              placeholder="charmander"
-              required
-            />
-            <label for="textoBusqueda">Texto a buscar</label>
+          <div class="form-espacio">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="textoBusqueda"
+                placeholder="charmander"
+                required
+              />
+              <label for="textoBusqueda">Texto a buscar</label>
+            </div>
           </div>
           <div class="alert alert-warning ocultarAviso" id="avisoDatosBusqueda" role="alert">
           </div>
-          <button class="btn btn-primary w-100 py-2" type="submit" id="botonBuscar" onclick="clickBuscar()">
-            Buscar
-          </button>
+          <div class="form-espacio">
+            <button class="btn btn-primary w-100 py-2" type="submit" id="botonBuscar" onclick="clickBuscar()">
+              Buscar
+            </button>
+          </div>
         </form>
       </div>
+      <div class="form-espacio">
       <div id="divCromos" class=" ocultarContenedor">
         <section class="py-5 text-center container">
           <div class="row py-lg-5">

@@ -21,6 +21,10 @@ function cargaInicial() {
     if (divUsuario.className.indexOf("ocultarContenedor")===-1){
         divUsuario.className += " ocultarContenedor";
     }
+    let enlaceAdministrar = document.getElementById("enlaceAdministrar");
+    if (enlaceAdministrar.className.indexOf("ocultarContenedor")===-1){
+        enlaceAdministrar.className += " ocultarContenedor";
+    }
     let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
     if (alertAvisoErrorGeneral.className.indexOf("ocultarAviso")===-1){
         alertAvisoErrorGeneral.className += " ocultarAviso";
@@ -157,6 +161,12 @@ function cargaDatos(respuesta){
                     títuloUsuario.textContent = "Aquí tus últimas acciones.";
                 }
 
+                // Si es administrador mostramos enlace
+                let cromosDatabaseAdmi = sessionStorage.getItem("CromosDatabaseAdmi");
+                if (cromosDatabaseAdmi === "ROLE_ADMIN"){
+                    let enlaceAdministrar = document.getElementById("enlaceAdministrar");
+                    enlaceAdministrar.className = enlaceAdministrar.className.replace(" ocultarContenedor","");
+                }
 
                 // Informamos de las Colecciones agregadas
                 textoDivElementoUsuario = "<div class='col'><div class='card shadow-sm'>";
@@ -220,14 +230,14 @@ function cargaDatos(respuesta){
 
         } else {
             let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");            
 
         }
     } catch (error) {
         errorCargaDatos(error);
         let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
-        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
         alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 
     }
@@ -263,6 +273,7 @@ function clickEnlaceAcceso (){
     if (enlaceAcceso.textContent != "Acceso"){
         sessionStorage.setItem("CromosDatabaseAuth", "");
         sessionStorage.setItem("CromosDatabaseNomb", "");
+        sessionStorage.setItem("CromosDatabaseAdmi", "");
         sessionStorage.setItem("CromosDatabaseCrom", "");
         sessionStorage.setItem("CromosDatabaseCole", "");
         sessionStorage.setItem("CromosDatabaseCate", "");

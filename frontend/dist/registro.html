@@ -247,45 +247,53 @@
       <h1 class="h3 mb-3 fw-normal">Acceso a Cromos Database</h1>
       <form name="formularioCrear" id="formularioCrear">
         <h2 class="h4 mb-3 fw-normal">Si quieres crearte una cuenta escribe aquí</h2>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="crearCorreo"
-            placeholder="name@example.com"
-            required
-          />
-          <label for="crearCorreo">Correo electrónico</label>
+        <div class="form-espacio">
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="crearCorreo"
+              placeholder="name@example.com"
+              required
+            />
+            <label for="crearCorreo">Correo electrónico</label>
+          </div>
         </div>
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="crearNombre"
-            placeholder="NombreUsuario"
-            required
-          />
-          <label for="crearNombre">Nombre de usuario a mostrar</label>
+        <div class="form-espacio">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="crearNombre"
+              placeholder="NombreUsuario"
+              required
+            />
+            <label for="crearNombre">Nombre de usuario a mostrar</label>
+          </div>
         </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="crearContrasena"
-            placeholder="Password"
-            required
-          />
-          <label for="crearContrasena">Contraseña</label>
+        <div class="form-espacio">
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="crearContrasena"
+              placeholder="Password"
+              required
+            />
+            <label for="crearContrasena">Contraseña</label>
+          </div>
         </div>
-        <div class="form-floating ultimo">
-          <input
-            type="password"
-            class="form-control"
-            id="crearContrasena2"
-            placeholder="Password"
-            required
-          />
-          <label for="crearContrasena2">Contraseña</label>
+        <div class="form-espacio">
+          <div class="form-floating ultimo">
+            <input
+              type="password"
+              class="form-control"
+              id="crearContrasena2"
+              placeholder="Password"
+              required
+            />
+            <label for="crearContrasena2">Contraseña</label>
+          </div>
         </div>
         <div class="alert alert-danger ocultarAviso" id="avisoErrorCrear" role="alert">
         </div>
@@ -293,9 +301,11 @@
         </div>
         <div class="alert alert-success ocultarAviso" id="avisoCorrectoCrear" role="alert">
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" id="botonCrear" onclick="crearUsuario()">
-          Crear
-        </button>
+        <div class="form-espacio">
+          <button class="btn btn-primary w-100 py-2" type="submit" id="botonCrear" onclick="crearUsuario()">
+            Crear
+          </button>
+        </div>
       </form>
     </main>
     <footer class="text-body-secondary py-5">

@@ -45,6 +45,16 @@ function cargaDatosAcceso(respuesta){
         if(!respuesta.status){
             sessionStorage.setItem("CromosDatabaseAuth", "Bearer " + respuesta.token);
             sessionStorage.setItem("CromosDatabaseNomb", respuesta.nombreMostrar);
+            let rolAdmin = null;
+
+            //Si tiene rol administrador lo guardamos
+            respuesta.roles.forEach(rol => {
+                if (rol === "ROLE_ADMIN"){
+                    rolAdmin = rol;
+                }
+            });
+            sessionStorage.setItem("CromosDatabaseAdmi", rolAdmin);
+
             let avisoCorrectoAcceso = document.getElementById("avisoCorrectoAcceso");
             avisoCorrectoAcceso.textContent = respuesta.mensaje?respuesta.mensaje:"Bienvenido " + respuesta.nombreMostrar + "! En breve vamos a la página de inicio, también puedes ir tú.";
             avisoCorrectoAcceso.className = avisoCorrectoAcceso.className.replace(" ocultarAviso","");
@@ -52,10 +62,10 @@ function cargaDatosAcceso(respuesta){
             if (botonAcceder.className.indexOf("ocultarAviso")===-1){
                 botonAcceder.className += " ocultarAviso";
             }
-            setTimeout(navegarInicio, 3000);
+            setTimeout(navegarInicio, 2000);
         }else{
             let avisoDatosAcceso = document.getElementById("avisoDatosAcceso");
-            avisoDatosAcceso.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+            avisoDatosAcceso.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
             avisoDatosAcceso.className = avisoDatosAcceso.className.replace(" ocultarAviso","");
         }
     } catch (error) {
@@ -67,7 +77,7 @@ function cargaDatosAcceso(respuesta){
 //Error en la cargar del servicio de acceso
 function errorCargaDatosAcceso(error){
     let avisoErrorAcceso = document.getElementById("avisoErrorAcceso");
-    avisoErrorAcceso.textContent = "Error inesperado, inténtelo de nuevo otra vez y si el error persiste compruebe su conexión.";
+    avisoErrorAcceso.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
     avisoErrorAcceso.className = avisoErrorAcceso.className.replace(" ocultarAviso","");
 }
 
