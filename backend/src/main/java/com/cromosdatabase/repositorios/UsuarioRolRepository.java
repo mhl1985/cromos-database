@@ -27,4 +27,10 @@ public interface UsuarioRolRepository extends JpaRepository<UsuarioRol, UsuarioR
      */
     List<UsuarioRol> findByUsuario_Email(String email);
 
+    /**
+     * Elimina todas las relaciones usuario-rol de un usuario.
+     *
+     * @param idUsuario ID del usuario.
+     */
+    void deleteByUsuario_IdUsuario(Integer idUsuario);
 }

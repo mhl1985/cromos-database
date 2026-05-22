@@ -222,6 +222,26 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Gestiona errores cuando la combinación de roles
+     * asignada a un usuario no es válida.
+     *
+     * @param ex excepción capturada
+     * @return respuesta HTTP 400
+     */
+    @ExceptionHandler(UsuarioRolInvalidoException.class)
+    public ResponseEntity<ErrorGenericoResponse> handleUsuarioRolInvalidoException(
+            UsuarioRolInvalidoException ex) {
+
+        ErrorGenericoResponse response = new ErrorGenericoResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    /**
      * Gestiona errores de tipo en parámetros de entrada de la petición.
      * Ejemplo: Cuando un parámetro que debería ser numérico
      * recibe un valor no válido, como idCategoria=abc.
