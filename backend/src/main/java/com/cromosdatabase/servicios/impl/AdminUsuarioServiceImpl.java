@@ -44,6 +44,16 @@ public class AdminUsuarioServiceImpl implements AdminUsuarioService {
     private final UsuarioRolRepository usuarioRolRepository;
 
     /**
+     * Nombre del rol de usuario estándar.
+     */
+    private static final String NOMBRE_ROL_USER = "ROLE_USER";
+
+    /**
+     * Nombre del rol de administrador.
+     */
+    private static final String NOMBRE_ROL_ADMIN = "ROLE_ADMIN";
+
+    /**
      * Obtiene el listado completo de usuarios.
      *
      * @return listado de usuarios
@@ -147,14 +157,13 @@ public class AdminUsuarioServiceImpl implements AdminUsuarioService {
             Usuario usuario,
             List<Integer> idsRoles) {
 
-        usuarioRolRepository.deleteAll(usuario.getUsuariosRoles());
+        List<Rol> roles = obtenerRolesValidados(idsRoles);
 
-        for (Integer idRol : idsRoles) {
+        validarCombinacionRoles(roles);
 
-            Rol rol = rolRepository.findById(idRol)
-                    .orElseThrow(() -> new RolNoEncontradoException(
-                            "No existe el rol con id " + idRol + "."
-                    ));
+        usuarioRolRepository.deleteByUsuario_IdUsuario(usuario.getIdUsuario());
+
+        for (Rol rol : roles) {
 
             UsuarioRol usuarioRol = new UsuarioRol();
 
@@ -193,5 +202,61 @@ public class AdminUsuarioServiceImpl implements AdminUsuarioService {
         }
 
         return rolesResponse;
+    }
+
+    /**
+     * Obtiene y valida los roles recibidos en la petición.
+     *
+     * @param idsRoles ids de roles recibidos
+     * @return lista de roles encontrados
+     */
+    private List<Rol> obtenerRolesValidados(List<Integer> idsRoles) {
+
+        List<Rol> roles = new ArrayList<>();
+
+        for (Integer idRol : idsRoles) {
+
+            Rol rol = rolRepository.findById(idRol)
+                    .orElseThrow(() -> new RolNoEncontradoException(
+                            "No existe el rol con id " + idRol + "."
+                    ));
+
+            roles.add(rol);
+        }
+
+        return roles;
+    }
+
+    /**
+     * Valida que la combinación de roles recibida sea correcta.
+     *
+     * Reglas:
+     * - Un usuario puede tener solo ROLE_USER.
+     * - Un usuario puede tener ROLE_USER y ROLE_ADMIN.
+     * - Un usuario no puede tener solo ROLE_ADMIN.
+     *
+     * @param roles roles recibidos
+     */
+    private void validarCombinacionRoles(List<Rol> roles) {
+
+        boolean tieneRolUser = false;
+        boolean tieneRolAdmin = false;
+
+        for (Rol rol : roles) {
+
+            if (NOMBRE_ROL_USER.equals(rol.getNombre())) {
+                tieneRolUser = true;
+            }
+
+            if (NOMBRE_ROL_ADMIN.equals(rol.getNombre())) {
+                tieneRolAdmin = true;
+            }
+        }
+
+        if (tieneRolAdmin && !tieneRolUser) {
+            throw new UsuarioRolInvalidoException(
+                    "Ningún usuario puede tener solamente el rol ROLE_ADMIN."
+            );
+        }
     }
 }
