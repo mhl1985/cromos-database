@@ -74,7 +74,7 @@ function cargaDatos(respuesta){
                 textoDivListaSubCategorias += "</h3><p class='lead text-body-secondary'>";
                 textoDivListaSubCategorias += subcate.descripcionSubcategoria;
                 textoDivListaSubCategorias += "</p></div></div></section><div class='album py-5 bg-body-tertiary'>";
-                textoDivListaSubCategorias += "<div class='container'><div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>";
+                textoDivListaSubCategorias += "<div class='container'><div class='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3'>";
 
 
 

@@ -126,7 +126,7 @@ div.accesibilidad p{
 
 /*Correciones accesibilidad*/
 [data-bs-theme = "dark"]{
-  div.btn-group button {
+  div button {
     color: white;
   }
 }

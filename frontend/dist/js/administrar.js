@@ -39,7 +39,7 @@ function cargaDatos(respuesta){
 
             //Mostramos cabecera con datos y botón
             let descripcionListaUsuarios = document.getElementById("descripcionUsuarios");
-            let textoDescripcionListaUsuarios = "<p>Ahora mismo hay " + respuesta.length + " usuarios en Cromos Database. Pulsa el botón para editarlos.<br/>No te olvides de volver a darle para guardar los datos.</p>";
+            let textoDescripcionListaUsuarios = "<p>Ahora mismo hay " + respuesta.length + " usuarios en Cromos Database. Pulsa el botón de cada uno de ellos para editar ese usuario.</p>";
             let divElementoListaUsuarios = document.createElement("div");
             divElementoListaUsuarios.innerHTML = textoDescripcionListaUsuarios;
             descripcionListaUsuarios.appendChild(divElementoListaUsuarios);
@@ -62,13 +62,13 @@ function cargaDatos(respuesta){
                 textoDivElementoUsuario += "<form class='form-usuario' name='formularioUsuario" + usuario.idUsuario + "' id='formularioUsuario" + usuario.idUsuario + "'>";
                 textoDivElementoUsuario += "<div class='form-espacio'>";
                 textoDivElementoUsuario += "<div class='form-floating'>";
-                textoDivElementoUsuario += "<input type='text' class='form-control' id='inputUsuarioNombre" + usuario.idUsuario + "' required='true' value='" + usuario.nombreMostrar + "'/>";
+                textoDivElementoUsuario += "<input type='text' class='form-control' id='inputUsuarioNombre" + usuario.idUsuario + "' required value='" + usuario.nombreMostrar + "'/>";
                 textoDivElementoUsuario += "<label for='inputUsuarioNombre" + usuario.idUsuario + "'>Nombre a mostrar</label>";
                 textoDivElementoUsuario += "</div>";
                 textoDivElementoUsuario += "</div>";
                 textoDivElementoUsuario += "<div class='form-espacio'>";
                 textoDivElementoUsuario += "<div class='form-floating'>";
-                textoDivElementoUsuario += "<input type='text' class='form-control' id='inputUsuarioCorreo" + usuario.idUsuario + "' required='true' value='" + usuario.email + "'/>";
+                textoDivElementoUsuario += "<input type='text' class='form-control' id='inputUsuarioCorreo" + usuario.idUsuario + "' required value='" + usuario.email + "'/>";
                 textoDivElementoUsuario += "<label for='inputUsuarioCorreo" + usuario.idUsuario + "'>Correo electrónico</label>";
                 textoDivElementoUsuario += "</div>";
                 textoDivElementoUsuario += "</div>";
