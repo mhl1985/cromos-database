@@ -21,10 +21,6 @@ function cargaInicial() {
     if (divUsuario.className.indexOf("ocultarContenedor")===-1){
         divUsuario.className += " ocultarContenedor";
     }
-    let enlaceAdministrar = document.getElementById("enlaceAdministrar");
-    if (enlaceAdministrar.className.indexOf("ocultarContenedor")===-1){
-        enlaceAdministrar.className += " ocultarContenedor";
-    }
     let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
     if (alertAvisoErrorGeneral.className.indexOf("ocultarAviso")===-1){
         alertAvisoErrorGeneral.className += " ocultarAviso";
