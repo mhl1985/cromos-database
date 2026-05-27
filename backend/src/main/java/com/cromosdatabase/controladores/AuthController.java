@@ -7,6 +7,7 @@ import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioRequest;
 import com.cromosdatabase.modelo.dtos.auth.RegistroUsuarioResponse;
 import com.cromosdatabase.servicios.AuthService;
 import com.cromosdatabase.servicios.RegistroUsuarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,10 @@ import lombok.RequiredArgsConstructor;
  * Expone los endpoints relacionados con el login, el registro
  * y la consulta del perfil del usuario autenticado.
  */
+@Tag(
+        name = "Autenticación",
+        description = "Endpoints relacionados con login, registro y perfil del usuario autenticado."
+)
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor

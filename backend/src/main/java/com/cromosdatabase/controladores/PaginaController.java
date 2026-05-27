@@ -8,6 +8,7 @@ import com.cromosdatabase.servicios.PaginaCategoriaService;
 import com.cromosdatabase.servicios.PaginaColeccionService;
 import com.cromosdatabase.servicios.PaginaCromoService;
 import com.cromosdatabase.servicios.PaginaInicioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
  * Su objetivo es agrupar la información necesaria para pintar
  * pantallas concretas de la aplicación.
  */
+@Tag(
+        name = "Páginas",
+        description = "Endpoints que agrupan información completa para cargar páginas del frontend."
+)
 @RestController
 @RequestMapping("/paginas")
 @RequiredArgsConstructor

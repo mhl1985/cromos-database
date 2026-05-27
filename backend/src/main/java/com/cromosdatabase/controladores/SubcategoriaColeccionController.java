@@ -3,6 +3,7 @@ package com.cromosdatabase.controladores;
 import com.cromosdatabase.modelo.dtos.subcategoria.SubcategoriaColeccionDetalleResponse;
 import com.cromosdatabase.modelo.dtos.subcategoria.SubcategoriaColeccionResumenResponse;
 import com.cromosdatabase.servicios.SubcategoriaColeccionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,10 @@ import java.util.List;
 /**
  * Controlador REST para la consulta de subcategorías de colección.
  */
+@Tag(
+        name = "Subcategorías",
+        description = "Endpoints públicos de consulta de subcategorías de colección."
+)
 @RestController
 @RequestMapping("/subcategorias")
 @RequiredArgsConstructor

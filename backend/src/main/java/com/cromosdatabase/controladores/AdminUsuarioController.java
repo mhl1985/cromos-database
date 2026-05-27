@@ -3,6 +3,7 @@ package com.cromosdatabase.controladores;
 import com.cromosdatabase.modelo.dtos.admin.AdminUsuarioResponse;
 import com.cromosdatabase.modelo.dtos.admin.AdminUsuarioUpdateRequest;
 import com.cromosdatabase.servicios.AdminUsuarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,10 @@ import java.util.List;
  *
  * Solo accesible para usuarios con ROLE_ADMIN.
  */
+@Tag(
+        name = "Administración de usuarios",
+        description = "Endpoints para la gestión de usuarios. (Administradores)."
+)
 @RestController
 @RequestMapping("/admin/usuarios")
 @RequiredArgsConstructor

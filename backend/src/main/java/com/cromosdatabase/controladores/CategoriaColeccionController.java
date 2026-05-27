@@ -2,6 +2,7 @@ package com.cromosdatabase.controladores;
 
 import com.cromosdatabase.modelo.dtos.categoria.CategoriaColeccionDetalleResponse;
 import com.cromosdatabase.servicios.CategoriaColeccionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,10 @@ import java.util.List;
 /**
  * Controlador REST para la consulta de categorías de colección.
  */
+@Tag(
+        name = "Categorías",
+        description = "Endpoints públicos de consulta de categorías de colección."
+)
 @RestController
 @RequestMapping("/categorias")
 @RequiredArgsConstructor

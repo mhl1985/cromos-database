@@ -3,6 +3,7 @@ package com.cromosdatabase.controladores;
 import com.cromosdatabase.modelo.dtos.editorial.EditorialDetalleResponse;
 import com.cromosdatabase.modelo.dtos.editorial.EditorialResumenResponse;
 import com.cromosdatabase.servicios.EditorialService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,10 @@ import java.util.List;
 /**
  * Controlador REST para la consulta de editoriales.
  */
+@Tag(
+        name = "Editoriales",
+        description = "Endpoints públicos de consulta de editoriales."
+)
 @RestController
 @RequestMapping("/editoriales")
 @RequiredArgsConstructor

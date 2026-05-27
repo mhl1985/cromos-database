@@ -2,6 +2,7 @@ package com.cromosdatabase.controladores;
 
 import com.cromosdatabase.modelo.dtos.usuario.UsuarioColeccionResumenResponse;
 import com.cromosdatabase.servicios.UsuarioColeccionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,10 @@ import java.util.List;
  * Controlador para gestionar las colecciones
  * del usuario autenticado.
  */
+@Tag(
+        name = "Mis colecciones",
+        description = "Endpoints privados para gestionar las colecciones del usuario autenticado."
+)
 @RestController
 @RequestMapping("/mis-colecciones")
 @RequiredArgsConstructor
