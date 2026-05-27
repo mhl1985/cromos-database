@@ -67,6 +67,14 @@ public class SecurityConfig {
                 .requestMatchers("/subcategorias/**").permitAll()
                 .requestMatchers("/cromos/**").permitAll()
                 .requestMatchers("/paginas/**").permitAll()
+                // Endpoints públicos de OpenApi
+                .requestMatchers(
+                        "/doc-swagger-cromos-database",
+                        "/doc-swagger-cromos-database/**",
+                        "/api-json-cromos-database",
+                        "/api-json-cromos-database/**",
+                        "/swagger-ui/**"
+                ).permitAll()
                 // Endpoints exclusivos para administradores.
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 // Cualquier otra petición requiere login.
