@@ -52,8 +52,8 @@ public class SecurityConfig {
         // Desactiva CSRF (API REST)
         http.csrf(csrf -> csrf.disable());
 
-        // Habilita CORS para permitir llamadas desde el frontend
-        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        // Habilita soporte CORS utilizando el bean CorsConfigurationSource definido en CorsConfig
+        http.cors(cors -> {});
 
         // La aplicación no usará sesión de servidor
         http.sessionManagement(session ->
