@@ -6,7 +6,7 @@ h1, h2, h3, h4, a{
 /*Título para poner encima de cada imagen de cromo*/
 div.cromo-titulo{
     position: relative;
-    top: -142px;
+    top: 8px;
 }
 div.cromo-titulo p{
     margin: 0 20px;
