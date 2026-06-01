@@ -94,9 +94,9 @@ public class PaginaColeccionServiceImpl implements PaginaColeccionService {
         List<Cromo> ultimosCromosEntidad =
                 cromoRepository.findTop10ByColeccion_IdColeccionOrderByIdCromoDesc(idColeccion);
 
-        // Obtenemos todos los cromos de la colección.
+        // Obtenemos todos los cromos de la colección ordenados por id.
         List<Cromo> cromosColeccionEntidad =
-                cromoRepository.findByColeccion_IdColeccion(idColeccion);
+                cromoRepository.findByColeccion_IdColeccionOrderByIdCromoAsc(idColeccion);
 
         // Si hay usuario autenticado y tiene cromos de esta colección,
         // se obtiene únicamente esa información.

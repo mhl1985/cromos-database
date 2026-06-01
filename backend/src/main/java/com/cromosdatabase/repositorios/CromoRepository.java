@@ -28,12 +28,13 @@ public interface CromoRepository extends JpaRepository<Cromo, Integer>,
     Optional<Cromo> findByColeccion_IdColeccionAndNumero(Integer idColeccion, String numero);
 
     /**
-     * Obtiene todos los cromos de una colección.
+     * Obtiene todos los cromos de una colección
+     * ordenados por ID de cromo ascendente.
      *
      * @param idColeccion ID de la colección.
-     * @return Lista de cromos de la colección.
+     * @return Lista de cromos de la colección ordenada por ID.
      */
-    List<Cromo> findByColeccion_IdColeccion(Integer idColeccion);
+    List<Cromo> findByColeccion_IdColeccionOrderByIdCromoAsc(Integer idColeccion);
 
     /**
      * Comprueba si existe un cromo con un número concreto dentro de una colección.

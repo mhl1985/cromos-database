@@ -63,8 +63,8 @@ public class UsuarioCromoServiceImpl implements UsuarioCromoService {
                 idColeccion
         );
 
-        // Listado completo de cromos de la colección.
-        List<Cromo> cromosColeccion = cromoRepository.findByColeccion_IdColeccion(idColeccion);
+        // Listado completo de cromos de la colección ordenados por id.
+        List<Cromo> cromosColeccion = cromoRepository.findByColeccion_IdColeccionOrderByIdCromoAsc(idColeccion);
 
         // Obtenemos los cromos de la colección que tiene el
         // usuario + la info personal de cada uno de ellos.
