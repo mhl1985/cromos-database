@@ -114,13 +114,33 @@ public class PaginaInicioServiceImpl implements PaginaInicioService {
         List<CategoriaColeccion> categoriasEntidad =
                 categoriaColeccionRepository.find5Aleatorias();
 
-        // Obtenemos los últimos cromos añadidos al sistema.
-        List<Cromo> ultimosCromosEntidad =
-                cromoRepository.findTop10ByOrderByIdCromoDesc();
+        /*
+         * Obtenemos los últimos cromos añadidos al sistema.
+         *
+         * Si se quieren mostrar los últimos cromos aunque tengan imagen genérica,
+         * usar findTop10ByOrderByIdCromoDesc().
+         *
+         * Si se quieren mostrar solo cromos con imagen real,
+         * usar findTop10ConImagenRealByOrderByIdCromoDesc().
+         */
 
-        // Obtenemos cromos aleatorios para mostrar en la home.
+        // List<Cromo> ultimosCromosEntidad = cromoRepository.findTop10ByOrderByIdCromoDesc();
+        List<Cromo> ultimosCromosEntidad =
+                cromoRepository.findTop10ConImagenRealByOrderByIdCromoDesc();
+
+        /*
+         * Obtenemos cromos aleatorios para mostrar en la home.
+         *
+         * Si se quieren mostrar cromos aleatorios aunque tengan imagen genérica,
+         * usar find10Aleatorios().
+         *
+         * Si se quieren mostrar solo cromos aleatorios con imagen real,
+         * usar find10AleatoriosConImagenReal().
+         */
+
+        // List<Cromo> cromosAleatoriosEntidad = cromoRepository.find10Aleatorios();
         List<Cromo> cromosAleatoriosEntidad =
-                cromoRepository.find10Aleatorios();
+                cromoRepository.find10AleatoriosConImagenReal();
 
         // Mapeo de entidades a DTOs.
         List<ColeccionResumenResponse> ultimasColecciones =

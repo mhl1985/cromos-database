@@ -80,6 +80,49 @@ public interface CromoRepository extends JpaRepository<Cromo, Integer>,
     List<Cromo> find10Aleatorios();
 
     /**
+     * Obtiene los 10 últimos cromos añadidos al sistema
+     * que tengan imagen real.
+     *
+     * Se considera que un cromo tiene imagen real cuando
+     * su imagen delantera no es null y no coincide con
+     * la imagen genérica de muestra.
+     *
+     * Actualmente, se considera como criterio de "últimos"
+     * el identificador de cromo en orden descendente.
+     *
+     * @return lista de los 10 últimos cromos con imagen real
+     */
+    @Query(value =
+            "SELECT * " +
+                    "FROM cromos " +
+                    "WHERE url_img_delantera IS NOT NULL " +
+                    "AND url_img_delantera <> 'img/muestras/cromo_delantera.webp' " +
+                    "ORDER BY id_cromo DESC " +
+                    "LIMIT 10", nativeQuery = true)
+    List<Cromo> findTop10ConImagenRealByOrderByIdCromoDesc();
+
+    /**
+     * Obtiene 10 cromos aleatorios que tengan imagen real.
+     *
+     * Se considera que un cromo tiene imagen real cuando
+     * su imagen delantera no es null y no coincide con
+     * la imagen genérica de muestra.
+     *
+     * Se utiliza consulta nativa porque la ordenación aleatoria
+     * depende de la base de datos.
+     *
+     * @return lista de 10 cromos aleatorios con imagen real
+     */
+    @Query(value =
+            "SELECT * " +
+                    "FROM cromos " +
+                    "WHERE url_img_delantera IS NOT NULL " +
+                    "AND url_img_delantera <> 'img/muestras/cromo_delantera.webp' " +
+                    "ORDER BY RAND() " +
+                    "LIMIT 10", nativeQuery = true)
+    List<Cromo> find10AleatoriosConImagenReal();
+
+    /**
      * Obtiene los 10 últimos cromos añadidos a una colección concreta.
      *
      * Actualmente se considera como criterio de "últimos"
