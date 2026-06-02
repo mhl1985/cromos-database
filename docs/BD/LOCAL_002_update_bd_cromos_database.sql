@@ -603,6 +603,6 @@ SET url_img_delantera = 'img/cromos/5_panini-fifa-world-cup-usa-94/420_20_delant
 WHERE id_cromo = 420;
 
 UPDATE cromos
-SET url_img_delantera = 'img/cromos/5_panini-fifa-world-cup-usa-94/457_257_delantera.webp',
-    url_img_trasera = 'img/cromos/5_panini-fifa-world-cup-usa-94/457_257_trasera.webp'
-WHERE id_cromo = 457;
+SET url_img_delantera = 'img/cromos/5_panini-fifa-world-cup-usa-94/492_257_delantera.webp',
+    url_img_trasera = 'img/cromos/5_panini-fifa-world-cup-usa-94/492_257_trasera.webp'
+WHERE id_cromo = 492;
