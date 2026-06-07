@@ -272,13 +272,36 @@ function botonEditarColeccion(){
 
 
 //Si funciona la edición muestro aviso
-function mostrarAvisoOK(){
-    let divCromos = document.getElementById("divCromos");
-    if (divCromos.className.indexOf("ocultarContenedor")===-1){
-        divCromos.className += " ocultarContenedor";
+function mostrarAvisoOK(respuesta){
+    try {
+        //Comprobamos que no se ha devuelto ningún código de error
+        if (!respuesta.status){
+            let divCromos = document.getElementById("divCromos");
+            if (divCromos.className.indexOf("ocultarContenedor")===-1){
+                divCromos.className += " ocultarContenedor";
+            }
+            let alertAvisoErrorGeneral = document.getElementById("avisoCorrectoCambio");
+            alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
+
+        } else {
+            let divCromos = document.getElementById("divCromos");
+            if (divCromos.className.indexOf("ocultarContenedor")===-1){
+                divCromos.className += " ocultarContenedor";
+            }
+            let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
+            alertAvisoErrorGeneral.textContent = respuesta.mensaje?respuesta.mensaje:"Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
+            alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");            
+        }
+    } catch (error) {
+        errorCargaDatos(error);
+        let divCromos = document.getElementById("divCromos");
+        if (divCromos.className.indexOf("ocultarContenedor")===-1){
+            divCromos.className += " ocultarContenedor";
+        }
+        let alertAvisoErrorGeneral = document.getElementById("avisoErrorGeneral");
+        alertAvisoErrorGeneral.textContent = "Error inesperado, inténtalo de nuevo otra vez y si el error persiste comprueba tu conexión.";
+        alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
     }
-    let alertAvisoErrorGeneral = document.getElementById("avisoCorrectoCambio");
-    alertAvisoErrorGeneral.className = alertAvisoErrorGeneral.className.replace(" ocultarAviso","");
 }
 
 //Envío de datos para acceso con usuario
